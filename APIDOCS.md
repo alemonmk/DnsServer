@@ -12,29 +12,30 @@ Note! The "set" type of API requests will overwrite any existing value managed b
 
 ## API Response Format
 
-The HTTP API returns a JSON formatted response for all requests. The JSON object returned contains `status` property which indicate if the request was successful. 
+The HTTP API returns a JSON formatted response for all requests. The JSON object returned contains `status` property which indicate if the request was successful.
 
 The `status` property can have following values:
+
 - `ok`: This indicates that the call was successful.
 - `error`: This response tells the call failed and provides additional properties that provide details about the error.
 - `invalid-token`: When a session has expired or an invalid token was provided this response is received.
 
 A successful response will look as shown below. Note that there will be other properties in the response which are specific to the request that was made.
 
-```
+```json
 {
-	"status": "ok"
+    "status": "ok"
 }
 ```
 
 In case of errors, the response will look as shown below. The `errorMessage` property can be shown in the UI to the user while the other two properties are useful for debugging.
 
-```
+```json
 {
-	"status": "error",
-	"errorMessage": "error message",
-	"stackTrace": "application stack trace",
-	"innerErrorMessage": "inner exception message"
+    "status": "error",
+    "errorMessage": "error message",
+    "stackTrace": "application stack trace",
+    "innerErrorMessage": "inner exception message"
 }
 ```
 
@@ -67,85 +68,88 @@ PERMISSIONS:\
 None
 
 WHERE:
+
 - `user`: The username for the user account. The built-in administrator username on the DNS server is `admin`.
-- `pass`: The password for the user account. The default password for `admin` user is `admin`. 
+- `pass`: The password for the user account. The default password for `admin` user is `admin`.
 - `includeInfo` (optional): Includes basic info relevant for the user in response.
 
 WARNING: It is highly recommended to change the password on first use to avoid security related issues.
 
 RESPONSE:
-```
+
+```json
 {
-	"displayName": "Administrator",
-	"username": "admin",
-	"token": "932b2a3495852c15af01598f62563ae534460388b6a370bfbbb8bb6094b698e9",
-	"info": {
-		"version": "9.0",
-		"dnsServerDomain": "server1",
-		"defaultRecordTtl": 3600,
-		"permissions": {
-			"Dashboard": {
-				"canView": true,
-				"canModify": true,
-				"canDelete": true
-			},
-			"Zones": {
-				"canView": true,
-				"canModify": true,
-				"canDelete": true
-			},
-			"Cache": {
-				"canView": true,
-				"canModify": true,
-				"canDelete": true
-			},
-			"Allowed": {
-				"canView": true,
-				"canModify": true,
-				"canDelete": true
-			},
-			"Blocked": {
-				"canView": true,
-				"canModify": true,
-				"canDelete": true
-			},
-			"Apps": {
-				"canView": true,
-				"canModify": true,
-				"canDelete": true
-			},
-			"DnsClient": {
-				"canView": true,
-				"canModify": true,
-				"canDelete": true
-			},
-			"Settings": {
-				"canView": true,
-				"canModify": true,
-				"canDelete": true
-			},
-			"DhcpServer": {
-				"canView": true,
-				"canModify": true,
-				"canDelete": true
-			},
-			"Administration": {
-				"canView": true,
-				"canModify": true,
-				"canDelete": true
-			},
-			"Logs": {
-				"canView": true,
-				"canModify": true,
-				"canDelete": true
-			}
-		}
-	},
-	"status": "ok"
+    "displayName": "Administrator",
+    "username": "admin",
+    "token": "932b2a3495852c15af01598f62563ae534460388b6a370bfbbb8bb6094b698e9",
+    "info": {
+        "version": "9.0",
+        "dnsServerDomain": "server1",
+        "defaultRecordTtl": 3600,
+        "permissions": {
+            "Dashboard": {
+                "canView": true,
+                "canModify": true,
+                "canDelete": true
+            },
+            "Zones": {
+                "canView": true,
+                "canModify": true,
+                "canDelete": true
+            },
+            "Cache": {
+                "canView": true,
+                "canModify": true,
+                "canDelete": true
+            },
+            "Allowed": {
+                "canView": true,
+                "canModify": true,
+                "canDelete": true
+            },
+            "Blocked": {
+                "canView": true,
+                "canModify": true,
+                "canDelete": true
+            },
+            "Apps": {
+                "canView": true,
+                "canModify": true,
+                "canDelete": true
+            },
+            "DnsClient": {
+                "canView": true,
+                "canModify": true,
+                "canDelete": true
+            },
+            "Settings": {
+                "canView": true,
+                "canModify": true,
+                "canDelete": true
+            },
+            "DhcpServer": {
+                "canView": true,
+                "canModify": true,
+                "canDelete": true
+            },
+            "Administration": {
+                "canView": true,
+                "canModify": true,
+                "canDelete": true
+            },
+            "Logs": {
+                "canView": true,
+                "canModify": true,
+                "canDelete": true
+            }
+        }
+    },
+    "status": "ok"
 }
 ```
 
 WHERE:
+
 - `token`: Is the session token generated that MUST be used with all subsequent API calls.
 
 ### Create API Token
@@ -159,21 +163,24 @@ PERMISSIONS:\
 None
 
 WHERE:
+
 - `user`: The username for the user account for which to generate the API token.
 - `pass`: The password for the user account.
 - `tokenName`: The name of the created token to identify its session.
 
 RESPONSE:
-```
+
+```json
 {
-	"username": "admin",
-	"tokenName": "MyToken1",
-	"token": "932b2a3495852c15af01598f62563ae534460388b6a370bfbbb8bb6094b698e9",
-	"status": "ok"
+    "username": "admin",
+    "tokenName": "MyToken1",
+    "token": "932b2a3495852c15af01598f62563ae534460388b6a370bfbbb8bb6094b698e9",
+    "status": "ok"
 }
 ```
 
 WHERE:
+
 - `token`: Is the session token generated that MUST be used with all subsequent API calls.
 
 ### Logout
@@ -190,12 +197,14 @@ PERMISSIONS:\
 None
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 
 RESPONSE:
-```
+
+```json
 {
-	"status": "ok"
+    "status": "ok"
 }
 ```
 
@@ -210,80 +219,82 @@ PERMISSIONS:\
 None
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 
 RESPONSE:
-```
+
+```json
 {
-	"displayName": "Administrator",
-	"username": "admin",
-	"token": "932b2a3495852c15af01598f62563ae534460388b6a370bfbbb8bb6094b698e9",
-	"info": {
-		"version": "11.5",
-		"uptimestamp": "2023-07-29T08:01:31.1117463Z",
-		"dnsServerDomain": "server1",
-		"defaultRecordTtl": 3600,
-		"useSoaSerialDateScheme": false,
-		"dnssecValidation": true,
-		"permissions": {
-			"Dashboard": {
-				"canView": true,
-				"canModify": true,
-				"canDelete": true
-			},
-			"Zones": {
-				"canView": true,
-				"canModify": true,
-				"canDelete": true
-			},
-			"Cache": {
-				"canView": true,
-				"canModify": true,
-				"canDelete": true
-			},
-			"Allowed": {
-				"canView": true,
-				"canModify": true,
-				"canDelete": true
-			},
-			"Blocked": {
-				"canView": true,
-				"canModify": true,
-				"canDelete": true
-			},
-			"Apps": {
-				"canView": true,
-				"canModify": true,
-				"canDelete": true
-			},
-			"DnsClient": {
-				"canView": true,
-				"canModify": true,
-				"canDelete": true
-			},
-			"Settings": {
-				"canView": true,
-				"canModify": true,
-				"canDelete": true
-			},
-			"DhcpServer": {
-				"canView": true,
-				"canModify": true,
-				"canDelete": true
-			},
-			"Administration": {
-				"canView": true,
-				"canModify": true,
-				"canDelete": true
-			},
-			"Logs": {
-				"canView": true,
-				"canModify": true,
-				"canDelete": true
-			}
-		}
-	},
-	"status": "ok"
+    "displayName": "Administrator",
+    "username": "admin",
+    "token": "932b2a3495852c15af01598f62563ae534460388b6a370bfbbb8bb6094b698e9",
+    "info": {
+        "version": "11.5",
+        "uptimestamp": "2023-07-29T08:01:31.1117463Z",
+        "dnsServerDomain": "server1",
+        "defaultRecordTtl": 3600,
+        "useSoaSerialDateScheme": false,
+        "dnssecValidation": true,
+        "permissions": {
+            "Dashboard": {
+                "canView": true,
+                "canModify": true,
+                "canDelete": true
+            },
+            "Zones": {
+                "canView": true,
+                "canModify": true,
+                "canDelete": true
+            },
+            "Cache": {
+                "canView": true,
+                "canModify": true,
+                "canDelete": true
+            },
+            "Allowed": {
+                "canView": true,
+                "canModify": true,
+                "canDelete": true
+            },
+            "Blocked": {
+                "canView": true,
+                "canModify": true,
+                "canDelete": true
+            },
+            "Apps": {
+                "canView": true,
+                "canModify": true,
+                "canDelete": true
+            },
+            "DnsClient": {
+                "canView": true,
+                "canModify": true,
+                "canDelete": true
+            },
+            "Settings": {
+                "canView": true,
+                "canModify": true,
+                "canDelete": true
+            },
+            "DhcpServer": {
+                "canView": true,
+                "canModify": true,
+                "canDelete": true
+            },
+            "Administration": {
+                "canView": true,
+                "canModify": true,
+                "canDelete": true
+            },
+            "Logs": {
+                "canView": true,
+                "canModify": true,
+                "canDelete": true
+            }
+        }
+    },
+    "status": "ok"
 }
 ```
 
@@ -298,14 +309,16 @@ PERMISSIONS:\
 None
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `partialToken`: The partial token as returned by the user profile details API call.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {},
-	"status": "ok"
+    "response": {},
+    "status": "ok"
 }
 ```
 
@@ -325,13 +338,15 @@ PERMISSIONS:\
 None
 
 WHERE:
+
 - `token`: The session token generated only by the `login` call.
 - `pass`: The new password for the currently logged in user.
 
 RESPONSE:
-```
+
+```json
 {
-	"status": "ok"
+    "status": "ok"
 }
 ```
 
@@ -346,37 +361,39 @@ PERMISSIONS:\
 None
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"displayName": "Administrator",
-		"username": "admin",
-		"disabled": false,
-		"previousSessionLoggedOn": "2022-09-15T12:59:05.944Z",
-		"previousSessionRemoteAddress": "127.0.0.1",
-		"recentSessionLoggedOn": "2022-09-15T13:57:50.1843973Z",
-		"recentSessionRemoteAddress": "127.0.0.1",
-		"sessionTimeoutSeconds": 1800,
-		"memberOfGroups": [
-			"Administrators"
-		],
-		"sessions": [
-			{
-				"username": "admin",
-				"isCurrentSession": true,
-				"partialToken": "620c3bfcd09d0a07",
-				"type": "Standard",
-				"tokenName": null,
-				"lastSeen": "2022-09-15T13:58:02.4728Z",
-				"lastSeenRemoteAddress": "127.0.0.1",
-				"lastSeenUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0"
-			}
-		]
-	},
-	"status": "ok"
+    "response": {
+        "displayName": "Administrator",
+        "username": "admin",
+        "disabled": false,
+        "previousSessionLoggedOn": "2022-09-15T12:59:05.944Z",
+        "previousSessionRemoteAddress": "127.0.0.1",
+        "recentSessionLoggedOn": "2022-09-15T13:57:50.1843973Z",
+        "recentSessionRemoteAddress": "127.0.0.1",
+        "sessionTimeoutSeconds": 1800,
+        "memberOfGroups": [
+            "Administrators"
+        ],
+        "sessions": [
+            {
+                "username": "admin",
+                "isCurrentSession": true,
+                "partialToken": "620c3bfcd09d0a07",
+                "type": "Standard",
+                "tokenName": null,
+                "lastSeen": "2022-09-15T13:58:02.4728Z",
+                "lastSeenRemoteAddress": "127.0.0.1",
+                "lastSeenUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0"
+            }
+        ]
+    },
+    "status": "ok"
 }
 ```
 
@@ -391,39 +408,41 @@ PERMISSIONS:\
 None
 
 WHERE:
+
 - `token`: The session token generated only by the `login` call.
 - `displayName` (optional): The display name to set for the user account.
 - `sessionTimeoutSeconds` (optional): The session timeout value to set in seconds for the user account.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"displayName": "Administrator",
-		"username": "admin",
-		"disabled": false,
-		"previousSessionLoggedOn": "2022-09-15T12:59:05.944Z",
-		"previousSessionRemoteAddress": "127.0.0.1",
-		"recentSessionLoggedOn": "2022-09-15T13:57:50.1843973Z",
-		"recentSessionRemoteAddress": "127.0.0.1",
-		"sessionTimeoutSeconds": 1800,
-		"memberOfGroups": [
-			"Administrators"
-		],
-		"sessions": [
-			{
-				"username": "admin",
-				"isCurrentSession": true,
-				"partialToken": "620c3bfcd09d0a07",
-				"type": "Standard",
-				"tokenName": null,
-				"lastSeen": "2022-09-15T14:00:50.288738Z",
-				"lastSeenRemoteAddress": "127.0.0.1",
-				"lastSeenUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0"
-			}
-		]
-	},
-	"status": "ok"
+    "response": {
+        "displayName": "Administrator",
+        "username": "admin",
+        "disabled": false,
+        "previousSessionLoggedOn": "2022-09-15T12:59:05.944Z",
+        "previousSessionRemoteAddress": "127.0.0.1",
+        "recentSessionLoggedOn": "2022-09-15T13:57:50.1843973Z",
+        "recentSessionRemoteAddress": "127.0.0.1",
+        "sessionTimeoutSeconds": 1800,
+        "memberOfGroups": [
+            "Administrators"
+        ],
+        "sessions": [
+            {
+                "username": "admin",
+                "isCurrentSession": true,
+                "partialToken": "620c3bfcd09d0a07",
+                "type": "Standard",
+                "tokenName": null,
+                "lastSeen": "2022-09-15T14:00:50.288738Z",
+                "lastSeenRemoteAddress": "127.0.0.1",
+                "lastSeenUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0"
+            }
+        ]
+    },
+    "status": "ok"
 }
 ```
 
@@ -441,22 +460,24 @@ PERMISSIONS:\
 None
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"updateAvailable": true,
-		"updateVersion": "9.0",
-		"currentVersion": "8.1.4",
-		"updateTitle": "New Update Available!",
-		"updateMessage": "Follow the instructions from the link below to update the DNS server to the latest version. Read the change logs before installing the update to know if there are any breaking changes.",
-		"downloadLink": "https://download.technitium.com/dns/DnsServerSetup.zip",
-		"instructionsLink": "https://blog.technitium.com/2017/11/running-dns-server-on-ubuntu-linux.html",
-		"changeLogLink": "https://github.com/TechnitiumSoftware/DnsServer/blob/master/CHANGELOG.md"
-	},
-	"status": "ok"
+    "response": {
+        "updateAvailable": true,
+        "updateVersion": "9.0",
+        "currentVersion": "8.1.4",
+        "updateTitle": "New Update Available!",
+        "updateMessage": "Follow the instructions from the link below to update the DNS server to the latest version. Read the change logs before installing the update to know if there are any breaking changes.",
+        "downloadLink": "https://download.technitium.com/dns/DnsServerSetup.zip",
+        "instructionsLink": "https://blog.technitium.com/2017/11/running-dns-server-on-ubuntu-linux.html",
+        "changeLogLink": "https://github.com/TechnitiumSoftware/DnsServer/blob/master/CHANGELOG.md"
+    },
+    "status": "ok"
 }
 ```
 
@@ -478,6 +499,7 @@ PERMISSIONS:\
 Dashboard: View
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `type` (optional): The duration type for which valid values are: [`LastHour`, `LastDay`, `LastWeek`, `LastMonth`, `LastYear`, `Custom`]. Default value is `LastHour`.
 - `utc` (optional): Set to `true` to return the main chart data with labels in UTC date time format using which the labels can be converted into local time for display using the received `labelFormat`.
@@ -485,1055 +507,1056 @@ WHERE:
 - `end` (optional): The end date in ISO 8601 format. Applies only to `custom` type.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"stats": {
-			"totalQueries": 925,
-			"totalNoError": 834,
-			"totalServerFailure": 1,
-			"totalNxDomain": 90,
-			"totalRefused": 0,
-			"totalAuthoritative": 47,
-			"totalRecursive": 348,
-			"totalCached": 481,
-			"totalBlocked": 49,
-			"totalDropped": 0,
-			"totalClients": 6,
-			"zones": 19,
-			"cachedEntries": 6330,
-			"allowedZones": 10,
-			"blockedZones": 1,
-			"allowListZones": 0,
-			"blockListZones": 307447
-		},
-		"mainChartData": {
-			"labelFormat": "HH:mm",
-			"labels": [
-				"2024-02-04T10:38:00.0000000Z",
-				"2024-02-04T10:39:00.0000000Z",
-				"2024-02-04T10:40:00.0000000Z",
-				"2024-02-04T10:41:00.0000000Z",
-				"2024-02-04T10:42:00.0000000Z",
-				"2024-02-04T10:43:00.0000000Z",
-				"2024-02-04T10:44:00.0000000Z",
-				"2024-02-04T10:45:00.0000000Z",
-				"2024-02-04T10:46:00.0000000Z",
-				"2024-02-04T10:47:00.0000000Z",
-				"2024-02-04T10:48:00.0000000Z",
-				"2024-02-04T10:49:00.0000000Z",
-				"2024-02-04T10:50:00.0000000Z",
-				"2024-02-04T10:51:00.0000000Z",
-				"2024-02-04T10:52:00.0000000Z",
-				"2024-02-04T10:53:00.0000000Z",
-				"2024-02-04T10:54:00.0000000Z",
-				"2024-02-04T10:55:00.0000000Z",
-				"2024-02-04T10:56:00.0000000Z",
-				"2024-02-04T10:57:00.0000000Z",
-				"2024-02-04T10:58:00.0000000Z",
-				"2024-02-04T10:59:00.0000000Z",
-				"2024-02-04T11:00:00.0000000Z",
-				"2024-02-04T11:01:00.0000000Z",
-				"2024-02-04T11:02:00.0000000Z",
-				"2024-02-04T11:03:00.0000000Z",
-				"2024-02-04T11:04:00.0000000Z",
-				"2024-02-04T11:05:00.0000000Z",
-				"2024-02-04T11:06:00.0000000Z",
-				"2024-02-04T11:07:00.0000000Z",
-				"2024-02-04T11:08:00.0000000Z",
-				"2024-02-04T11:09:00.0000000Z",
-				"2024-02-04T11:10:00.0000000Z",
-				"2024-02-04T11:11:00.0000000Z",
-				"2024-02-04T11:12:00.0000000Z",
-				"2024-02-04T11:13:00.0000000Z",
-				"2024-02-04T11:14:00.0000000Z",
-				"2024-02-04T11:15:00.0000000Z",
-				"2024-02-04T11:16:00.0000000Z",
-				"2024-02-04T11:17:00.0000000Z",
-				"2024-02-04T11:18:00.0000000Z",
-				"2024-02-04T11:19:00.0000000Z",
-				"2024-02-04T11:20:00.0000000Z",
-				"2024-02-04T11:21:00.0000000Z",
-				"2024-02-04T11:22:00.0000000Z",
-				"2024-02-04T11:23:00.0000000Z",
-				"2024-02-04T11:24:00.0000000Z",
-				"2024-02-04T11:25:00.0000000Z",
-				"2024-02-04T11:26:00.0000000Z",
-				"2024-02-04T11:27:00.0000000Z",
-				"2024-02-04T11:28:00.0000000Z",
-				"2024-02-04T11:29:00.0000000Z",
-				"2024-02-04T11:30:00.0000000Z",
-				"2024-02-04T11:31:00.0000000Z",
-				"2024-02-04T11:32:00.0000000Z",
-				"2024-02-04T11:33:00.0000000Z",
-				"2024-02-04T11:34:00.0000000Z",
-				"2024-02-04T11:35:00.0000000Z",
-				"2024-02-04T11:36:00.0000000Z",
-				"2024-02-04T11:37:00.0000000Z"
-			],
-			"datasets": [
-				{
-					"label": "Total",
-					"backgroundColor": "rgba(102, 153, 255, 0.1)",
-					"borderColor": "rgb(102, 153, 255)",
-					"borderWidth": 2,
-					"fill": true,
-					"data": [
-						4,
-						6,
-						13,
-						9,
-						27,
-						9,
-						11,
-						15,
-						9,
-						10,
-						5,
-						9,
-						5,
-						17,
-						6,
-						9,
-						61,
-						23,
-						9,
-						21,
-						8,
-						20,
-						5,
-						7,
-						35,
-						26,
-						33,
-						20,
-						7,
-						12,
-						4,
-						14,
-						3,
-						19,
-						37,
-						10,
-						18,
-						12,
-						7,
-						30,
-						47,
-						16,
-						10,
-						3,
-						12,
-						11,
-						37,
-						3,
-						18,
-						22,
-						16,
-						6,
-						15,
-						5,
-						41,
-						13,
-						7,
-						9,
-						17,
-						12
-					]
-				},
-				{
-					"label": "No Error",
-					"backgroundColor": "rgba(92, 184, 92, 0.1)",
-					"borderColor": "rgb(92, 184, 92)",
-					"borderWidth": 2,
-					"fill": true,
-					"data": [
-						4,
-						6,
-						11,
-						9,
-						22,
-						6,
-						11,
-						13,
-						9,
-						7,
-						5,
-						7,
-						4,
-						13,
-						5,
-						7,
-						59,
-						22,
-						8,
-						21,
-						8,
-						19,
-						5,
-						7,
-						31,
-						25,
-						24,
-						16,
-						6,
-						12,
-						4,
-						12,
-						3,
-						19,
-						36,
-						8,
-						18,
-						12,
-						7,
-						28,
-						46,
-						16,
-						10,
-						3,
-						11,
-						10,
-						34,
-						2,
-						10,
-						13,
-						11,
-						6,
-						15,
-						5,
-						40,
-						12,
-						6,
-						9,
-						14,
-						12
-					]
-				},
-				{
-					"label": "Server Failure",
-					"backgroundColor": "rgba(217, 83, 79, 0.1)",
-					"borderColor": "rgb(217, 83, 79)",
-					"borderWidth": 2,
-					"fill": true,
-					"data": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						1,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					]
-				},
-				{
-					"label": "NX Domain",
-					"backgroundColor": "rgba(120, 120, 120, 0.1)",
-					"borderColor": "rgb(120, 120, 120)",
-					"borderWidth": 2,
-					"fill": true,
-					"data": [
-						0,
-						0,
-						2,
-						0,
-						5,
-						3,
-						0,
-						2,
-						0,
-						3,
-						0,
-						2,
-						1,
-						4,
-						1,
-						2,
-						2,
-						1,
-						1,
-						0,
-						0,
-						1,
-						0,
-						0,
-						4,
-						1,
-						9,
-						4,
-						1,
-						0,
-						0,
-						2,
-						0,
-						0,
-						1,
-						2,
-						0,
-						0,
-						0,
-						2,
-						0,
-						0,
-						0,
-						0,
-						1,
-						1,
-						3,
-						1,
-						8,
-						9,
-						5,
-						0,
-						0,
-						0,
-						1,
-						1,
-						1,
-						0,
-						3,
-						0
-					]
-				},
-				{
-					"label": "Refused",
-					"backgroundColor": "rgba(91, 192, 222, 0.1)",
-					"borderColor": "rgb(91, 192, 222)",
-					"borderWidth": 2,
-					"fill": true,
-					"data": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					]
-				},
-				{
-					"label": "Authoritative",
-					"backgroundColor": "rgba(150, 150, 0, 0.1)",
-					"borderColor": "rgb(150, 150, 0)",
-					"borderWidth": 2,
-					"fill": true,
-					"data": [
-						0,
-						0,
-						1,
-						0,
-						3,
-						1,
-						0,
-						2,
-						1,
-						1,
-						0,
-						1,
-						0,
-						2,
-						1,
-						1,
-						1,
-						1,
-						2,
-						0,
-						0,
-						1,
-						0,
-						0,
-						2,
-						1,
-						3,
-						2,
-						0,
-						0,
-						0,
-						1,
-						0,
-						0,
-						1,
-						1,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						1,
-						1,
-						1,
-						0,
-						4,
-						4,
-						2,
-						0,
-						2,
-						0,
-						1,
-						1,
-						0,
-						0,
-						0,
-						0
-					]
-				},
-				{
-					"label": "Recursive",
-					"backgroundColor": "rgba(23, 162, 184, 0.1)",
-					"borderColor": "rgb(23, 162, 184)",
-					"borderWidth": 2,
-					"fill": true,
-					"data": [
-						1,
-						3,
-						0,
-						1,
-						14,
-						2,
-						8,
-						4,
-						1,
-						3,
-						2,
-						3,
-						1,
-						3,
-						3,
-						3,
-						36,
-						8,
-						2,
-						14,
-						4,
-						6,
-						1,
-						1,
-						26,
-						17,
-						11,
-						10,
-						2,
-						4,
-						0,
-						8,
-						1,
-						7,
-						18,
-						0,
-						3,
-						0,
-						2,
-						10,
-						6,
-						1,
-						3,
-						1,
-						5,
-						4,
-						20,
-						0,
-						5,
-						7,
-						0,
-						3,
-						7,
-						0,
-						21,
-						7,
-						1,
-						3,
-						6,
-						5
-					]
-				},
-				{
-					"label": "Cached",
-					"backgroundColor": "rgba(111, 84, 153, 0.1)",
-					"borderColor": "rgb(111, 84, 153)",
-					"borderWidth": 2,
-					"fill": true,
-					"data": [
-						3,
-						3,
-						11,
-						8,
-						8,
-						4,
-						3,
-						8,
-						7,
-						4,
-						3,
-						4,
-						3,
-						10,
-						2,
-						4,
-						23,
-						14,
-						5,
-						7,
-						4,
-						13,
-						4,
-						6,
-						5,
-						8,
-						13,
-						6,
-						4,
-						8,
-						4,
-						4,
-						2,
-						12,
-						18,
-						8,
-						15,
-						12,
-						5,
-						18,
-						41,
-						15,
-						7,
-						2,
-						6,
-						6,
-						14,
-						2,
-						5,
-						6,
-						10,
-						3,
-						6,
-						5,
-						19,
-						5,
-						5,
-						6,
-						8,
-						7
-					]
-				},
-				{
-					"label": "Blocked",
-					"backgroundColor": "rgba(255, 165, 0, 0.1)",
-					"borderColor": "rgb(255, 165, 0)",
-					"borderWidth": 2,
-					"fill": true,
-					"data": [
-						0,
-						0,
-						1,
-						0,
-						2,
-						2,
-						0,
-						1,
-						0,
-						2,
-						0,
-						1,
-						1,
-						2,
-						0,
-						1,
-						1,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						2,
-						0,
-						6,
-						2,
-						1,
-						0,
-						0,
-						1,
-						0,
-						0,
-						0,
-						1,
-						0,
-						0,
-						0,
-						2,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						2,
-						1,
-						4,
-						5,
-						4,
-						0,
-						0,
-						0,
-						0,
-						0,
-						1,
-						0,
-						3,
-						0
-					]
-				},
-				{
-					"label": "Dropped",
-					"backgroundColor": "rgba(30, 30, 30, 0.1)",
-					"borderColor": "rgb(30, 30, 30)",
-					"borderWidth": 2,
-					"fill": true,
-					"data": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					]
-				},
-				{
-					"label": "Clients",
-					"backgroundColor": "rgba(51, 122, 183, 0.1)",
-					"borderColor": "rgb(51, 122, 183)",
-					"borderWidth": 2,
-					"fill": true,
-					"data": [
-						3,
-						4,
-						3,
-						2,
-						3,
-						4,
-						2,
-						3,
-						3,
-						2,
-						2,
-						3,
-						3,
-						3,
-						2,
-						4,
-						3,
-						2,
-						2,
-						2,
-						2,
-						2,
-						2,
-						2,
-						3,
-						2,
-						3,
-						3,
-						2,
-						2,
-						2,
-						3,
-						2,
-						2,
-						3,
-						3,
-						1,
-						3,
-						3,
-						3,
-						3,
-						3,
-						3,
-						2,
-						3,
-						3,
-						4,
-						2,
-						3,
-						4,
-						4,
-						2,
-						4,
-						3,
-						3,
-						3,
-						3,
-						2,
-						2,
-						3
-					]
-				}
-			]
-		},
-		"queryResponseChartData": {
-			"labels": [
-				"Authoritative",
-				"Recursive",
-				"Cached",
-				"Blocked",
-				"Dropped"
-			],
-			"datasets": [
-				{
-					"data": [
-						47,
-						348,
-						481,
-						49,
-						0
-					],
-					"backgroundColor": [
-						"rgba(150, 150, 0, 0.5)",
-						"rgba(23, 162, 184, 0.5)",
-						"rgba(111, 84, 153, 0.5)",
-						"rgba(255, 165, 0, 0.5)",
-						"rgba(7, 7, 7, 0.5)"
-					]
-				}
-			]
-		},
-		"queryTypeChartData": {
-			"labels": [
-				"A",
-				"HTTPS",
-				"AAAA",
-				"SOA",
-				"SRV"
-			],
-			"datasets": [
-				{
-					"data": [
-						683,
-						196,
-						42,
-						2,
-						2
-					],
-					"backgroundColor": [
-						"rgba(102, 153, 255, 0.5)",
-						"rgba(92, 184, 92, 0.5)",
-						"rgba(7, 7, 7, 0.5)",
-						"rgba(91, 192, 222, 0.5)",
-						"rgba(150, 150, 0, 0.5)",
-						"rgba(23, 162, 184, 0.5)",
-						"rgba(111, 84, 153, 0.5)",
-						"rgba(255, 165, 0, 0.5)",
-						"rgba(51, 122, 183, 0.5)",
-						"rgba(150, 150, 150, 0.5)"
-					]
-				}
-			]
-		},
-		"protocolTypeChartData": {
-			"labels": [
-				"Udp"
-			],
-			"datasets": [
-				{
-					"data": [
-						925
-					],
-					"backgroundColor": [
-						"rgba(111, 84, 153, 0.5)",
-						"rgba(150, 150, 0, 0.5)",
-						"rgba(23, 162, 184, 0.5)",
-						"rgba(255, 165, 0, 0.5)",
-						"rgba(91, 192, 222, 0.5)"
-					]
-				}
-			]
-		},
-		"topClients": [
-			{
-				"name": "192.168.10.5",
-				"domain": "server1.home",
-				"hits": 463,
-				"rateLimited": false
-			},
-			{
-				"name": "192.168.10.12",
-				"domain": "vostro1.home",
-				"hits": 236,
-				"rateLimited": false
-			},
-			{
-				"name": "192.168.10.13",
-				"hits": 165,
-				"rateLimited": false
-			},
-			{
-				"name": "192.168.10.11",
-				"domain": "shreyas-zare.home",
-				"hits": 53,
-				"rateLimited": false
-			},
-			{
-				"name": "192.168.10.15",
-				"domain": "android-9c3d70b130d99b94.home",
-				"hits": 6,
-				"rateLimited": false
-			},
-			{
-				"name": "192.168.10.2",
-				"domain": "pi1.home",
-				"hits": 2,
-				"rateLimited": false
-			}
-		],
-		"topDomains": [
-			{
-				"name": "hses7-vod-cf-ace.cdn.hotstar.com",
-				"hits": 114
-			},
-			{
-				"name": "bifrost-api.hotstar.com",
-				"hits": 61
-			},
-			{
-				"name": "edge.microsoft.com",
-				"hits": 52
-			},
-			{
-				"name": "www.google.com",
-				"hits": 34
-			},
-			{
-				"name": "www.hotstar.com",
-				"hits": 24
-			},
-			{
-				"name": "safebrowsing.googleapis.com",
-				"hits": 15
-			},
-			{
-				"name": "www.bing.com",
-				"hits": 14
-			},
-			{
-				"name": "go.microsoft.com",
-				"hits": 14
-			},
-			{
-				"name": "graph.facebook.com",
-				"hits": 13
-			},
-			{
-				"name": "substrate.office.com",
-				"hits": 11
-			}
-		],
-		"topBlockedDomains": [
-			{
-				"name": "mobile.pipe.aria.microsoft.com",
-				"hits": 10
-			},
-			{
-				"name": "in.api.glance.inmobi.com",
-				"hits": 9
-			},
-			{
-				"name": "in.analytics.glance.inmobi.com",
-				"hits": 6
-			},
-			{
-				"name": "app-measurement.com",
-				"hits": 4
-			},
-			{
-				"name": "googleads.g.doubleclick.net",
-				"hits": 4
-			},
-			{
-				"name": "analytics.swiggy.com",
-				"hits": 2
-			},
-			{
-				"name": "firebase-settings.crashlytics.com",
-				"hits": 2
-			},
-			{
-				"name": "cdn.cookielaw.org",
-				"hits": 2
-			},
-			{
-				"name": "m.urbancompany.com",
-				"hits": 1
-			},
-			{
-				"name": "beacons.gvt2.com",
-				"hits": 1
-			}
-		]
-	},
-	"status": "ok"
+    "response": {
+        "stats": {
+            "totalQueries": 925,
+            "totalNoError": 834,
+            "totalServerFailure": 1,
+            "totalNxDomain": 90,
+            "totalRefused": 0,
+            "totalAuthoritative": 47,
+            "totalRecursive": 348,
+            "totalCached": 481,
+            "totalBlocked": 49,
+            "totalDropped": 0,
+            "totalClients": 6,
+            "zones": 19,
+            "cachedEntries": 6330,
+            "allowedZones": 10,
+            "blockedZones": 1,
+            "allowListZones": 0,
+            "blockListZones": 307447
+        },
+        "mainChartData": {
+            "labelFormat": "HH:mm",
+            "labels": [
+                "2024-02-04T10:38:00.0000000Z",
+                "2024-02-04T10:39:00.0000000Z",
+                "2024-02-04T10:40:00.0000000Z",
+                "2024-02-04T10:41:00.0000000Z",
+                "2024-02-04T10:42:00.0000000Z",
+                "2024-02-04T10:43:00.0000000Z",
+                "2024-02-04T10:44:00.0000000Z",
+                "2024-02-04T10:45:00.0000000Z",
+                "2024-02-04T10:46:00.0000000Z",
+                "2024-02-04T10:47:00.0000000Z",
+                "2024-02-04T10:48:00.0000000Z",
+                "2024-02-04T10:49:00.0000000Z",
+                "2024-02-04T10:50:00.0000000Z",
+                "2024-02-04T10:51:00.0000000Z",
+                "2024-02-04T10:52:00.0000000Z",
+                "2024-02-04T10:53:00.0000000Z",
+                "2024-02-04T10:54:00.0000000Z",
+                "2024-02-04T10:55:00.0000000Z",
+                "2024-02-04T10:56:00.0000000Z",
+                "2024-02-04T10:57:00.0000000Z",
+                "2024-02-04T10:58:00.0000000Z",
+                "2024-02-04T10:59:00.0000000Z",
+                "2024-02-04T11:00:00.0000000Z",
+                "2024-02-04T11:01:00.0000000Z",
+                "2024-02-04T11:02:00.0000000Z",
+                "2024-02-04T11:03:00.0000000Z",
+                "2024-02-04T11:04:00.0000000Z",
+                "2024-02-04T11:05:00.0000000Z",
+                "2024-02-04T11:06:00.0000000Z",
+                "2024-02-04T11:07:00.0000000Z",
+                "2024-02-04T11:08:00.0000000Z",
+                "2024-02-04T11:09:00.0000000Z",
+                "2024-02-04T11:10:00.0000000Z",
+                "2024-02-04T11:11:00.0000000Z",
+                "2024-02-04T11:12:00.0000000Z",
+                "2024-02-04T11:13:00.0000000Z",
+                "2024-02-04T11:14:00.0000000Z",
+                "2024-02-04T11:15:00.0000000Z",
+                "2024-02-04T11:16:00.0000000Z",
+                "2024-02-04T11:17:00.0000000Z",
+                "2024-02-04T11:18:00.0000000Z",
+                "2024-02-04T11:19:00.0000000Z",
+                "2024-02-04T11:20:00.0000000Z",
+                "2024-02-04T11:21:00.0000000Z",
+                "2024-02-04T11:22:00.0000000Z",
+                "2024-02-04T11:23:00.0000000Z",
+                "2024-02-04T11:24:00.0000000Z",
+                "2024-02-04T11:25:00.0000000Z",
+                "2024-02-04T11:26:00.0000000Z",
+                "2024-02-04T11:27:00.0000000Z",
+                "2024-02-04T11:28:00.0000000Z",
+                "2024-02-04T11:29:00.0000000Z",
+                "2024-02-04T11:30:00.0000000Z",
+                "2024-02-04T11:31:00.0000000Z",
+                "2024-02-04T11:32:00.0000000Z",
+                "2024-02-04T11:33:00.0000000Z",
+                "2024-02-04T11:34:00.0000000Z",
+                "2024-02-04T11:35:00.0000000Z",
+                "2024-02-04T11:36:00.0000000Z",
+                "2024-02-04T11:37:00.0000000Z"
+            ],
+            "datasets": [
+                {
+                    "label": "Total",
+                    "backgroundColor": "rgba(102, 153, 255, 0.1)",
+                    "borderColor": "rgb(102, 153, 255)",
+                    "borderWidth": 2,
+                    "fill": true,
+                    "data": [
+                        4,
+                        6,
+                        13,
+                        9,
+                        27,
+                        9,
+                        11,
+                        15,
+                        9,
+                        10,
+                        5,
+                        9,
+                        5,
+                        17,
+                        6,
+                        9,
+                        61,
+                        23,
+                        9,
+                        21,
+                        8,
+                        20,
+                        5,
+                        7,
+                        35,
+                        26,
+                        33,
+                        20,
+                        7,
+                        12,
+                        4,
+                        14,
+                        3,
+                        19,
+                        37,
+                        10,
+                        18,
+                        12,
+                        7,
+                        30,
+                        47,
+                        16,
+                        10,
+                        3,
+                        12,
+                        11,
+                        37,
+                        3,
+                        18,
+                        22,
+                        16,
+                        6,
+                        15,
+                        5,
+                        41,
+                        13,
+                        7,
+                        9,
+                        17,
+                        12
+                    ]
+                },
+                {
+                    "label": "No Error",
+                    "backgroundColor": "rgba(92, 184, 92, 0.1)",
+                    "borderColor": "rgb(92, 184, 92)",
+                    "borderWidth": 2,
+                    "fill": true,
+                    "data": [
+                        4,
+                        6,
+                        11,
+                        9,
+                        22,
+                        6,
+                        11,
+                        13,
+                        9,
+                        7,
+                        5,
+                        7,
+                        4,
+                        13,
+                        5,
+                        7,
+                        59,
+                        22,
+                        8,
+                        21,
+                        8,
+                        19,
+                        5,
+                        7,
+                        31,
+                        25,
+                        24,
+                        16,
+                        6,
+                        12,
+                        4,
+                        12,
+                        3,
+                        19,
+                        36,
+                        8,
+                        18,
+                        12,
+                        7,
+                        28,
+                        46,
+                        16,
+                        10,
+                        3,
+                        11,
+                        10,
+                        34,
+                        2,
+                        10,
+                        13,
+                        11,
+                        6,
+                        15,
+                        5,
+                        40,
+                        12,
+                        6,
+                        9,
+                        14,
+                        12
+                    ]
+                },
+                {
+                    "label": "Server Failure",
+                    "backgroundColor": "rgba(217, 83, 79, 0.1)",
+                    "borderColor": "rgb(217, 83, 79)",
+                    "borderWidth": 2,
+                    "fill": true,
+                    "data": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        1,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "label": "NX Domain",
+                    "backgroundColor": "rgba(120, 120, 120, 0.1)",
+                    "borderColor": "rgb(120, 120, 120)",
+                    "borderWidth": 2,
+                    "fill": true,
+                    "data": [
+                        0,
+                        0,
+                        2,
+                        0,
+                        5,
+                        3,
+                        0,
+                        2,
+                        0,
+                        3,
+                        0,
+                        2,
+                        1,
+                        4,
+                        1,
+                        2,
+                        2,
+                        1,
+                        1,
+                        0,
+                        0,
+                        1,
+                        0,
+                        0,
+                        4,
+                        1,
+                        9,
+                        4,
+                        1,
+                        0,
+                        0,
+                        2,
+                        0,
+                        0,
+                        1,
+                        2,
+                        0,
+                        0,
+                        0,
+                        2,
+                        0,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        3,
+                        1,
+                        8,
+                        9,
+                        5,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1,
+                        0,
+                        3,
+                        0
+                    ]
+                },
+                {
+                    "label": "Refused",
+                    "backgroundColor": "rgba(91, 192, 222, 0.1)",
+                    "borderColor": "rgb(91, 192, 222)",
+                    "borderWidth": 2,
+                    "fill": true,
+                    "data": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "label": "Authoritative",
+                    "backgroundColor": "rgba(150, 150, 0, 0.1)",
+                    "borderColor": "rgb(150, 150, 0)",
+                    "borderWidth": 2,
+                    "fill": true,
+                    "data": [
+                        0,
+                        0,
+                        1,
+                        0,
+                        3,
+                        1,
+                        0,
+                        2,
+                        1,
+                        1,
+                        0,
+                        1,
+                        0,
+                        2,
+                        1,
+                        1,
+                        1,
+                        1,
+                        2,
+                        0,
+                        0,
+                        1,
+                        0,
+                        0,
+                        2,
+                        1,
+                        3,
+                        2,
+                        0,
+                        0,
+                        0,
+                        1,
+                        0,
+                        0,
+                        1,
+                        1,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        1,
+                        1,
+                        1,
+                        0,
+                        4,
+                        4,
+                        2,
+                        0,
+                        2,
+                        0,
+                        1,
+                        1,
+                        0,
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "label": "Recursive",
+                    "backgroundColor": "rgba(23, 162, 184, 0.1)",
+                    "borderColor": "rgb(23, 162, 184)",
+                    "borderWidth": 2,
+                    "fill": true,
+                    "data": [
+                        1,
+                        3,
+                        0,
+                        1,
+                        14,
+                        2,
+                        8,
+                        4,
+                        1,
+                        3,
+                        2,
+                        3,
+                        1,
+                        3,
+                        3,
+                        3,
+                        36,
+                        8,
+                        2,
+                        14,
+                        4,
+                        6,
+                        1,
+                        1,
+                        26,
+                        17,
+                        11,
+                        10,
+                        2,
+                        4,
+                        0,
+                        8,
+                        1,
+                        7,
+                        18,
+                        0,
+                        3,
+                        0,
+                        2,
+                        10,
+                        6,
+                        1,
+                        3,
+                        1,
+                        5,
+                        4,
+                        20,
+                        0,
+                        5,
+                        7,
+                        0,
+                        3,
+                        7,
+                        0,
+                        21,
+                        7,
+                        1,
+                        3,
+                        6,
+                        5
+                    ]
+                },
+                {
+                    "label": "Cached",
+                    "backgroundColor": "rgba(111, 84, 153, 0.1)",
+                    "borderColor": "rgb(111, 84, 153)",
+                    "borderWidth": 2,
+                    "fill": true,
+                    "data": [
+                        3,
+                        3,
+                        11,
+                        8,
+                        8,
+                        4,
+                        3,
+                        8,
+                        7,
+                        4,
+                        3,
+                        4,
+                        3,
+                        10,
+                        2,
+                        4,
+                        23,
+                        14,
+                        5,
+                        7,
+                        4,
+                        13,
+                        4,
+                        6,
+                        5,
+                        8,
+                        13,
+                        6,
+                        4,
+                        8,
+                        4,
+                        4,
+                        2,
+                        12,
+                        18,
+                        8,
+                        15,
+                        12,
+                        5,
+                        18,
+                        41,
+                        15,
+                        7,
+                        2,
+                        6,
+                        6,
+                        14,
+                        2,
+                        5,
+                        6,
+                        10,
+                        3,
+                        6,
+                        5,
+                        19,
+                        5,
+                        5,
+                        6,
+                        8,
+                        7
+                    ]
+                },
+                {
+                    "label": "Blocked",
+                    "backgroundColor": "rgba(255, 165, 0, 0.1)",
+                    "borderColor": "rgb(255, 165, 0)",
+                    "borderWidth": 2,
+                    "fill": true,
+                    "data": [
+                        0,
+                        0,
+                        1,
+                        0,
+                        2,
+                        2,
+                        0,
+                        1,
+                        0,
+                        2,
+                        0,
+                        1,
+                        1,
+                        2,
+                        0,
+                        1,
+                        1,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        2,
+                        0,
+                        6,
+                        2,
+                        1,
+                        0,
+                        0,
+                        1,
+                        0,
+                        0,
+                        0,
+                        1,
+                        0,
+                        0,
+                        0,
+                        2,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        2,
+                        1,
+                        4,
+                        5,
+                        4,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        1,
+                        0,
+                        3,
+                        0
+                    ]
+                },
+                {
+                    "label": "Dropped",
+                    "backgroundColor": "rgba(30, 30, 30, 0.1)",
+                    "borderColor": "rgb(30, 30, 30)",
+                    "borderWidth": 2,
+                    "fill": true,
+                    "data": [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                {
+                    "label": "Clients",
+                    "backgroundColor": "rgba(51, 122, 183, 0.1)",
+                    "borderColor": "rgb(51, 122, 183)",
+                    "borderWidth": 2,
+                    "fill": true,
+                    "data": [
+                        3,
+                        4,
+                        3,
+                        2,
+                        3,
+                        4,
+                        2,
+                        3,
+                        3,
+                        2,
+                        2,
+                        3,
+                        3,
+                        3,
+                        2,
+                        4,
+                        3,
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        3,
+                        2,
+                        3,
+                        3,
+                        2,
+                        2,
+                        2,
+                        3,
+                        2,
+                        2,
+                        3,
+                        3,
+                        1,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        2,
+                        3,
+                        3,
+                        4,
+                        2,
+                        3,
+                        4,
+                        4,
+                        2,
+                        4,
+                        3,
+                        3,
+                        3,
+                        3,
+                        2,
+                        2,
+                        3
+                    ]
+                }
+            ]
+        },
+        "queryResponseChartData": {
+            "labels": [
+                "Authoritative",
+                "Recursive",
+                "Cached",
+                "Blocked",
+                "Dropped"
+            ],
+            "datasets": [
+                {
+                    "data": [
+                        47,
+                        348,
+                        481,
+                        49,
+                        0
+                    ],
+                    "backgroundColor": [
+                        "rgba(150, 150, 0, 0.5)",
+                        "rgba(23, 162, 184, 0.5)",
+                        "rgba(111, 84, 153, 0.5)",
+                        "rgba(255, 165, 0, 0.5)",
+                        "rgba(7, 7, 7, 0.5)"
+                    ]
+                }
+            ]
+        },
+        "queryTypeChartData": {
+            "labels": [
+                "A",
+                "HTTPS",
+                "AAAA",
+                "SOA",
+                "SRV"
+            ],
+            "datasets": [
+                {
+                    "data": [
+                        683,
+                        196,
+                        42,
+                        2,
+                        2
+                    ],
+                    "backgroundColor": [
+                        "rgba(102, 153, 255, 0.5)",
+                        "rgba(92, 184, 92, 0.5)",
+                        "rgba(7, 7, 7, 0.5)",
+                        "rgba(91, 192, 222, 0.5)",
+                        "rgba(150, 150, 0, 0.5)",
+                        "rgba(23, 162, 184, 0.5)",
+                        "rgba(111, 84, 153, 0.5)",
+                        "rgba(255, 165, 0, 0.5)",
+                        "rgba(51, 122, 183, 0.5)",
+                        "rgba(150, 150, 150, 0.5)"
+                    ]
+                }
+            ]
+        },
+        "protocolTypeChartData": {
+            "labels": [
+                "Udp"
+            ],
+            "datasets": [
+                {
+                    "data": [
+                        925
+                    ],
+                    "backgroundColor": [
+                        "rgba(111, 84, 153, 0.5)",
+                        "rgba(150, 150, 0, 0.5)",
+                        "rgba(23, 162, 184, 0.5)",
+                        "rgba(255, 165, 0, 0.5)",
+                        "rgba(91, 192, 222, 0.5)"
+                    ]
+                }
+            ]
+        },
+        "topClients": [
+            {
+                "name": "192.168.10.5",
+                "domain": "server1.home",
+                "hits": 463,
+                "rateLimited": false
+            },
+            {
+                "name": "192.168.10.12",
+                "domain": "vostro1.home",
+                "hits": 236,
+                "rateLimited": false
+            },
+            {
+                "name": "192.168.10.13",
+                "hits": 165,
+                "rateLimited": false
+            },
+            {
+                "name": "192.168.10.11",
+                "domain": "shreyas-zare.home",
+                "hits": 53,
+                "rateLimited": false
+            },
+            {
+                "name": "192.168.10.15",
+                "domain": "android-9c3d70b130d99b94.home",
+                "hits": 6,
+                "rateLimited": false
+            },
+            {
+                "name": "192.168.10.2",
+                "domain": "pi1.home",
+                "hits": 2,
+                "rateLimited": false
+            }
+        ],
+        "topDomains": [
+            {
+                "name": "hses7-vod-cf-ace.cdn.hotstar.com",
+                "hits": 114
+            },
+            {
+                "name": "bifrost-api.hotstar.com",
+                "hits": 61
+            },
+            {
+                "name": "edge.microsoft.com",
+                "hits": 52
+            },
+            {
+                "name": "www.google.com",
+                "hits": 34
+            },
+            {
+                "name": "www.hotstar.com",
+                "hits": 24
+            },
+            {
+                "name": "safebrowsing.googleapis.com",
+                "hits": 15
+            },
+            {
+                "name": "www.bing.com",
+                "hits": 14
+            },
+            {
+                "name": "go.microsoft.com",
+                "hits": 14
+            },
+            {
+                "name": "graph.facebook.com",
+                "hits": 13
+            },
+            {
+                "name": "substrate.office.com",
+                "hits": 11
+            }
+        ],
+        "topBlockedDomains": [
+            {
+                "name": "mobile.pipe.aria.microsoft.com",
+                "hits": 10
+            },
+            {
+                "name": "in.api.glance.inmobi.com",
+                "hits": 9
+            },
+            {
+                "name": "in.analytics.glance.inmobi.com",
+                "hits": 6
+            },
+            {
+                "name": "app-measurement.com",
+                "hits": 4
+            },
+            {
+                "name": "googleads.g.doubleclick.net",
+                "hits": 4
+            },
+            {
+                "name": "analytics.swiggy.com",
+                "hits": 2
+            },
+            {
+                "name": "firebase-settings.crashlytics.com",
+                "hits": 2
+            },
+            {
+                "name": "cdn.cookielaw.org",
+                "hits": 2
+            },
+            {
+                "name": "m.urbancompany.com",
+                "hits": 1
+            },
+            {
+                "name": "beacons.gvt2.com",
+                "hits": 1
+            }
+        ]
+    },
+    "status": "ok"
 }
 ```
 
@@ -1551,6 +1574,7 @@ PERMISSIONS:\
 Dashboard: View
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `type` (optional): The duration type for which valid values are: [`LastHour`, `LastDay`, `LastWeek`, `LastMonth`, `LastYear`, `custom`]. Default value is `LastHour`.
 - `start` (optional): The start date in ISO 8601 format. Applies only to `custom` type.
@@ -1562,64 +1586,65 @@ WHERE:
 
 RESPONSE:
 The response json will include the object with definition same in the `getStats` response depending on the `statsType`. For example below is the response for `TopClients`:
-```
+
+```json
 {
-	"response": {
-		"topClients": [
-			{
-				"name": "192.168.10.5",
-				"domain": "server1.local",
-				"hits": 236,
-				"rateLimited": false
-			},
-			{
-				"name": "192.168.10.4",
-				"domain": "nas1.local",
-				"hits": 16,
-				"rateLimited": false
-			},
-			{
-				"name": "192.168.10.6",
-				"domain": "server2.local",
-				"hits": 14,
-				"rateLimited": false
-			},
-			{
-				"name": "192.168.10.3",
-				"domain": "nas2.local",
-				"hits": 12,
-				"rateLimited": false
-			},
-			{
-				"name": "217.31.193.175",
-				"domain": "condor175.knot-resolver.cz",
-				"hits": 10,
-				"rateLimited": false
-			},
-			{
-				"name": "162.158.180.45",
-				"hits": 9,
-				"rateLimited": false
-			},
-			{
-				"name": "217.31.193.163",
-				"domain": "gondor-resolver.labs.nic.cz",
-				"hits": 9,
-				"rateLimited": false
-			},
-			{
-				"name": "210.245.24.68",
-				"hits": 8,
-				"rateLimited": false
-			},
-			{
-				"name": "101.91.16.140",
-				"hits": 8,
-				"rateLimited": false
-			}
-		],
-	},
-	"status": "ok"
+    "response": {
+        "topClients": [
+            {
+                "name": "192.168.10.5",
+                "domain": "server1.local",
+                "hits": 236,
+                "rateLimited": false
+            },
+            {
+                "name": "192.168.10.4",
+                "domain": "nas1.local",
+                "hits": 16,
+                "rateLimited": false
+            },
+            {
+                "name": "192.168.10.6",
+                "domain": "server2.local",
+                "hits": 14,
+                "rateLimited": false
+            },
+            {
+                "name": "192.168.10.3",
+                "domain": "nas2.local",
+                "hits": 12,
+                "rateLimited": false
+            },
+            {
+                "name": "217.31.193.175",
+                "domain": "condor175.knot-resolver.cz",
+                "hits": 10,
+                "rateLimited": false
+            },
+            {
+                "name": "162.158.180.45",
+                "hits": 9,
+                "rateLimited": false
+            },
+            {
+                "name": "217.31.193.163",
+                "domain": "gondor-resolver.labs.nic.cz",
+                "hits": 9,
+                "rateLimited": false
+            },
+            {
+                "name": "210.245.24.68",
+                "hits": 8,
+                "rateLimited": false
+            },
+            {
+                "name": "101.91.16.140",
+                "hits": 8,
+                "rateLimited": false
+            }
+        ],
+    },
+    "status": "ok"
 }
 ```
 
@@ -1637,13 +1662,15 @@ PERMISSIONS:\
 Dashboard: Delete
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {},
-	"status": "ok"
+    "response": {},
+    "status": "ok"
 }
 ```
 
@@ -1667,121 +1694,123 @@ Zones: View\
 Zone: View
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `pageNumber` (optional): When this parameter is specified, the API will return paginated results based on the page number and zones per pages options. When not specified, the API will return a list of all zones.
 - `zonesPerPage` (optional): The number of zones per page to be returned. This option is only used when `pageNumber` options is specified. The default value is `10` when not specified.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"pageNumber": 1,
-		"totalPages": 2,
-		"totalZones": 12,
-		"zones": [
-			{
-				"name": "",
-				"type": "Secondary",
-				"dnssecStatus": "SignedWithNSEC",
-				"soaSerial": 1,
-				"expiry": "2022-02-26T07:57:08.1842183Z",
-				"isExpired": false,
-				"syncFailed": false,
-				"lastModified": "2022-02-26T07:57:08.1842183Z",
-				"disabled": false
-			},
-			{
-				"name": "0.in-addr.arpa",
-				"type": "Primary",
-				"internal": true,
-				"dnssecStatus": "Unsigned",
-				"soaSerial": 1,
-				"lastModified": "2022-02-26T07:57:08.1842183Z",
-				"disabled": false
-			},
-			{
-				"name": "1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.ip6.arpa",
-				"type": "Primary",
-				"internal": true,
-				"dnssecStatus": "Unsigned",
-				"soaSerial": 1,
-				"lastModified": "2022-02-26T07:57:08.1842183Z",
-				"disabled": false
-			},
-			{
-				"name": "127.in-addr.arpa",
-				"type": "Primary",
-				"internal": true,
-				"dnssecStatus": "Unsigned",
-				"soaSerial": 1,
-				"lastModified": "2022-02-26T07:57:08.1842183Z",
-				"disabled": false
-			},
-			{
-				"name": "255.in-addr.arpa",
-				"type": "Primary",
-				"internal": true,
-				"dnssecStatus": "Unsigned",
-				"soaSerial": 1,
-				"lastModified": "2022-02-26T07:57:08.1842183Z",
-				"disabled": false
-			},
-			{
-				"name": "example.com",
-				"type": "Primary",
-				"internal": false,
-				"dnssecStatus": "SignedWithNSEC",
-				"soaSerial": 1,
-				"notifyFailed": false,
-				"notifyFailedFor": [],
-				"lastModified": "2022-02-26T07:57:08.1842183Z",
-				"disabled": false
-			},
-			{
-				"name": "localhost",
-				"type": "Primary",
-				"internal": true,
-				"dnssecStatus": "Unsigned",
-				"soaSerial": 1,
-				"lastModified": "2022-02-26T07:57:08.1842183Z",
-				"disabled": false
-			},
-			{
-				"name": "test0.com",
-				"type": "Primary",
-				"internal": false,
-				"dnssecStatus": "Unsigned",
-				"soaSerial": 1,
-				"notifyFailed": false,
-				"notifyFailedFor": [],
-				"lastModified": "2022-02-26T07:57:08.1842183Z",
-				"disabled": false
-			},
-			{
-				"name": "test1.com",
-				"type": "Primary",
-				"internal": false,
-				"dnssecStatus": "Unsigned",
-				"soaSerial": 1,
-				"notifyFailed": false,
-				"notifyFailedFor": [],
-				"lastModified": "2022-02-26T07:57:08.1842183Z",
-				"disabled": false
-			},
-			{
-				"name": "test2.com",
-				"type": "Primary",
-				"internal": false,
-				"dnssecStatus": "Unsigned",
-				"soaSerial": 1,
-				"notifyFailed": false,
-				"notifyFailedFor": [],
-				"lastModified": "2022-02-26T07:57:08.1842183Z",
-				"disabled": false
-			}
-		]
-	},
-	"status": "ok"
+    "response": {
+        "pageNumber": 1,
+        "totalPages": 2,
+        "totalZones": 12,
+        "zones": [
+            {
+                "name": "",
+                "type": "Secondary",
+                "dnssecStatus": "SignedWithNSEC",
+                "soaSerial": 1,
+                "expiry": "2022-02-26T07:57:08.1842183Z",
+                "isExpired": false,
+                "syncFailed": false,
+                "lastModified": "2022-02-26T07:57:08.1842183Z",
+                "disabled": false
+            },
+            {
+                "name": "0.in-addr.arpa",
+                "type": "Primary",
+                "internal": true,
+                "dnssecStatus": "Unsigned",
+                "soaSerial": 1,
+                "lastModified": "2022-02-26T07:57:08.1842183Z",
+                "disabled": false
+            },
+            {
+                "name": "1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.ip6.arpa",
+                "type": "Primary",
+                "internal": true,
+                "dnssecStatus": "Unsigned",
+                "soaSerial": 1,
+                "lastModified": "2022-02-26T07:57:08.1842183Z",
+                "disabled": false
+            },
+            {
+                "name": "127.in-addr.arpa",
+                "type": "Primary",
+                "internal": true,
+                "dnssecStatus": "Unsigned",
+                "soaSerial": 1,
+                "lastModified": "2022-02-26T07:57:08.1842183Z",
+                "disabled": false
+            },
+            {
+                "name": "255.in-addr.arpa",
+                "type": "Primary",
+                "internal": true,
+                "dnssecStatus": "Unsigned",
+                "soaSerial": 1,
+                "lastModified": "2022-02-26T07:57:08.1842183Z",
+                "disabled": false
+            },
+            {
+                "name": "example.com",
+                "type": "Primary",
+                "internal": false,
+                "dnssecStatus": "SignedWithNSEC",
+                "soaSerial": 1,
+                "notifyFailed": false,
+                "notifyFailedFor": [],
+                "lastModified": "2022-02-26T07:57:08.1842183Z",
+                "disabled": false
+            },
+            {
+                "name": "localhost",
+                "type": "Primary",
+                "internal": true,
+                "dnssecStatus": "Unsigned",
+                "soaSerial": 1,
+                "lastModified": "2022-02-26T07:57:08.1842183Z",
+                "disabled": false
+            },
+            {
+                "name": "test0.com",
+                "type": "Primary",
+                "internal": false,
+                "dnssecStatus": "Unsigned",
+                "soaSerial": 1,
+                "notifyFailed": false,
+                "notifyFailedFor": [],
+                "lastModified": "2022-02-26T07:57:08.1842183Z",
+                "disabled": false
+            },
+            {
+                "name": "test1.com",
+                "type": "Primary",
+                "internal": false,
+                "dnssecStatus": "Unsigned",
+                "soaSerial": 1,
+                "notifyFailed": false,
+                "notifyFailedFor": [],
+                "lastModified": "2022-02-26T07:57:08.1842183Z",
+                "disabled": false
+            },
+            {
+                "name": "test2.com",
+                "type": "Primary",
+                "internal": false,
+                "dnssecStatus": "Unsigned",
+                "soaSerial": 1,
+                "notifyFailed": false,
+                "notifyFailedFor": [],
+                "lastModified": "2022-02-26T07:57:08.1842183Z",
+                "disabled": false
+            }
+        ]
+    },
+    "status": "ok"
 }
 ```
 
@@ -1797,17 +1826,19 @@ Zones: View\
 Zone: View
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"catalogZoneNames": [
-			"catalog1"
-		]
-	},
-	"status": "ok"
+    "response": {
+        "catalogZoneNames": [
+            "catalog1"
+        ]
+    },
+    "status": "ok"
 }
 ```
 
@@ -1826,6 +1857,7 @@ PERMISSIONS:\
 Zones: Modify
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `zone`: The domain name for creating the new zone. The value can be valid domain name, an IP address, or an network address in CIDR format. When value is IP address or network address, a reverse zone is created.
 - `type`: The type of zone to be created. Valid values are [`Primary`, `Secondary`, `Stub`, `Forwarder`, `SecondaryForwarder`, `Catalog`, `SecondaryCatalog`].
@@ -1845,19 +1877,21 @@ WHERE:
 - `proxyPassword` (optional): The proxy server password to use when `proxyType` is configured. This optional parameter is required to be used with Conditional Forwarder zones.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"domain": "example.com"
-	},
-	"status": "ok"
+    "response": {
+        "domain": "example.com"
+    },
+    "status": "ok"
 }
 ```
 
 WHERE:
+
 - `domain`: Will contain the zone that was created. This is specifically useful to know the reverse zone that was created.
 
-### Import Zone 
+### Import Zone
 
 Allows importing a complete zone file or a set of DNS resource records in standard RFC 1035 zone file format.
 
@@ -1869,6 +1903,7 @@ Zones: Modify
 Zone: Modify
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `zone`: The domain name of the zone to import.
 - `overwrite` (optional): Set to `true` to allow overwriting existing resource record set for the records being imported.
@@ -1877,9 +1912,10 @@ WHERE:
 REQUEST: This is a POST request call where the request must use `text/plain` content type and request body must contain the zone file in text format.
 
 RESPONSE:
-```
+
+```json
 {
-	"status": "ok"
+    "status": "ok"
 }
 ```
 
@@ -1895,6 +1931,7 @@ Zones: View
 Zone: View
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `zone`: The domain name of the zone to export.
 
@@ -1912,14 +1949,16 @@ Zones: Modify
 Zone: View
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `zone`: The domain name of the zone to be created.
 - `sourceZone`: The domain name of the zone to be cloned.
 
 RESPONSE:
-```
+
+```json
 {
-	"status": "ok"
+    "status": "ok"
 }
 ```
 
@@ -1935,14 +1974,16 @@ Zones: Delete
 Zone: Delete
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `zone`: The domain name of the zone to be converted.
 - `type`: The zone type to convert the current zone to.
 
 RESPONSE:
-```
+
+```json
 {
-	"status": "ok"
+    "status": "ok"
 }
 ```
 
@@ -1962,13 +2003,15 @@ Zones: Modify\
 Zone: Modify
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `zone`: The domain name of the zone to be enabled.
 
 RESPONSE:
-```
+
+```json
 {
-	"status": "ok"
+    "status": "ok"
 }
 ```
 
@@ -1988,13 +2031,15 @@ Zones: Modify\
 Zone: Modify
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `zone`: The domain name of the zone to be disabled.
 
 RESPONSE:
-```
+
+```json
 {
-	"status": "ok"
+    "status": "ok"
 }
 ```
 
@@ -2014,13 +2059,15 @@ Zones: Delete\
 Zone: Delete
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `zone`: The domain name of the zone to be deleted.
 
 RESPONSE:
-```
+
+```json
 {
-	"status": "ok"
+    "status": "ok"
 }
 ```
 
@@ -2039,13 +2086,15 @@ Zones: Modify\
 Zone: Modify
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `zone`: The domain name of the zone to resync.
 
 RESPONSE:
-```
+
+```json
 {
-	"status": "ok"
+    "status": "ok"
 }
 ```
 
@@ -2064,67 +2113,69 @@ Zones: Modify\
 Zone: View
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `zone`: The domain name of the zone to get options.
 - `includeAvailableCatalogZoneNames`: Set to `true` to include list of available Catalog zone names on the DNS server.
 - `includeAvailableTsigKeyNames`: Set to `true` to include list of available TSIG key names on the DNS server.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"name": "example.com",
-		"type": "Primary",
-		"internal": false,
-		"dnssecStatus": "Unsigned",
-		"notifyFailed": true,
-		"notifyFailedFor": [
-			"192.168.10.5"
-		],
-		"disabled": false,
-		"catalog": "catalog1",
-		"overrideCatalogQueryAccess": false,
-		"overrideCatalogZoneTransfer": false,
-		"overrideCatalogNotify": false,
-		"queryAccess": "Allow",
-		"queryAccessNetworkACL": [],
-		"zoneTransfer": "AllowOnlyZoneNameServers",
-		"zoneTransferNetworkACL": [],
-		"zoneTransferTsigKeyNames": [
-			"key.example.com"
-		],
-		"notify": "ZoneNameServers",
-		"notifyNameServers": [],
-		"update": "UseSpecifiedNetworkACL",
-		"updateNetworkACL": [
-			"192.168.180.0/24"
-		],
-		"updateSecurityPolicies": [
-			{
-				"tsigKeyName": "key.example.com",
-				"domain": "example.com",
-				"allowedTypes": [
-					"A",
-					"AAAA"
-				]
-			},
-			{
-				"tsigKeyName": "key.example.com",
-				"domain": "*.example.com",
-				"allowedTypes": [
-					"ANY"
-				]
-			}
-		],
-		"availableCatalogZoneNames": [
-			"catalog1"
-		],
-		"availableTsigKeyNames": [
-			"key.example.com",
-			"catalog"
-		]
-	},
-	"status": "ok"
+    "response": {
+        "name": "example.com",
+        "type": "Primary",
+        "internal": false,
+        "dnssecStatus": "Unsigned",
+        "notifyFailed": true,
+        "notifyFailedFor": [
+            "192.168.10.5"
+        ],
+        "disabled": false,
+        "catalog": "catalog1",
+        "overrideCatalogQueryAccess": false,
+        "overrideCatalogZoneTransfer": false,
+        "overrideCatalogNotify": false,
+        "queryAccess": "Allow",
+        "queryAccessNetworkACL": [],
+        "zoneTransfer": "AllowOnlyZoneNameServers",
+        "zoneTransferNetworkACL": [],
+        "zoneTransferTsigKeyNames": [
+            "key.example.com"
+        ],
+        "notify": "ZoneNameServers",
+        "notifyNameServers": [],
+        "update": "UseSpecifiedNetworkACL",
+        "updateNetworkACL": [
+            "192.168.180.0/24"
+        ],
+        "updateSecurityPolicies": [
+            {
+                "tsigKeyName": "key.example.com",
+                "domain": "example.com",
+                "allowedTypes": [
+                    "A",
+                    "AAAA"
+                ]
+            },
+            {
+                "tsigKeyName": "key.example.com",
+                "domain": "*.example.com",
+                "allowedTypes": [
+                    "ANY"
+                ]
+            }
+        ],
+        "availableCatalogZoneNames": [
+            "catalog1"
+        ],
+        "availableTsigKeyNames": [
+            "key.example.com",
+            "catalog"
+        ]
+    },
+    "status": "ok"
 }
 ```
 
@@ -2143,6 +2194,7 @@ Zones: Modify\
 Zone: Delete
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `zone`: The domain name of the zone to set options.
 - `disabled` (optional): Sets if the zone is enabled or disabled.
@@ -2151,7 +2203,7 @@ WHERE:
 - `overrideCatalogZoneTransfer` (optional): Set to `true` to override Zone Transfer option in the Catalog zone. This option is valid only for `Primary`, and `Forwarder` zones.
 - `overrideCatalogNotify` (optional): Set to `true` to override Notify option in the Catalog zone.  This option is valid only for `Primary`, and `Forwarder` zones.
 - `primaryNameServerAddresses` (optional): List of comma separated IP addresses or domain names of the primary name server. This optional parameter is used only with `Secondary`, `SecondaryForwarder`, `SecondaryCatalog`, and `Stub` zones. If this parameter is not used, the DNS server will try to recursively resolve the primary name server addresses automatically for `Secondary` and `Stub` zones. This option is required for `SecondaryForwarder` and `SecondaryCatalog` zones.
-- `primaryZoneTransferProtocol `(optional): The zone transfer protocol to be used by `Secondary`, `SecondaryForwarder`, and `SecondaryCatalog` zones. Valid values are [`Tcp`, `Tls`, `Quic`].
+- `primaryZoneTransferProtocol` (optional): The zone transfer protocol to be used by `Secondary`, `SecondaryForwarder`, and `SecondaryCatalog` zones. Valid values are [`Tcp`, `Tls`, `Quic`].
 - `primaryZoneTransferTsigKeyName` (optional): The TSIG key name to be used by `Secondary`, `SecondaryForwarder`, and `SecondaryCatalog` zones for zone transfer.
 - `validateZone`: (optional): Set value as `true` to enable ZONEMD validation. When enabled, the `Secondary` zone will be validated using the ZONEMD record after every zone transfer. The zone will get disabled if the validation fails. The zone must be DNSSEC signed for the validation to work. This option is only valid for `Secondary` zones.
 - `queryAccess` (optional): Valid options are [`Deny`, `Allow`, `AllowOnlyPrivateNetworks`, `AllowOnlyZoneNameServers`, `UseSpecifiedNetworkACL`, `AllowZoneNameServersAndUseSpecifiedNetworkACL`].
@@ -2167,9 +2219,10 @@ WHERE:
 - `updateSecurityPolicies` (optional): A pipe `|` separated table data of security policies with each row containing the TSIG keys name, domain name, and comma separated record types that are allowed. Use wildcard domain name to specify all sub domain names. Set this option to `false` to clear all security policies and stop TSIG authentication. This option is valid only for `Primary` and `Forwarder` zones.
 
 RESPONSE:
-```
+
+```json
 {
-	"status": "ok"
+    "status": "ok"
 }
 ```
 
@@ -2185,50 +2238,52 @@ Zones: Modify\
 Zone: View
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `zone`: The domain name of the zone to get the permissions for.
 - `includeUsersAndGroups`: Set to true to get a list of users and groups in the response.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"section": "Zones",
-		"subItem": "example.com",
-		"userPermissions": [
-			{
-				"username": "admin",
-				"canView": true,
-				"canModify": true,
-				"canDelete": true
-			}
-		],
-		"groupPermissions": [
-			{
-				"name": "Administrators",
-				"canView": true,
-				"canModify": true,
-				"canDelete": true
-			},
-			{
-				"name": "DNS Administrators",
-				"canView": true,
-				"canModify": true,
-				"canDelete": true
-			}
-		],
-		"users": [
-			"admin",
-			"shreyas"
-		],
-		"groups": [
-			"Administrators",
-			"DHCP Administrators",
-			"DNS Administrators",
-			"Everyone"
-		]
-	},
-	"status": "ok"
+    "response": {
+        "section": "Zones",
+        "subItem": "example.com",
+        "userPermissions": [
+            {
+                "username": "admin",
+                "canView": true,
+                "canModify": true,
+                "canDelete": true
+            }
+        ],
+        "groupPermissions": [
+            {
+                "name": "Administrators",
+                "canView": true,
+                "canModify": true,
+                "canDelete": true
+            },
+            {
+                "name": "DNS Administrators",
+                "canView": true,
+                "canModify": true,
+                "canDelete": true
+            }
+        ],
+        "users": [
+            "admin",
+            "shreyas"
+        ],
+        "groups": [
+            "Administrators",
+            "DHCP Administrators",
+            "DNS Administrators",
+            "Everyone"
+        ]
+    },
+    "status": "ok"
 }
 ```
 
@@ -2244,41 +2299,43 @@ Zones: Modify\
 Zone: Delete
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `zone`: The domain name of the zone to get the permissions for.
 - `userPermissions` (optional): A pipe `|` separated table data with each row containing username and boolean values for the view, modify and delete permissions. For example: user1|true|true|true|user2|true|false|false
 - `groupPermissions` (optional): A pipe `|` separated table data with each row containing the group name and boolean values for the view, modify and delete permissions. For example: group1|true|true|true|group2|true|true|false
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"section": "Zones",
-		"subItem": "example.com",
-		"userPermissions": [
-			{
-				"username": "admin",
-				"canView": true,
-				"canModify": true,
-				"canDelete": true
-			}
-		],
-		"groupPermissions": [
-			{
-				"name": "Administrators",
-				"canView": true,
-				"canModify": true,
-				"canDelete": true
-			},
-			{
-				"name": "DNS Administrators",
-				"canView": true,
-				"canModify": true,
-				"canDelete": true
-			}
-		]
-	},
-	"status": "ok"
+    "response": {
+        "section": "Zones",
+        "subItem": "example.com",
+        "userPermissions": [
+            {
+                "username": "admin",
+                "canView": true,
+                "canModify": true,
+                "canDelete": true
+            }
+        ],
+        "groupPermissions": [
+            {
+                "name": "Administrators",
+                "canView": true,
+                "canModify": true,
+                "canDelete": true
+            },
+            {
+                "name": "DNS Administrators",
+                "canView": true,
+                "canModify": true,
+                "canDelete": true
+            }
+        ]
+    },
+    "status": "ok"
 }
 ```
 
@@ -2297,6 +2354,7 @@ Zones: Modify\
 Zone: Delete
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `zone`: The name of the primary zone to sign.
 - `algorithm`: The algorithm to be used for signing. Valid values are [`RSA`, `ECDSA`].
@@ -2311,9 +2369,10 @@ WHERE:
 - `saltLength` (optional): The length of salt in bytes to use for hashing in NSEC3. This optional parameter is only applicable when using `NSEC3` as the `nxProof`. Default value is `0` when not specified.
 
 RESPONSE:
-```
+
+```json
 {
-	"status": "ok"
+    "status": "ok"
 }
 ```
 
@@ -2322,7 +2381,7 @@ RESPONSE:
 Unsigns the primary zone (DNSSEC).
 
 URL:\
-`http://localhost:5380/api/zones/dnssec/unsign?token=x&zone=example.com
+`http://localhost:5380/api/zones/dnssec/unsign?token=x&zone=example.com`
 
 OBSOLETE PATH:\
 `/api/zone/dnssec/unsign`
@@ -2332,13 +2391,15 @@ Zones: Modify\
 Zone: Delete
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `zone`: The name of the primary zone to unsign.
 
 RESPONSE:
-```
+
+```json
 {
-	"status": "ok"
+    "status": "ok"
 }
 ```
 
@@ -2347,46 +2408,48 @@ RESPONSE:
 Get the DS info for the signed primary zone to help with updating DS records at the parent zone.
 
 URL:\
-`http://localhost:5380/api/zones/dnssec/viewDS?token=x&zone=example.com
+`http://localhost:5380/api/zones/dnssec/viewDS?token=x&zone=example.com`
 
 PERMISSIONS:\
 Zones: View\
 Zone: View
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `zone`: The name of the signed primary zone.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"name": "example.com",
-		"type": "Primary",
-		"internal": false,
-		"disabled": false,
-		"dnssecStatus": "SignedWithNSEC",
-		"dsRecords": [
-			{
-				"keyTag": 47972,
-				"dnsKeyState": "Published",
-				"dnsKeyStateReadyBy": "2023-10-29T16:20:08.8007369Z",
-				"algorithm": "ECDSAP256SHA256",
-				"publicKey": "TK5a8pXPMspDwuh4Z3evOfNZm9kkc8IzwZDiCgIX6imxwkbpY9FTvhoI/ttZiLWZ5hvLbvrpsbd0liqSwqNmPg==",
-				"digests": [
-					{
-						"digestType": "SHA256",
-						"digest": "D59EBB413C88576B519B2980DF50493689A4A260383D0CB2F260251D5CA2E144"
-					},
-					{
-						"digestType": "SHA384",
-						"digest": "F8235EEAB1AEBCFAD28096DF8DCF820F25C685041562AAB63E1A3E1AC89D2FC3836E97114A64EC0E057DCA234451E50C"
-					}
-				]
-			}
-		]
-	},
-	"status": "ok"
+    "response": {
+        "name": "example.com",
+        "type": "Primary",
+        "internal": false,
+        "disabled": false,
+        "dnssecStatus": "SignedWithNSEC",
+        "dsRecords": [
+            {
+                "keyTag": 47972,
+                "dnsKeyState": "Published",
+                "dnsKeyStateReadyBy": "2023-10-29T16:20:08.8007369Z",
+                "algorithm": "ECDSAP256SHA256",
+                "publicKey": "TK5a8pXPMspDwuh4Z3evOfNZm9kkc8IzwZDiCgIX6imxwkbpY9FTvhoI/ttZiLWZ5hvLbvrpsbd0liqSwqNmPg==",
+                "digests": [
+                    {
+                        "digestType": "SHA256",
+                        "digest": "D59EBB413C88576B519B2980DF50493689A4A260383D0CB2F260251D5CA2E144"
+                    },
+                    {
+                        "digestType": "SHA384",
+                        "digest": "F8235EEAB1AEBCFAD28096DF8DCF820F25C685041562AAB63E1A3E1AC89D2FC3836E97114A64EC0E057DCA234451E50C"
+                    }
+                ]
+            }
+        ]
+    },
+    "status": "ok"
 }
 ```
 
@@ -2405,42 +2468,44 @@ Zones: Modify\
 Zone: View
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `zone`: The name of the primary zone.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"name": "example.com",
-		"type": "Primary",
-		"internal": false,
-		"disabled": false,
-		"dnssecStatus": "SignedWithNSEC",
-		"dnsKeyTtl": 3600,
-		"dnssecPrivateKeys": [
-			{
-				"keyTag": 15048,
-				"keyType": "KeySigningKey",
-				"algorithm": "ECDSAP256SHA256",
-				"state": "Published",
-				"stateChangedOn": "2022-12-18T14:39:50.0328321Z",
-				"stateReadyBy": "2022-12-18T16:14:50.0328321Z",
-				"isRetiring": false,
-				"rolloverDays": 0
-			},
-			{
-				"keyTag": 46152,
-				"keyType": "ZoneSigningKey",
-				"algorithm": "ECDSAP256SHA256",
-				"state": "Active",
-				"stateChangedOn": "2022-12-18T14:39:50.0661173Z",
-				"isRetiring": false,
-				"rolloverDays": 90
-			}
-		]
-	},
-	"status": "ok"
+    "response": {
+        "name": "example.com",
+        "type": "Primary",
+        "internal": false,
+        "disabled": false,
+        "dnssecStatus": "SignedWithNSEC",
+        "dnsKeyTtl": 3600,
+        "dnssecPrivateKeys": [
+            {
+                "keyTag": 15048,
+                "keyType": "KeySigningKey",
+                "algorithm": "ECDSAP256SHA256",
+                "state": "Published",
+                "stateChangedOn": "2022-12-18T14:39:50.0328321Z",
+                "stateReadyBy": "2022-12-18T16:14:50.0328321Z",
+                "isRetiring": false,
+                "rolloverDays": 0
+            },
+            {
+                "keyTag": 46152,
+                "keyType": "ZoneSigningKey",
+                "algorithm": "ECDSAP256SHA256",
+                "state": "Active",
+                "stateChangedOn": "2022-12-18T14:39:50.0661173Z",
+                "isRetiring": false,
+                "rolloverDays": 90
+            }
+        ]
+    },
+    "status": "ok"
 }
 ```
 
@@ -2459,13 +2524,15 @@ Zones: Modify\
 Zone: Delete
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `zone`: The name of the primary zone.
 
 RESPONSE:
-```
+
+```json
 {
-	"status": "ok"
+    "status": "ok"
 }
 ```
 
@@ -2484,13 +2551,15 @@ Zones: Modify\
 Zone: Delete
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `zone`: The name of the primary zone.
 
 RESPONSE:
-```
+
+```json
 {
-	"status": "ok"
+    "status": "ok"
 }
 ```
 
@@ -2509,15 +2578,17 @@ Zones: Modify\
 Zone: Delete
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `zone`: The name of the primary zone.
 - `iterations` (optional): The number of iterations to use for hashing. Default value is `0` when not specified.
 - `saltLength` (optional): The length of salt in bytes to use for hashing. Default value is `0` when not specified.
 
 RESPONSE:
-```
+
+```json
 {
-	"status": "ok"
+    "status": "ok"
 }
 ```
 
@@ -2536,14 +2607,16 @@ Zones: Modify\
 Zone: Delete
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `zone`: The name of the primary zone.
 - `ttl`: The TTL value for the DNSKEY resource record set.
 
 RESPONSE:
-```
+
+```json
 {
-	"status": "ok"
+    "status": "ok"
 }
 ```
 
@@ -2562,6 +2635,7 @@ Zones: Modify\
 Zone: Delete
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `zone`: The name of the primary zone.
 - `keyType`: The type of key for which the private key is to be generated. Valid values are [`KeySigningKey`, `ZoneSigningKey`].
@@ -2572,9 +2646,10 @@ WHERE:
 - `curve` (optional): The name of the curve to be used when using `ECDSA` algorithm. Valid values are [`P256`, `P384`]. This optional parameter is required when using `ECDSA` algorithm.
 
 RESPONSE:
-```
+
+```json
 {
-	"status": "ok"
+    "status": "ok"
 }
 ```
 
@@ -2593,15 +2668,17 @@ Zones: Modify\
 Zone: Delete
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `zone`: The name of the primary zone.
 - `keyTag`: The key tag of the private key to be updated.
-- `rolloverDays`: The frequency in days that the DNS server must automatically rollover the private key in the zone. Valid range is 0-365 days where 0 disables rollover. 
+- `rolloverDays`: The frequency in days that the DNS server must automatically rollover the private key in the zone. Valid range is 0-365 days where 0 disables rollover.
 
 RESPONSE:
-```
+
+```json
 {
-	"status": "ok"
+    "status": "ok"
 }
 ```
 
@@ -2620,14 +2697,16 @@ Zones: Modify\
 Zone: Delete
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `zone`: The name of the primary zone.
 - `keyTag`: The key tag of the private key to be deleted.
 
 RESPONSE:
-```
+
+```json
 {
-	"status": "ok"
+    "status": "ok"
 }
 ```
 
@@ -2646,13 +2725,15 @@ Zones: Modify\
 Zone: Delete
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `zone`: The name of the primary zone.
 
 RESPONSE:
-```
+
+```json
 {
-	"status": "ok"
+    "status": "ok"
 }
 ```
 
@@ -2671,14 +2752,16 @@ Zones: Modify\
 Zone: Delete
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `zone`: The name of the primary zone.
 - `keyTag`: The key tag of the private key to rollover.
 
 RESPONSE:
-```
+
+```json
 {
-	"status": "ok"
+    "status": "ok"
 }
 ```
 
@@ -2697,14 +2780,16 @@ Zones: Modify\
 Zone: Delete
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `zone`: The name of the primary zone.
 - `keyTag`: The key tag of the private key to retire.
 
 RESPONSE:
-```
+
+```json
 {
-	"status": "ok"
+    "status": "ok"
 }
 ```
 
@@ -2724,6 +2809,7 @@ Zones: None\
 Zone: Modify
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `domain`: The domain name of the zone to add record.
 - `zone` (optional): The name of the authoritative zone into which the `domain` exists. When unspecified, the closest authoritative zone will be used.
@@ -2795,29 +2881,30 @@ WHERE:
 - `rdata` (optional): This parameter is used for adding unknown i.e. unsupported record types. The value must be formatted as a hex string or a colon separated hex string.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"zone": {
-			"name": "example.com",
-			"type": "Primary",
-			"internal": false,
-			"dnssecStatus": "SignedWithNSEC",
-			"disabled": false
-		},
-		"addedRecord": {
-			"disabled": false,
-			"name": "example.com",
-			"type": "A",
-			"ttl": 3600,
-			"rData": {
-				"ipAddress": "3.3.3.3"
-			},
-			"dnssecStatus": "Unknown",
-			"lastUsedOn": "0001-01-01T00:00:00"
-		}
-	},
-	"status": "ok"
+    "response": {
+        "zone": {
+            "name": "example.com",
+            "type": "Primary",
+            "internal": false,
+            "dnssecStatus": "SignedWithNSEC",
+            "disabled": false
+        },
+        "addedRecord": {
+            "disabled": false,
+            "name": "example.com",
+            "type": "A",
+            "ttl": 3600,
+            "rData": {
+                "ipAddress": "3.3.3.3"
+            },
+            "dnssecStatus": "Unknown",
+            "lastUsedOn": "0001-01-01T00:00:00"
+        }
+    },
+    "status": "ok"
 }
 ```
 
@@ -2837,525 +2924,527 @@ Zones: None\
 Zone: View
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `domain`: The domain name of the zone to get records.
 - `zone` (optional): The name of the authoritative zone into which the `domain` exists. When unspecified, the closest authoritative zone will be used.
 - `listZone` (optional): When set to `true` will list all records in the zone else will list records only for the given domain name. Default value is `false` when not specified.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"zone": {
-			"name": "example.com",
-			"type": "Primary",
-			"internal": false,
-			"dnssecStatus": "SignedWithNSEC3",
-			"disabled": false
-		},
-		"records": [
-			{
-				"disabled": false,
-				"name": "example.com",
-				"type": "A",
-				"ttl": 3600,
-				"rData": {
-					"ipAddress": "1.1.1.1"
-				},
-				"dnssecStatus": "Unknown"
-			},
-			{
-				"disabled": false,
-				"name": "example.com",
-				"type": "NS",
-				"ttl": 3600,
-				"rData": {
-					"nameServer": "server1"
-				},
-				"dnssecStatus": "Unknown"
-			},
-			{
-				"disabled": false,
-				"name": "example.com",
-				"type": "SOA",
-				"ttl": 900,
-				"rData": {
-					"primaryNameServer": "server1",
-					"responsiblePerson": "hostadmin.example.com",
-					"serial": 35,
-					"refresh": 900,
-					"retry": 300,
-					"expire": 604800,
-					"minimum": 900
-				},
-				"dnssecStatus": "Unknown"
-			},
-			{
-				"disabled": false,
-				"name": "example.com",
-				"type": "RRSIG",
-				"ttl": 900,
-				"rData": {
-					"typeCovered": "NSEC3PARAM",
-					"algorithm": "ECDSAP256SHA256",
-					"labels": 2,
-					"originalTtl": 900,
-					"signatureExpiration": "2022-03-15T11:45:31Z",
-					"signatureInception": "2022-03-05T10:45:31Z",
-					"keyTag": 61009,
-					"signersName": "example.com",
-					"signature": "vJ/fXkGKsapdvWjDhcfHsBxpZhSzMRLZv3/bEGJ4N3/K7jiM92Ik336W680SI7g+NyPCQ3gqE7ta/JEL4bht4Q=="
-				},
-				"dnssecStatus": "Unknown"
-			},
-			{
-				"disabled": false,
-				"name": "example.com",
-				"type": "RRSIG",
-				"ttl": 900,
-				"rData": {
-					"typeCovered": "SOA",
-					"algorithm": "ECDSAP256SHA256",
-					"labels": 2,
-					"originalTtl": 900,
-					"signatureExpiration": "2022-03-15T12:53:39Z",
-					"signatureInception": "2022-03-05T11:53:39Z",
-					"keyTag": 61009,
-					"signersName": "example.com",
-					"signature": "9PQHH3ZGCuFRYkn28SoilS8y8zszgeOpCfJpIOAaE5ao+iBPCXudHacr/EpgB2wLzXpRjR+WgiYjmJH17+6bKg=="
-				},
-				"dnssecStatus": "Unknown"
-			},
-			{
-				"disabled": false,
-				"name": "example.com",
-				"type": "RRSIG",
-				"ttl": 3600,
-				"rData": {
-					"typeCovered": "A",
-					"algorithm": "ECDSAP256SHA256",
-					"labels": 2,
-					"originalTtl": 3600,
-					"signatureExpiration": "2022-03-15T11:25:35Z",
-					"signatureInception": "2022-03-05T10:25:35Z",
-					"keyTag": 61009,
-					"signersName": "example.com",
-					"signature": "dWjn5hTWuEq57ncwGdVq+kdbMuFtuxLuZhYCcQMdsTxYkM/64RrPY6eYwfYQ7+fY1+QBSX2WudAM4dzbmL/s2A=="
-				},
-				"dnssecStatus": "Unknown"
-			},
-			{
-				"disabled": false,
-				"name": "example.com",
-				"type": "RRSIG",
-				"ttl": 3600,
-				"rData": {
-					"typeCovered": "NS",
-					"algorithm": "ECDSAP256SHA256",
-					"labels": 2,
-					"originalTtl": 3600,
-					"signatureExpiration": "2022-03-15T11:25:35Z",
-					"signatureInception": "2022-03-05T10:25:35Z",
-					"keyTag": 61009,
-					"signersName": "example.com",
-					"signature": "Yx+leBcYNFf0gUfN6rECWrUZwCDhJbAGk1BNOJN01nPakS5meSbDApUHJZeAzfSBcPzodK3ddmEuhho1MABaZw=="
-				},
-				"dnssecStatus": "Unknown"
-			},
-			{
-				"disabled": false,
-				"name": "example.com",
-				"type": "RRSIG",
-				"ttl": 86400,
-				"rData": {
-					"typeCovered": "DNSKEY",
-					"algorithm": "ECDSAP256SHA256",
-					"labels": 2,
-					"originalTtl": 86400,
-					"signatureExpiration": "2022-03-15T12:27:09Z",
-					"signatureInception": "2022-03-05T11:27:09Z",
-					"keyTag": 65078,
-					"signersName": "example.com",
-					"signature": "KWAK7o+FjJ2/6ZvX4C1wB41yRzlmec5pR2TTeNWlY/weg0MNKCLRs3uTopSjoTih+uq3IRR7Zx0iOcy7evOitA=="
-				},
-				"dnssecStatus": "Unknown"
-			},
-			{
-				"disabled": false,
-				"name": "example.com",
-				"type": "RRSIG",
-				"ttl": 86400,
-				"rData": {
-					"typeCovered": "DNSKEY",
-					"algorithm": "ECDSAP256SHA256",
-					"labels": 2,
-					"originalTtl": 86400,
-					"signatureExpiration": "2022-03-15T12:27:09Z",
-					"signatureInception": "2022-03-05T11:27:09Z",
-					"keyTag": 52896,
-					"signersName": "example.com",
-					"signature": "oHtt1gUmDXxI5GMfS+LJ6uxKUcuUu+5EELXdhLrbk5V/yganP6sMgA4hGkzokYM22LDowjSdO5qwzCW6IDgKxg=="
-				},
-				"dnssecStatus": "Unknown"
-			},
-			{
-				"disabled": false,
-				"name": "example.com",
-				"type": "DNSKEY",
-				"ttl": 86400,
-				"rData": {
-					"flags": "SecureEntryPoint, ZoneKey",
-					"protocol": 3,
-					"algorithm": "ECDSAP256SHA256",
-					"publicKey": "dMRyc/Pji31mF3iHNrybPzbgvtb2NKtmXhjQq433BHI= ZveDa1z00VxDnugV1x7EDvpt+42TDh8OQwp1kOrpX0E=",
-					"computedKeyTag": 65078,
-					"dnsKeyState": "Ready",
-					"computedDigests": [
-						{
-							"digestType": "SHA256",
-							"digest": "BBE017B17E5CB5FFFF1EC2C7815367DF80D8E7EAEE4832D3ED192159D79B1EEB"
-						},
-						{
-							"digestType": "SHA384",
-							"digest": "0B0C9F1019BD3FE62C8B71F8C80E7A833BA468A7E303ABC819C0CB9BEDE8E26BB50CB1729547BFCCE2AE22390E44CDA3"
-						}
-					]
-				},
-				"dnssecStatus": "Unknown"
-			},
-			{
-				"disabled": false,
-				"name": "example.com",
-				"type": "DNSKEY",
-				"ttl": 86400,
-				"rData": {
-					"flags": "ZoneKey",
-					"protocol": 3,
-					"algorithm": "ECDSAP256SHA256",
-					"publicKey": "IUvzTkf4JPg+7k57cQw7n7SR6/1dH7FaKxu9Cf+kcvo= UU+uoKRWnYAFHDNF0X3U8ZYetUyDF7fcNAwEaSQnIUM=",
-					"computedKeyTag": 61009,
-					"dnsKeyState": "Active"
-				},
-				"dnssecStatus": "Unknown"
-			},
-			{
-				"disabled": false,
-				"name": "example.com",
-				"type": "DNSKEY",
-				"ttl": 3600,
-				"rData": {
-					"flags": "SecureEntryPoint, ZoneKey",
-					"protocol": 3,
-					"algorithm": "ECDSAP256SHA256",
-					"publicKey": "KOJWFitKm58EgjO43GDnsFbnkGoqVKeLRkP8FGPAdhqA2F758Ta1mkxieEu0YN0EoX+u5bVuc5DEBFSv+U63CA==",
-					"computedKeyTag": 15048,
-					"dnsKeyState": "Published",
-					"dnsKeyStateReadyBy": "2022-12-18T16:14:50.0328321Z",
-					"computedDigests": [
-						{
-							"digestType": "SHA256",
-							"digest": "8EAFAE3305DB57A27CA5A261525515461CB7232A34A44AD96441B88BCA9B9849"
-						},
-						{
-							"digestType": "SHA384",
-							"digest": "4A6DA59E91872B5B835FCEE5987B17151A6F10FE409B595BEEEDB28FE64315C9C268493B59A0BF72EA84BE0F20A33F96"
-						}
-					]
-				},
-				"dnssecStatus": "Unknown",
-				"lastUsedOn": "0001-01-01T00:00:00"
-			},
-			{
-				"disabled": false,
-				"name": "example.com",
-				"type": "DNSKEY",
-				"ttl": 86400,
-				"rData": {
-					"flags": "ZoneKey",
-					"protocol": 3,
-					"algorithm": "ECDSAP256SHA256",
-					"publicKey": "337uQ11fdKbr6sKYq9mwwBC2xdnu0geuIkfHcIauKNI= rKk7pfVKlLfcGBOIn5hEVeod2aIRIyUiivdTPzrmpIo=",
-					"computedKeyTag": 4811,
-					"dnsKeyState": "Published"
-				},
-				"dnssecStatus": "Unknown"
-			},
-			{
-				"disabled": false,
-				"name": "example.com",
-				"type": "NSEC3PARAM",
-				"ttl": 900,
-				"rData": {
-					"hashAlgorithm": "SHA1",
-					"flags": "None",
-					"iterations": 0,
-					"salt": ""
-				},
-				"dnssecStatus": "Unknown"
-			},
-			{
-				"disabled": false,
-				"name": "*.example.com",
-				"type": "A",
-				"ttl": 3600,
-				"rData": {
-					"ipAddress": "7.7.7.7"
-				},
-				"dnssecStatus": "Unknown"
-			},
-			{
-				"disabled": false,
-				"name": "*.example.com",
-				"type": "RRSIG",
-				"ttl": 3600,
-				"rData": {
-					"typeCovered": "A",
-					"algorithm": "ECDSAP256SHA256",
-					"labels": 2,
-					"originalTtl": 3600,
-					"signatureExpiration": "2022-03-15T11:25:35Z",
-					"signatureInception": "2022-03-05T10:25:35Z",
-					"keyTag": 61009,
-					"signersName": "example.com",
-					"signature": "ZoUNNEdb8XWqHHi5o4BcUe7deRVlJZLhQtc3sjRtuJ68DNPDmQ0GfCrNTigJcomspr7CYqWcXfoSOqu6f2AyyQ=="
-				},
-				"dnssecStatus": "Unknown"
-			},
-			{
-				"disabled": false,
-				"name": "4F3CNT8CU22TNGEC382JJ4GDE4RB47UB.example.com",
-				"type": "RRSIG",
-				"ttl": 900,
-				"rData": {
-					"typeCovered": "NSEC3",
-					"algorithm": "ECDSAP256SHA256",
-					"labels": 3,
-					"originalTtl": 900,
-					"signatureExpiration": "2022-03-15T11:45:31Z",
-					"signatureInception": "2022-03-05T10:45:31Z",
-					"keyTag": 61009,
-					"signersName": "example.com",
-					"signature": "piZeLYa6WpHyiJerPlXq2s+JKBjHznNALXHJCOfiQ4o/iTqWILoqYHfKB5AWrLwLmkxXcbKf63CnEMGlinRidg=="
-				},
-				"dnssecStatus": "Unknown"
-			},
-			{
-				"disabled": false,
-				"name": "4F3CNT8CU22TNGEC382JJ4GDE4RB47UB.example.com",
-				"type": "NSEC3",
-				"ttl": 900,
-				"rData": {
-					"hashAlgorithm": "SHA1",
-					"flags": "None",
-					"iterations": 0,
-					"salt": "",
-					"nextHashedOwnerName": "KG19N32806C832KIJDNGLQ8P9M2R5MDJ",
-					"types": [
-						"A"
-					]
-				},
-				"dnssecStatus": "Unknown"
-			},
-			{
-				"disabled": false,
-				"name": "KG19N32806C832KIJDNGLQ8P9M2R5MDJ.example.com",
-				"type": "RRSIG",
-				"ttl": 900,
-				"rData": {
-					"typeCovered": "NSEC3",
-					"algorithm": "ECDSAP256SHA256",
-					"labels": 3,
-					"originalTtl": 900,
-					"signatureExpiration": "2022-03-15T11:45:31Z",
-					"signatureInception": "2022-03-05T10:45:31Z",
-					"keyTag": 61009,
-					"signersName": "example.com",
-					"signature": "i/PMxc1LFA9a8jLxju7SSpoY7y8aZYkAILcCRIxE3lTundPJmzFG0U9kve04kqT7+Klmzj3OzXnCvjTA54+DZA=="
-				},
-				"dnssecStatus": "Unknown"
-			},
-			{
-				"disabled": false,
-				"name": "KG19N32806C832KIJDNGLQ8P9M2R5MDJ.example.com",
-				"type": "NSEC3",
-				"ttl": 900,
-				"rData": {
-					"hashAlgorithm": "SHA1",
-					"flags": "None",
-					"iterations": 0,
-					"salt": "",
-					"nextHashedOwnerName": "MIFDNDT3NFF3OD53O7TLA1HRFF95JKUK",
-					"types": [
-						"NS",
-						"DS"
-					]
-				},
-				"dnssecStatus": "Unknown"
-			},
-			{
-				"disabled": false,
-				"name": "MIFDNDT3NFF3OD53O7TLA1HRFF95JKUK.example.com",
-				"type": "RRSIG",
-				"ttl": 900,
-				"rData": {
-					"typeCovered": "NSEC3",
-					"algorithm": "ECDSAP256SHA256",
-					"labels": 3,
-					"originalTtl": 900,
-					"signatureExpiration": "2022-03-15T11:45:31Z",
-					"signatureInception": "2022-03-05T10:45:31Z",
-					"keyTag": 61009,
-					"signersName": "example.com",
-					"signature": "mr37TDMmWJ3YLNtpYy++S9eAeHIXKajX6jB8zLscJyC1uI0OFnSTuesfhIlLDbj0SDgrzRQWsLmvMKzfq89TJA=="
-				},
-				"dnssecStatus": "Unknown"
-			},
-			{
-				"disabled": false,
-				"name": "MIFDNDT3NFF3OD53O7TLA1HRFF95JKUK.example.com",
-				"type": "NSEC3",
-				"ttl": 900,
-				"rData": {
-					"hashAlgorithm": "SHA1",
-					"flags": "None",
-					"iterations": 0,
-					"salt": "",
-					"nextHashedOwnerName": "ONIB9MGUB9H0RML3CDF5BGRJ59DKJHVK",
-					"types": [
-						"CNAME"
-					]
-				},
-				"dnssecStatus": "Unknown"
-			},
-			{
-				"disabled": false,
-				"name": "ONIB9MGUB9H0RML3CDF5BGRJ59DKJHVK.example.com",
-				"type": "RRSIG",
-				"ttl": 900,
-				"rData": {
-					"typeCovered": "NSEC3",
-					"algorithm": "ECDSAP256SHA256",
-					"labels": 3,
-					"originalTtl": 900,
-					"signatureExpiration": "2022-03-15T11:45:31Z",
-					"signatureInception": "2022-03-05T10:45:31Z",
-					"keyTag": 61009,
-					"signersName": "example.com",
-					"signature": "GGh/KkB6C2D55xRJa0zFbZ8As3DZK9btUamryZVmyo7FaLPyltkeRZor9OExgQ6HC1SLXNGJIfCO9cM4K6P8iw=="
-				},
-				"dnssecStatus": "Unknown"
-			},
-			{
-				"disabled": false,
-				"name": "ONIB9MGUB9H0RML3CDF5BGRJ59DKJHVK.example.com",
-				"type": "NSEC3",
-				"ttl": 900,
-				"rData": {
-					"hashAlgorithm": "SHA1",
-					"flags": "None",
-					"iterations": 0,
-					"salt": "",
-					"nextHashedOwnerName": "4F3CNT8CU22TNGEC382JJ4GDE4RB47UB",
-					"types": [
-						"A",
-						"NS",
-						"SOA",
-						"DNSKEY",
-						"NSEC3PARAM"
-					]
-				},
-				"dnssecStatus": "Unknown"
-			},
-			{
-				"disabled": false,
-				"name": "sub.example.com",
-				"type": "NS",
-				"ttl": 3600,
-				"rData": {
-					"nameServer": "server1"
-				},
-				"dnssecStatus": "Unknown"
-			},
-			{
-				"disabled": false,
-				"name": "sub.example.com",
-				"type": "DS",
-				"ttl": 3600,
-				"rData": {
-					"keyTag": 46125,
-					"algorithm": "ECDSAP384SHA384",
-					"digestType": "SHA1",
-					"digest": "5590E425472785A16DC0F853000557DB5543C39E"
-				},
-				"dnssecStatus": "Unknown"
-			},
-			{
-				"disabled": false,
-				"name": "sub.example.com",
-				"type": "RRSIG",
-				"ttl": 3600,
-				"rData": {
-					"typeCovered": "NS",
-					"algorithm": "ECDSAP256SHA256",
-					"labels": 3,
-					"originalTtl": 3600,
-					"signatureExpiration": "2022-03-15T11:25:35Z",
-					"signatureInception": "2022-03-05T10:25:35Z",
-					"keyTag": 61009,
-					"signersName": "example.com",
-					"signature": "hFzYTL9V0/0UQZlvZpRWCOvu/2udvhswKoxpe4+quNuC6K59W7uCJLuDm/z0aFK5nW8Of4oTk2YjSBZo0nBSlg=="
-				},
-				"dnssecStatus": "Unknown"
-			},
-			{
-				"disabled": false,
-				"name": "sub.example.com",
-				"type": "RRSIG",
-				"ttl": 3600,
-				"rData": {
-					"typeCovered": "DS",
-					"algorithm": "ECDSAP256SHA256",
-					"labels": 3,
-					"originalTtl": 3600,
-					"signatureExpiration": "2022-03-15T12:53:39Z",
-					"signatureInception": "2022-03-05T11:53:39Z",
-					"keyTag": 61009,
-					"signersName": "example.com",
-					"signature": "UYpUKV5Uq7DM3rltg3sPFOwYgRa2yBzT/j9U8xCh5oyXt27fIn3eemvqqe9qV4xeQaAN0QfQPkj9vmOZSAYafg=="
-				},
-				"dnssecStatus": "Unknown"
-			},
-			{
-				"disabled": false,
-				"name": "www.example.com",
-				"type": "CNAME",
-				"ttl": 3600,
-				"rData": {
-					"cname": "example.com"
-				},
-				"dnssecStatus": "Unknown"
-			},
-			{
-				"disabled": false,
-				"name": "www.example.com",
-				"type": "RRSIG",
-				"ttl": 3600,
-				"rData": {
-					"typeCovered": "CNAME",
-					"algorithm": "ECDSAP256SHA256",
-					"labels": 3,
-					"originalTtl": 3600,
-					"signatureExpiration": "2022-03-15T11:25:35Z",
-					"signatureInception": "2022-03-05T10:25:35Z",
-					"keyTag": 61009,
-					"signersName": "example.com",
-					"signature": "cAbYvDJhZGLS/uI5I4mSrh7S5gEUy6bmX2sY7zEd1XVFPqrUOZHbVZuwXPjA6r9/m0rCaww9RiG90JhNNDLEtA=="
-				},
-				"dnssecStatus": "Unknown"
-			}
-		]
-	},
-	"status": "ok"
+    "response": {
+        "zone": {
+            "name": "example.com",
+            "type": "Primary",
+            "internal": false,
+            "dnssecStatus": "SignedWithNSEC3",
+            "disabled": false
+        },
+        "records": [
+            {
+                "disabled": false,
+                "name": "example.com",
+                "type": "A",
+                "ttl": 3600,
+                "rData": {
+                    "ipAddress": "1.1.1.1"
+                },
+                "dnssecStatus": "Unknown"
+            },
+            {
+                "disabled": false,
+                "name": "example.com",
+                "type": "NS",
+                "ttl": 3600,
+                "rData": {
+                    "nameServer": "server1"
+                },
+                "dnssecStatus": "Unknown"
+            },
+            {
+                "disabled": false,
+                "name": "example.com",
+                "type": "SOA",
+                "ttl": 900,
+                "rData": {
+                    "primaryNameServer": "server1",
+                    "responsiblePerson": "hostadmin.example.com",
+                    "serial": 35,
+                    "refresh": 900,
+                    "retry": 300,
+                    "expire": 604800,
+                    "minimum": 900
+                },
+                "dnssecStatus": "Unknown"
+            },
+            {
+                "disabled": false,
+                "name": "example.com",
+                "type": "RRSIG",
+                "ttl": 900,
+                "rData": {
+                    "typeCovered": "NSEC3PARAM",
+                    "algorithm": "ECDSAP256SHA256",
+                    "labels": 2,
+                    "originalTtl": 900,
+                    "signatureExpiration": "2022-03-15T11:45:31Z",
+                    "signatureInception": "2022-03-05T10:45:31Z",
+                    "keyTag": 61009,
+                    "signersName": "example.com",
+                    "signature": "vJ/fXkGKsapdvWjDhcfHsBxpZhSzMRLZv3/bEGJ4N3/K7jiM92Ik336W680SI7g+NyPCQ3gqE7ta/JEL4bht4Q=="
+                },
+                "dnssecStatus": "Unknown"
+            },
+            {
+                "disabled": false,
+                "name": "example.com",
+                "type": "RRSIG",
+                "ttl": 900,
+                "rData": {
+                    "typeCovered": "SOA",
+                    "algorithm": "ECDSAP256SHA256",
+                    "labels": 2,
+                    "originalTtl": 900,
+                    "signatureExpiration": "2022-03-15T12:53:39Z",
+                    "signatureInception": "2022-03-05T11:53:39Z",
+                    "keyTag": 61009,
+                    "signersName": "example.com",
+                    "signature": "9PQHH3ZGCuFRYkn28SoilS8y8zszgeOpCfJpIOAaE5ao+iBPCXudHacr/EpgB2wLzXpRjR+WgiYjmJH17+6bKg=="
+                },
+                "dnssecStatus": "Unknown"
+            },
+            {
+                "disabled": false,
+                "name": "example.com",
+                "type": "RRSIG",
+                "ttl": 3600,
+                "rData": {
+                    "typeCovered": "A",
+                    "algorithm": "ECDSAP256SHA256",
+                    "labels": 2,
+                    "originalTtl": 3600,
+                    "signatureExpiration": "2022-03-15T11:25:35Z",
+                    "signatureInception": "2022-03-05T10:25:35Z",
+                    "keyTag": 61009,
+                    "signersName": "example.com",
+                    "signature": "dWjn5hTWuEq57ncwGdVq+kdbMuFtuxLuZhYCcQMdsTxYkM/64RrPY6eYwfYQ7+fY1+QBSX2WudAM4dzbmL/s2A=="
+                },
+                "dnssecStatus": "Unknown"
+            },
+            {
+                "disabled": false,
+                "name": "example.com",
+                "type": "RRSIG",
+                "ttl": 3600,
+                "rData": {
+                    "typeCovered": "NS",
+                    "algorithm": "ECDSAP256SHA256",
+                    "labels": 2,
+                    "originalTtl": 3600,
+                    "signatureExpiration": "2022-03-15T11:25:35Z",
+                    "signatureInception": "2022-03-05T10:25:35Z",
+                    "keyTag": 61009,
+                    "signersName": "example.com",
+                    "signature": "Yx+leBcYNFf0gUfN6rECWrUZwCDhJbAGk1BNOJN01nPakS5meSbDApUHJZeAzfSBcPzodK3ddmEuhho1MABaZw=="
+                },
+                "dnssecStatus": "Unknown"
+            },
+            {
+                "disabled": false,
+                "name": "example.com",
+                "type": "RRSIG",
+                "ttl": 86400,
+                "rData": {
+                    "typeCovered": "DNSKEY",
+                    "algorithm": "ECDSAP256SHA256",
+                    "labels": 2,
+                    "originalTtl": 86400,
+                    "signatureExpiration": "2022-03-15T12:27:09Z",
+                    "signatureInception": "2022-03-05T11:27:09Z",
+                    "keyTag": 65078,
+                    "signersName": "example.com",
+                    "signature": "KWAK7o+FjJ2/6ZvX4C1wB41yRzlmec5pR2TTeNWlY/weg0MNKCLRs3uTopSjoTih+uq3IRR7Zx0iOcy7evOitA=="
+                },
+                "dnssecStatus": "Unknown"
+            },
+            {
+                "disabled": false,
+                "name": "example.com",
+                "type": "RRSIG",
+                "ttl": 86400,
+                "rData": {
+                    "typeCovered": "DNSKEY",
+                    "algorithm": "ECDSAP256SHA256",
+                    "labels": 2,
+                    "originalTtl": 86400,
+                    "signatureExpiration": "2022-03-15T12:27:09Z",
+                    "signatureInception": "2022-03-05T11:27:09Z",
+                    "keyTag": 52896,
+                    "signersName": "example.com",
+                    "signature": "oHtt1gUmDXxI5GMfS+LJ6uxKUcuUu+5EELXdhLrbk5V/yganP6sMgA4hGkzokYM22LDowjSdO5qwzCW6IDgKxg=="
+                },
+                "dnssecStatus": "Unknown"
+            },
+            {
+                "disabled": false,
+                "name": "example.com",
+                "type": "DNSKEY",
+                "ttl": 86400,
+                "rData": {
+                    "flags": "SecureEntryPoint, ZoneKey",
+                    "protocol": 3,
+                    "algorithm": "ECDSAP256SHA256",
+                    "publicKey": "dMRyc/Pji31mF3iHNrybPzbgvtb2NKtmXhjQq433BHI= ZveDa1z00VxDnugV1x7EDvpt+42TDh8OQwp1kOrpX0E=",
+                    "computedKeyTag": 65078,
+                    "dnsKeyState": "Ready",
+                    "computedDigests": [
+                        {
+                            "digestType": "SHA256",
+                            "digest": "BBE017B17E5CB5FFFF1EC2C7815367DF80D8E7EAEE4832D3ED192159D79B1EEB"
+                        },
+                        {
+                            "digestType": "SHA384",
+                            "digest": "0B0C9F1019BD3FE62C8B71F8C80E7A833BA468A7E303ABC819C0CB9BEDE8E26BB50CB1729547BFCCE2AE22390E44CDA3"
+                        }
+                    ]
+                },
+                "dnssecStatus": "Unknown"
+            },
+            {
+                "disabled": false,
+                "name": "example.com",
+                "type": "DNSKEY",
+                "ttl": 86400,
+                "rData": {
+                    "flags": "ZoneKey",
+                    "protocol": 3,
+                    "algorithm": "ECDSAP256SHA256",
+                    "publicKey": "IUvzTkf4JPg+7k57cQw7n7SR6/1dH7FaKxu9Cf+kcvo= UU+uoKRWnYAFHDNF0X3U8ZYetUyDF7fcNAwEaSQnIUM=",
+                    "computedKeyTag": 61009,
+                    "dnsKeyState": "Active"
+                },
+                "dnssecStatus": "Unknown"
+            },
+            {
+                "disabled": false,
+                "name": "example.com",
+                "type": "DNSKEY",
+                "ttl": 3600,
+                "rData": {
+                    "flags": "SecureEntryPoint, ZoneKey",
+                    "protocol": 3,
+                    "algorithm": "ECDSAP256SHA256",
+                    "publicKey": "KOJWFitKm58EgjO43GDnsFbnkGoqVKeLRkP8FGPAdhqA2F758Ta1mkxieEu0YN0EoX+u5bVuc5DEBFSv+U63CA==",
+                    "computedKeyTag": 15048,
+                    "dnsKeyState": "Published",
+                    "dnsKeyStateReadyBy": "2022-12-18T16:14:50.0328321Z",
+                    "computedDigests": [
+                        {
+                            "digestType": "SHA256",
+                            "digest": "8EAFAE3305DB57A27CA5A261525515461CB7232A34A44AD96441B88BCA9B9849"
+                        },
+                        {
+                            "digestType": "SHA384",
+                            "digest": "4A6DA59E91872B5B835FCEE5987B17151A6F10FE409B595BEEEDB28FE64315C9C268493B59A0BF72EA84BE0F20A33F96"
+                        }
+                    ]
+                },
+                "dnssecStatus": "Unknown",
+                "lastUsedOn": "0001-01-01T00:00:00"
+            },
+            {
+                "disabled": false,
+                "name": "example.com",
+                "type": "DNSKEY",
+                "ttl": 86400,
+                "rData": {
+                    "flags": "ZoneKey",
+                    "protocol": 3,
+                    "algorithm": "ECDSAP256SHA256",
+                    "publicKey": "337uQ11fdKbr6sKYq9mwwBC2xdnu0geuIkfHcIauKNI= rKk7pfVKlLfcGBOIn5hEVeod2aIRIyUiivdTPzrmpIo=",
+                    "computedKeyTag": 4811,
+                    "dnsKeyState": "Published"
+                },
+                "dnssecStatus": "Unknown"
+            },
+            {
+                "disabled": false,
+                "name": "example.com",
+                "type": "NSEC3PARAM",
+                "ttl": 900,
+                "rData": {
+                    "hashAlgorithm": "SHA1",
+                    "flags": "None",
+                    "iterations": 0,
+                    "salt": ""
+                },
+                "dnssecStatus": "Unknown"
+            },
+            {
+                "disabled": false,
+                "name": "*.example.com",
+                "type": "A",
+                "ttl": 3600,
+                "rData": {
+                    "ipAddress": "7.7.7.7"
+                },
+                "dnssecStatus": "Unknown"
+            },
+            {
+                "disabled": false,
+                "name": "*.example.com",
+                "type": "RRSIG",
+                "ttl": 3600,
+                "rData": {
+                    "typeCovered": "A",
+                    "algorithm": "ECDSAP256SHA256",
+                    "labels": 2,
+                    "originalTtl": 3600,
+                    "signatureExpiration": "2022-03-15T11:25:35Z",
+                    "signatureInception": "2022-03-05T10:25:35Z",
+                    "keyTag": 61009,
+                    "signersName": "example.com",
+                    "signature": "ZoUNNEdb8XWqHHi5o4BcUe7deRVlJZLhQtc3sjRtuJ68DNPDmQ0GfCrNTigJcomspr7CYqWcXfoSOqu6f2AyyQ=="
+                },
+                "dnssecStatus": "Unknown"
+            },
+            {
+                "disabled": false,
+                "name": "4F3CNT8CU22TNGEC382JJ4GDE4RB47UB.example.com",
+                "type": "RRSIG",
+                "ttl": 900,
+                "rData": {
+                    "typeCovered": "NSEC3",
+                    "algorithm": "ECDSAP256SHA256",
+                    "labels": 3,
+                    "originalTtl": 900,
+                    "signatureExpiration": "2022-03-15T11:45:31Z",
+                    "signatureInception": "2022-03-05T10:45:31Z",
+                    "keyTag": 61009,
+                    "signersName": "example.com",
+                    "signature": "piZeLYa6WpHyiJerPlXq2s+JKBjHznNALXHJCOfiQ4o/iTqWILoqYHfKB5AWrLwLmkxXcbKf63CnEMGlinRidg=="
+                },
+                "dnssecStatus": "Unknown"
+            },
+            {
+                "disabled": false,
+                "name": "4F3CNT8CU22TNGEC382JJ4GDE4RB47UB.example.com",
+                "type": "NSEC3",
+                "ttl": 900,
+                "rData": {
+                    "hashAlgorithm": "SHA1",
+                    "flags": "None",
+                    "iterations": 0,
+                    "salt": "",
+                    "nextHashedOwnerName": "KG19N32806C832KIJDNGLQ8P9M2R5MDJ",
+                    "types": [
+                        "A"
+                    ]
+                },
+                "dnssecStatus": "Unknown"
+            },
+            {
+                "disabled": false,
+                "name": "KG19N32806C832KIJDNGLQ8P9M2R5MDJ.example.com",
+                "type": "RRSIG",
+                "ttl": 900,
+                "rData": {
+                    "typeCovered": "NSEC3",
+                    "algorithm": "ECDSAP256SHA256",
+                    "labels": 3,
+                    "originalTtl": 900,
+                    "signatureExpiration": "2022-03-15T11:45:31Z",
+                    "signatureInception": "2022-03-05T10:45:31Z",
+                    "keyTag": 61009,
+                    "signersName": "example.com",
+                    "signature": "i/PMxc1LFA9a8jLxju7SSpoY7y8aZYkAILcCRIxE3lTundPJmzFG0U9kve04kqT7+Klmzj3OzXnCvjTA54+DZA=="
+                },
+                "dnssecStatus": "Unknown"
+            },
+            {
+                "disabled": false,
+                "name": "KG19N32806C832KIJDNGLQ8P9M2R5MDJ.example.com",
+                "type": "NSEC3",
+                "ttl": 900,
+                "rData": {
+                    "hashAlgorithm": "SHA1",
+                    "flags": "None",
+                    "iterations": 0,
+                    "salt": "",
+                    "nextHashedOwnerName": "MIFDNDT3NFF3OD53O7TLA1HRFF95JKUK",
+                    "types": [
+                        "NS",
+                        "DS"
+                    ]
+                },
+                "dnssecStatus": "Unknown"
+            },
+            {
+                "disabled": false,
+                "name": "MIFDNDT3NFF3OD53O7TLA1HRFF95JKUK.example.com",
+                "type": "RRSIG",
+                "ttl": 900,
+                "rData": {
+                    "typeCovered": "NSEC3",
+                    "algorithm": "ECDSAP256SHA256",
+                    "labels": 3,
+                    "originalTtl": 900,
+                    "signatureExpiration": "2022-03-15T11:45:31Z",
+                    "signatureInception": "2022-03-05T10:45:31Z",
+                    "keyTag": 61009,
+                    "signersName": "example.com",
+                    "signature": "mr37TDMmWJ3YLNtpYy++S9eAeHIXKajX6jB8zLscJyC1uI0OFnSTuesfhIlLDbj0SDgrzRQWsLmvMKzfq89TJA=="
+                },
+                "dnssecStatus": "Unknown"
+            },
+            {
+                "disabled": false,
+                "name": "MIFDNDT3NFF3OD53O7TLA1HRFF95JKUK.example.com",
+                "type": "NSEC3",
+                "ttl": 900,
+                "rData": {
+                    "hashAlgorithm": "SHA1",
+                    "flags": "None",
+                    "iterations": 0,
+                    "salt": "",
+                    "nextHashedOwnerName": "ONIB9MGUB9H0RML3CDF5BGRJ59DKJHVK",
+                    "types": [
+                        "CNAME"
+                    ]
+                },
+                "dnssecStatus": "Unknown"
+            },
+            {
+                "disabled": false,
+                "name": "ONIB9MGUB9H0RML3CDF5BGRJ59DKJHVK.example.com",
+                "type": "RRSIG",
+                "ttl": 900,
+                "rData": {
+                    "typeCovered": "NSEC3",
+                    "algorithm": "ECDSAP256SHA256",
+                    "labels": 3,
+                    "originalTtl": 900,
+                    "signatureExpiration": "2022-03-15T11:45:31Z",
+                    "signatureInception": "2022-03-05T10:45:31Z",
+                    "keyTag": 61009,
+                    "signersName": "example.com",
+                    "signature": "GGh/KkB6C2D55xRJa0zFbZ8As3DZK9btUamryZVmyo7FaLPyltkeRZor9OExgQ6HC1SLXNGJIfCO9cM4K6P8iw=="
+                },
+                "dnssecStatus": "Unknown"
+            },
+            {
+                "disabled": false,
+                "name": "ONIB9MGUB9H0RML3CDF5BGRJ59DKJHVK.example.com",
+                "type": "NSEC3",
+                "ttl": 900,
+                "rData": {
+                    "hashAlgorithm": "SHA1",
+                    "flags": "None",
+                    "iterations": 0,
+                    "salt": "",
+                    "nextHashedOwnerName": "4F3CNT8CU22TNGEC382JJ4GDE4RB47UB",
+                    "types": [
+                        "A",
+                        "NS",
+                        "SOA",
+                        "DNSKEY",
+                        "NSEC3PARAM"
+                    ]
+                },
+                "dnssecStatus": "Unknown"
+            },
+            {
+                "disabled": false,
+                "name": "sub.example.com",
+                "type": "NS",
+                "ttl": 3600,
+                "rData": {
+                    "nameServer": "server1"
+                },
+                "dnssecStatus": "Unknown"
+            },
+            {
+                "disabled": false,
+                "name": "sub.example.com",
+                "type": "DS",
+                "ttl": 3600,
+                "rData": {
+                    "keyTag": 46125,
+                    "algorithm": "ECDSAP384SHA384",
+                    "digestType": "SHA1",
+                    "digest": "5590E425472785A16DC0F853000557DB5543C39E"
+                },
+                "dnssecStatus": "Unknown"
+            },
+            {
+                "disabled": false,
+                "name": "sub.example.com",
+                "type": "RRSIG",
+                "ttl": 3600,
+                "rData": {
+                    "typeCovered": "NS",
+                    "algorithm": "ECDSAP256SHA256",
+                    "labels": 3,
+                    "originalTtl": 3600,
+                    "signatureExpiration": "2022-03-15T11:25:35Z",
+                    "signatureInception": "2022-03-05T10:25:35Z",
+                    "keyTag": 61009,
+                    "signersName": "example.com",
+                    "signature": "hFzYTL9V0/0UQZlvZpRWCOvu/2udvhswKoxpe4+quNuC6K59W7uCJLuDm/z0aFK5nW8Of4oTk2YjSBZo0nBSlg=="
+                },
+                "dnssecStatus": "Unknown"
+            },
+            {
+                "disabled": false,
+                "name": "sub.example.com",
+                "type": "RRSIG",
+                "ttl": 3600,
+                "rData": {
+                    "typeCovered": "DS",
+                    "algorithm": "ECDSAP256SHA256",
+                    "labels": 3,
+                    "originalTtl": 3600,
+                    "signatureExpiration": "2022-03-15T12:53:39Z",
+                    "signatureInception": "2022-03-05T11:53:39Z",
+                    "keyTag": 61009,
+                    "signersName": "example.com",
+                    "signature": "UYpUKV5Uq7DM3rltg3sPFOwYgRa2yBzT/j9U8xCh5oyXt27fIn3eemvqqe9qV4xeQaAN0QfQPkj9vmOZSAYafg=="
+                },
+                "dnssecStatus": "Unknown"
+            },
+            {
+                "disabled": false,
+                "name": "www.example.com",
+                "type": "CNAME",
+                "ttl": 3600,
+                "rData": {
+                    "cname": "example.com"
+                },
+                "dnssecStatus": "Unknown"
+            },
+            {
+                "disabled": false,
+                "name": "www.example.com",
+                "type": "RRSIG",
+                "ttl": 3600,
+                "rData": {
+                    "typeCovered": "CNAME",
+                    "algorithm": "ECDSAP256SHA256",
+                    "labels": 3,
+                    "originalTtl": 3600,
+                    "signatureExpiration": "2022-03-15T11:25:35Z",
+                    "signatureInception": "2022-03-05T10:25:35Z",
+                    "keyTag": 61009,
+                    "signersName": "example.com",
+                    "signature": "cAbYvDJhZGLS/uI5I4mSrh7S5gEUy6bmX2sY7zEd1XVFPqrUOZHbVZuwXPjA6r9/m0rCaww9RiG90JhNNDLEtA=="
+                },
+                "dnssecStatus": "Unknown"
+            }
+        ]
+    },
+    "status": "ok"
 }
 ```
 
@@ -3375,6 +3464,7 @@ Zones: None\
 Zone: Modify
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `domain`: The domain name of the zone to update the record.
 - `zone` (optional): The name of the authoritative zone into which the `domain` exists. When unspecified, the closest authoritative zone will be used.
@@ -3459,11 +3549,11 @@ WHERE:
 - `tlsaCertificateAssociationData` (optional): This parameter is required when updating `TLSA` record.
 - `newTlsaCertificateAssociationData` (optional): This parameter is required when updating `TLSA` record.
 - `svcPriority` (optional): The priority value for `SVCB` or `HTTPS` record. This parameter is required for updating `SCVB` or `HTTPS` record.
-- `newSvcPriority` (optional): The new priority value for `SVCB` or `HTTPS` record. This parameter when missing will use the old value. 
+- `newSvcPriority` (optional): The new priority value for `SVCB` or `HTTPS` record. This parameter when missing will use the old value.
 - `svcTargetName` (optional): The target domain name for `SVCB` or `HTTPS` record. This parameter is required for updating `SCVB` or `HTTPS` record.
-- `newSvcTargetName` (optional): The new target domain name for `SVCB` or `HTTPS` record. This parameter when missing will use the old value. 
+- `newSvcTargetName` (optional): The new target domain name for `SVCB` or `HTTPS` record. This parameter when missing will use the old value.
 - `svcParams` (optional): The service parameters for `SVCB` or `HTTPS` record which is a pipe separated list of key and value. For example, `alpn|h2,h3|port|53443`. To clear existing values, set it to `false`. This parameter is required for updating `SCVB` or `HTTPS` record.
-- `newSvcParams` (optional): The new service parameters for `SVCB` or `HTTPS` record which is a pipe separated list of key and value. To clear existing values, set it to `false`. This parameter when missing will use the old value. 
+- `newSvcParams` (optional): The new service parameters for `SVCB` or `HTTPS` record which is a pipe separated list of key and value. To clear existing values, set it to `false`. This parameter when missing will use the old value.
 - `autoIpv4Hint` (optional): Set this option to `true` to enable Automatic Hints for the `ipv4hint` parameter in the `newSvcParams`. This option is valid only for `SVCB` and `HTTPS` records.
 - `autoIpv6Hint` (optional): Set this option to `true` to enable Automatic Hints for the `ipv6hint` parameter in the `newSvcParams`. This option is valid only for `SVCB` and `HTTPS` records.
 - `uriPriority` (optional): The priority value for the `URI` record. This parameter is required for updating the `URI` record.
@@ -3498,35 +3588,36 @@ WHERE:
 - `newRData` (optional): This parameter is used for updating unknown i.e. unsupported record types. The new value that must be formatted as a hex string or a colon separated hex string.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"zone": {
-			"name": "example.com",
-			"type": "Primary",
-			"internal": false,
-			"dnssecStatus": "SignedWithNSEC",
-			"disabled": false
-		},
-		"updatedRecord": {
-			"disabled": false,
-			"name": "example.com",
-			"type": "SOA",
-			"ttl": 900,
-			"rData": {
-				"primaryNameServer": "server1.home",
-				"responsiblePerson": "hostadmin.example.com",
-				"serial": 75,
-				"refresh": 900,
-				"retry": 300,
-				"expire": 604800,
-				"minimum": 900
-			},
-			"dnssecStatus": "Unknown",
-			"lastUsedOn": "0001-01-01T00:00:00"
-		}
-	},
-	"status": "ok"
+    "response": {
+        "zone": {
+            "name": "example.com",
+            "type": "Primary",
+            "internal": false,
+            "dnssecStatus": "SignedWithNSEC",
+            "disabled": false
+        },
+        "updatedRecord": {
+            "disabled": false,
+            "name": "example.com",
+            "type": "SOA",
+            "ttl": 900,
+            "rData": {
+                "primaryNameServer": "server1.home",
+                "responsiblePerson": "hostadmin.example.com",
+                "serial": 75,
+                "refresh": 900,
+                "retry": 300,
+                "expire": 604800,
+                "minimum": 900
+            },
+            "dnssecStatus": "Unknown",
+            "lastUsedOn": "0001-01-01T00:00:00"
+        }
+    },
+    "status": "ok"
 }
 ```
 
@@ -3546,6 +3637,7 @@ Zones: None\
 Zone: Delete
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `domain`: The domain name of the zone to delete the record.
 - `zone` (optional): The name of the authoritative zone into which the `domain` exists. When unspecified, the closest authoritative zone will be used.
@@ -3596,10 +3688,11 @@ WHERE:
 - `rdata` (optional): This parameter is used for deleting unknown i.e. unsupported record types. The value must be formatted as a hex string or a colon separated hex string.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {},
-	"status": "ok"
+    "response": {},
+    "status": "ok"
 }
 ```
 
@@ -3618,31 +3711,33 @@ OBSOLETE PATH:\
 `/api/listCachedZones`
 
 PERMISSIONS:\
-Cache: View 
+Cache: View
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `domain` (Optional): The domain name to list records. If not passed, the domain is set to empty string which corresponds to the zone root.
 - `direction` (Optional): Allows specifying the direction of browsing the zone. Valid values are [`up`, `down`] and the default value is `down` when parameter is missing. This option allows the server to skip empty labels in the domain name when browsing up or down.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"domain": "google.com",
-		"zones": [],
-		"records": [
-			{
-				"name": "google.com",
-				"type": "A",
-				"ttl": "283 (4 mins 43 sec)",
-				"rData": {
-					"value": "216.58.199.174"
-				}
-			}
-		]
-	},
-	"status": "ok"
+    "response": {
+        "domain": "google.com",
+        "zones": [],
+        "records": [
+            {
+                "name": "google.com",
+                "type": "A",
+                "ttl": "283 (4 mins 43 sec)",
+                "rData": {
+                    "value": "216.58.199.174"
+                }
+            }
+        ]
+    },
+    "status": "ok"
 }
 ```
 
@@ -3660,13 +3755,15 @@ PERMISSIONS:\
 Cache: Delete
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `domain`: The domain name to delete cached records from.
 
 RESPONSE:
-```
+
+```json
 {
-	"status": "ok"
+    "status": "ok"
 }
 ```
 
@@ -3684,12 +3781,14 @@ PERMISSIONS:\
 Cache: Delete
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 
 RESPONSE:
-```
+
+```json
 {
-	"status": "ok"
+    "status": "ok"
 }
 ```
 
@@ -3711,42 +3810,44 @@ PERMISSIONS:\
 Allowed: View
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `domain` (Optional): The domain name to list records. If not passed, the domain is set to empty string which corresponds to the zone root.
 - `direction` (Optional): Allows specifying the direction of browsing the zone. Valid values are [`up`, `down`] and the default value is `down` when parameter is missing. This option allows the server to skip empty labels in the domain name when browsing up or down.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"domain": "google.com",
-		"zones": [],
-		"records": [
-			{
-				"name": "google.com",
-				"type": "NS",
-				"ttl": "14400 (4 hours)",
-				"rData": {
-					"value": "server1"
-				}
-			},
-			{
-				"name": "google.com",
-				"type": "SOA",
-				"ttl": "14400 (4 hours)",
-				"rData": {
-					"primaryNameServer": "server1",
-					"responsiblePerson": "hostadmin.server1",
-					"serial": 1,
-					"refresh": 14400,
-					"retry": 3600,
-					"expire": 604800,
-					"minimum": 900
-				}
-			}
-		]
-	},
-	"status": "ok"
+    "response": {
+        "domain": "google.com",
+        "zones": [],
+        "records": [
+            {
+                "name": "google.com",
+                "type": "NS",
+                "ttl": "14400 (4 hours)",
+                "rData": {
+                    "value": "server1"
+                }
+            },
+            {
+                "name": "google.com",
+                "type": "SOA",
+                "ttl": "14400 (4 hours)",
+                "rData": {
+                    "primaryNameServer": "server1",
+                    "responsiblePerson": "hostadmin.server1",
+                    "serial": 1,
+                    "refresh": 14400,
+                    "retry": 3600,
+                    "expire": 604800,
+                    "minimum": 900
+                }
+            }
+        ]
+    },
+    "status": "ok"
 }
 ```
 
@@ -3764,13 +3865,15 @@ PERMISSIONS:\
 Allowed: Modify
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `domain`: The domain name for the zone to be added.
 
 RESPONSE:
-```
+
+```json
 {
-	"status": "ok"
+    "status": "ok"
 }
 ```
 
@@ -3788,13 +3891,15 @@ PERMISSIONS:\
 Allowed: Delete
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `domain`: The domain name for the zone to be deleted.
 
 RESPONSE:
-```
+
+```json
 {
-	"status": "ok"
+    "status": "ok"
 }
 ```
 
@@ -3812,12 +3917,14 @@ PERMISSIONS:\
 Allowed: Delete
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 
 RESPONSE:
-```
+
+```json
 {
-	"status": "ok"
+    "status": "ok"
 }
 ```
 
@@ -3835,22 +3942,25 @@ PERMISSIONS:\
 Allowed: Modify
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 
 REQUEST:
 This is a `POST` request call where the content type of the request must be `application/x-www-form-urlencoded` and the content must be as shown below:
 
-```
+```text
 allowedZones=google.com,twitter.com
 ```
 
 WHERE:
+
 - `allowedZones`: A list of comma separated domain names that are to be imported.
 
 RESPONSE:
-```
+
+```json
 {
-	"status": "ok"
+    "status": "ok"
 }
 ```
 
@@ -3868,6 +3978,7 @@ PERMISSIONS:\
 Allowed: View
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 
 RESPONSE:
@@ -3891,42 +4002,44 @@ PERMISSIONS:\
 Blocked: View
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `domain` (Optional): The domain name to list records. If not passed, the domain is set to empty string which corresponds to the zone root.
 - `direction` (Optional): Allows specifying the direction of browsing the zone. Valid values are [`up`, `down`] and the default value is `down` when parameter is missing. This option allows the server to skip empty labels in the domain name when browsing up or down.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"domain": "google.com",
-		"zones": [],
-		"records": [
-			{
-				"name": "google.com",
-				"type": "NS",
-				"ttl": "14400 (4 hours)",
-				"rData": {
-					"value": "server1"
-				}
-			},
-			{
-				"name": "google.com",
-				"type": "SOA",
-				"ttl": "14400 (4 hours)",
-				"rData": {
-					"primaryNameServer": "server1",
-					"responsiblePerson": "hostadmin.server1",
-					"serial": 1,
-					"refresh": 14400,
-					"retry": 3600,
-					"expire": 604800,
-					"minimum": 900
-				}
-			}
-		]
-	},
-	"status": "ok"
+    "response": {
+        "domain": "google.com",
+        "zones": [],
+        "records": [
+            {
+                "name": "google.com",
+                "type": "NS",
+                "ttl": "14400 (4 hours)",
+                "rData": {
+                    "value": "server1"
+                }
+            },
+            {
+                "name": "google.com",
+                "type": "SOA",
+                "ttl": "14400 (4 hours)",
+                "rData": {
+                    "primaryNameServer": "server1",
+                    "responsiblePerson": "hostadmin.server1",
+                    "serial": 1,
+                    "refresh": 14400,
+                    "retry": 3600,
+                    "expire": 604800,
+                    "minimum": 900
+                }
+            }
+        ]
+    },
+    "status": "ok"
 }
 ```
 
@@ -3944,13 +4057,15 @@ PERMISSIONS:\
 Blocked: Modify
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `domain`: The domain name for the zone to be added.
 
 RESPONSE:
-```
+
+```json
 {
-	"status": "ok"
+    "status": "ok"
 }
 ```
 
@@ -3968,13 +4083,15 @@ PERMISSIONS:\
 Blocked: Delete
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `domain`: The domain name for the zone to be deleted.
 
 RESPONSE:
-```
+
+```json
 {
-	"status": "ok"
+    "status": "ok"
 }
 ```
 
@@ -3992,12 +4109,14 @@ PERMISSIONS:\
 Blocked: Delete
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 
 RESPONSE:
-```
+
+```json
 {
-	"status": "ok"
+    "status": "ok"
 }
 ```
 
@@ -4015,22 +4134,25 @@ PERMISSIONS:\
 Blocked: Modify
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 
 REQUEST:
 This is a `POST` request call where the content type of the request must be `application/x-www-form-urlencoded` and the content must be as shown below:
 
-```
+```text
 blockedZones=google.com,twitter.com
 ```
 
 WHERE:
+
 - `blockedZones`: A list of comma separated domain names that are to be imported.
 
 RESPONSE:
-```
+
+```json
 {
-	"status": "ok"
+    "status": "ok"
 }
 ```
 
@@ -4048,6 +4170,7 @@ PERMISSIONS:\
 Blocked: View
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 
 RESPONSE:
@@ -4068,49 +4191,51 @@ PERMISSIONS:\
 Apps/Zones/Logs: View
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"apps": [
-			{
-				"name": "Block Page",
-				"version": "1.0",
-				"dnsApps": [
-					{
-						"classPath": "BlockPageWebServer.App",
-						"description": "Serves a block page from a built-in web server that can be displayed to the end user when a website is blocked by the DNS server.\n\nNote: You need to manually configure the custom IP addresses of this built-in web server in the blocking settings for the block page to be served.",
-						"isAppRecordRequestHandler": false,
-						"isRequestController": false,
-						"isAuthoritativeRequestHandler": false,
-						"isRequestBlockingHandler": false,
-						"isQueryLogger": false,
-						"isPostProcessor": false
-					}
-				]
-			},
-			{
-				"name": "What Is My DNS",
-				"version": "2.0",
-				"dnsApps": [
-					{
-						"classPath": "WhatIsMyDns.App",
-						"description": "Returns the IP address of the user's DNS Server for A, AAAA, and TXT queries.",
-						"isAppRecordRequestHandler": true,
-						"recordDataTemplate": null,
-						"isRequestController": false,
-						"isAuthoritativeRequestHandler": false,
-						"isRequestBlockingHandler": false,
-						"isQueryLogger": false,
-						"isPostProcessor": false
-					}
-				]
-			}
-		]
-	},
-	"status": "ok"
+    "response": {
+        "apps": [
+            {
+                "name": "Block Page",
+                "version": "1.0",
+                "dnsApps": [
+                    {
+                        "classPath": "BlockPageWebServer.App",
+                        "description": "Serves a block page from a built-in web server that can be displayed to the end user when a website is blocked by the DNS server.\n\nNote: You need to manually configure the custom IP addresses of this built-in web server in the blocking settings for the block page to be served.",
+                        "isAppRecordRequestHandler": false,
+                        "isRequestController": false,
+                        "isAuthoritativeRequestHandler": false,
+                        "isRequestBlockingHandler": false,
+                        "isQueryLogger": false,
+                        "isPostProcessor": false
+                    }
+                ]
+            },
+            {
+                "name": "What Is My DNS",
+                "version": "2.0",
+                "dnsApps": [
+                    {
+                        "classPath": "WhatIsMyDns.App",
+                        "description": "Returns the IP address of the user's DNS Server for A, AAAA, and TXT queries.",
+                        "isAppRecordRequestHandler": true,
+                        "recordDataTemplate": null,
+                        "isRequestController": false,
+                        "isAuthoritativeRequestHandler": false,
+                        "isRequestBlockingHandler": false,
+                        "isQueryLogger": false,
+                        "isPostProcessor": false
+                    }
+                ]
+            }
+        ]
+    },
+    "status": "ok"
 }
 ```
 
@@ -4125,60 +4250,62 @@ PERMISSIONS:\
 Apps: View
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"storeApps": [
-			{
-				"name": "Geo Continent",
-				"version": "1.1",
-				"description": "Returns A or AAAA records, or CNAME record based on the continent the client queries from using MaxMind GeoIP2 Country database. This app requires MaxMind GeoIP2 database and includes the GeoLite2 version for trial. To update the MaxMind GeoIP2 database for your app, download the GeoIP2-Country.mmdb file from MaxMind and zip it. Use the zip file with the manual Update option.",
-				"url": "https://download.technitium.com/dns/apps/GeoContinentApp.zip",
-				"size": "2.01 MB",
-				"installed": false
-			},
-			{
-				"name": "Geo Country",
-				"version": "1.1",
-				"description": "Returns A or AAAA records, or CNAME record based on the country the client queries from using MaxMind GeoIP2 Country database. This app requires MaxMind GeoIP2 database and includes the GeoLite2 version for trial. To update the MaxMind GeoIP2 database for your app, download the GeoIP2-Country.mmdb file from MaxMind and zip it. Use the zip file with the manual Update option.",
-				"url": "https://download.technitium.com/dns/apps/GeoCountryApp.zip",
-				"size": "2.01 MB",
-				"installed": false
-			},
-			{
-				"name": "Geo Distance",
-				"version": "1.1",
-				"description": "Returns A or AAAA records, or CNAME record of the server located geographically closest to the client using MaxMind GeoIP2 City database. This app requires MaxMind GeoIP2 database and includes the GeoLite2 version for trial. To update the MaxMind GeoIP2 database for your app, download the GeoIP2-City.mmdb file from MaxMind and zip it. Use the zip file with the manual Update option.",
-				"url": "https://download.technitium.com/dns/apps/GeoDistanceApp.zip",
-				"size": "28.6 MB",
-				"installed": false
-			},
-			{
-				"name": "Split Horizon",
-				"version": "1.1",
-				"description": "Returns different set of A or AAAA records, or CNAME record for clients querying over public and private networks.",
-				"url": "https://download.technitium.com/dns/apps/SplitHorizonApp.zip",
-				"size": "11.1 KB",
-				"installed": true,
-				"installedVersion": "1.1",
-				"updateAvailable": false
-			},
-			{
-				"name": "What Is My Dns",
-				"version": "1.1",
-				"description": "Returns the IP address of the user's DNS Server for A, AAAA, and TXT queries.",
-				"url": "https://download.technitium.com/dns/apps/WhatIsMyDnsApp.zip",
-				"size": "8.79 KB",
-				"installed": true,
-				"installedVersion": "1.1",
-				"updateAvailable": false
-			}
-		]
-	},
-	"status": "ok"
+    "response": {
+        "storeApps": [
+            {
+                "name": "Geo Continent",
+                "version": "1.1",
+                "description": "Returns A or AAAA records, or CNAME record based on the continent the client queries from using MaxMind GeoIP2 Country database. This app requires MaxMind GeoIP2 database and includes the GeoLite2 version for trial. To update the MaxMind GeoIP2 database for your app, download the GeoIP2-Country.mmdb file from MaxMind and zip it. Use the zip file with the manual Update option.",
+                "url": "https://download.technitium.com/dns/apps/GeoContinentApp.zip",
+                "size": "2.01 MB",
+                "installed": false
+            },
+            {
+                "name": "Geo Country",
+                "version": "1.1",
+                "description": "Returns A or AAAA records, or CNAME record based on the country the client queries from using MaxMind GeoIP2 Country database. This app requires MaxMind GeoIP2 database and includes the GeoLite2 version for trial. To update the MaxMind GeoIP2 database for your app, download the GeoIP2-Country.mmdb file from MaxMind and zip it. Use the zip file with the manual Update option.",
+                "url": "https://download.technitium.com/dns/apps/GeoCountryApp.zip",
+                "size": "2.01 MB",
+                "installed": false
+            },
+            {
+                "name": "Geo Distance",
+                "version": "1.1",
+                "description": "Returns A or AAAA records, or CNAME record of the server located geographically closest to the client using MaxMind GeoIP2 City database. This app requires MaxMind GeoIP2 database and includes the GeoLite2 version for trial. To update the MaxMind GeoIP2 database for your app, download the GeoIP2-City.mmdb file from MaxMind and zip it. Use the zip file with the manual Update option.",
+                "url": "https://download.technitium.com/dns/apps/GeoDistanceApp.zip",
+                "size": "28.6 MB",
+                "installed": false
+            },
+            {
+                "name": "Split Horizon",
+                "version": "1.1",
+                "description": "Returns different set of A or AAAA records, or CNAME record for clients querying over public and private networks.",
+                "url": "https://download.technitium.com/dns/apps/SplitHorizonApp.zip",
+                "size": "11.1 KB",
+                "installed": true,
+                "installedVersion": "1.1",
+                "updateAvailable": false
+            },
+            {
+                "name": "What Is My Dns",
+                "version": "1.1",
+                "description": "Returns the IP address of the user's DNS Server for A, AAAA, and TXT queries.",
+                "url": "https://download.technitium.com/dns/apps/WhatIsMyDnsApp.zip",
+                "size": "8.79 KB",
+                "installed": true,
+                "installedVersion": "1.1",
+                "updateAvailable": false
+            }
+        ]
+    },
+    "status": "ok"
 }
 ```
 
@@ -4193,33 +4320,35 @@ PERMISSIONS:\
 Apps: Delete
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `name`: The name of the app to install.
 - `url`: The URL of the app zip file. URL must start with `https://`.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"installedApp": {
-			"name": "Wild IP",
-			"version": "1.0",
-			"dnsApps": [
-				{
-					"classPath": "WildIp.App",
-					"description": "Returns the IP address that was embedded in the subdomain name for A and AAAA queries. It works similar to sslip.io.",
-					"isAppRecordRequestHandler": true,
-					"recordDataTemplate": null,
-					"isRequestController": false,
-					"isAuthoritativeRequestHandler": false,
-					"isRequestBlockingHandler": false,
-					"isQueryLogger": false,
-					"isPostProcessor": false
-				}
-			]
-		}
-	},
-	"status": "ok"
+    "response": {
+        "installedApp": {
+            "name": "Wild IP",
+            "version": "1.0",
+            "dnsApps": [
+                {
+                    "classPath": "WildIp.App",
+                    "description": "Returns the IP address that was embedded in the subdomain name for A and AAAA queries. It works similar to sslip.io.",
+                    "isAppRecordRequestHandler": true,
+                    "recordDataTemplate": null,
+                    "isRequestController": false,
+                    "isAuthoritativeRequestHandler": false,
+                    "isRequestBlockingHandler": false,
+                    "isQueryLogger": false,
+                    "isPostProcessor": false
+                }
+            ]
+        }
+    },
+    "status": "ok"
 }
 ```
 
@@ -4234,33 +4363,35 @@ PERMISSIONS:\
 Apps: Delete
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `name`: The name of the app to install.
 - `url`: The URL of the app zip file. URL must start with `https://`.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"updatedApp": {
-			"name": "Wild IP",
-			"version": "1.0",
-			"dnsApps": [
-				{
-					"classPath": "WildIp.App",
-					"description": "Returns the IP address that was embedded in the subdomain name for A and AAAA queries. It works similar to sslip.io.",
-					"isAppRecordRequestHandler": true,
-					"recordDataTemplate": null,
-					"isRequestController": false,
-					"isAuthoritativeRequestHandler": false,
-					"isRequestBlockingHandler": false,
-					"isQueryLogger": false,
-					"isPostProcessor": false
-				}
-			]
-		}
-	},
-	"status": "ok"
+    "response": {
+        "updatedApp": {
+            "name": "Wild IP",
+            "version": "1.0",
+            "dnsApps": [
+                {
+                    "classPath": "WildIp.App",
+                    "description": "Returns the IP address that was embedded in the subdomain name for A and AAAA queries. It works similar to sslip.io.",
+                    "isAppRecordRequestHandler": true,
+                    "recordDataTemplate": null,
+                    "isRequestController": false,
+                    "isAuthoritativeRequestHandler": false,
+                    "isRequestBlockingHandler": false,
+                    "isQueryLogger": false,
+                    "isPostProcessor": false
+                }
+            ]
+        }
+    },
+    "status": "ok"
 }
 ```
 
@@ -4275,34 +4406,36 @@ PERMISSIONS:\
 Apps: Delete
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `name`: The name of the app to install.
 
 REQUEST: This is a POST request call where the request must be multi-part form data with the DNS application zip file data in binary format.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"installedApp": {
-			"name": "Wild IP",
-			"version": "1.0",
-			"dnsApps": [
-				{
-					"classPath": "WildIp.App",
-					"description": "Returns the IP address that was embedded in the subdomain name for A and AAAA queries. It works similar to sslip.io.",
-					"isAppRecordRequestHandler": true,
-					"recordDataTemplate": null,
-					"isRequestController": false,
-					"isAuthoritativeRequestHandler": false,
-					"isRequestBlockingHandler": false,
-					"isQueryLogger": false,
-					"isPostProcessor": false
-				}
-			]
-		}
-	},
-	"status": "ok"
+    "response": {
+        "installedApp": {
+            "name": "Wild IP",
+            "version": "1.0",
+            "dnsApps": [
+                {
+                    "classPath": "WildIp.App",
+                    "description": "Returns the IP address that was embedded in the subdomain name for A and AAAA queries. It works similar to sslip.io.",
+                    "isAppRecordRequestHandler": true,
+                    "recordDataTemplate": null,
+                    "isRequestController": false,
+                    "isAuthoritativeRequestHandler": false,
+                    "isRequestBlockingHandler": false,
+                    "isQueryLogger": false,
+                    "isPostProcessor": false
+                }
+            ]
+        }
+    },
+    "status": "ok"
 }
 ```
 
@@ -4317,34 +4450,36 @@ PERMISSIONS:\
 Apps: Delete
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `name`: The name of the app to update.
 
 REQUEST: This is a POST request call where the request must be multi-part form data with the DNS application zip file data in binary format.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"updatedApp": {
-			"name": "Wild IP",
-			"version": "1.0",
-			"dnsApps": [
-				{
-					"classPath": "WildIp.App",
-					"description": "Returns the IP address that was embedded in the subdomain name for A and AAAA queries. It works similar to sslip.io.",
-					"isAppRecordRequestHandler": true,
-					"recordDataTemplate": null,
-					"isRequestController": false,
-					"isAuthoritativeRequestHandler": false,
-					"isRequestBlockingHandler": false,
-					"isQueryLogger": false,
-					"isPostProcessor": false
-				}
-			]
-		}
-	},
-	"status": "ok"
+    "response": {
+        "updatedApp": {
+            "name": "Wild IP",
+            "version": "1.0",
+            "dnsApps": [
+                {
+                    "classPath": "WildIp.App",
+                    "description": "Returns the IP address that was embedded in the subdomain name for A and AAAA queries. It works similar to sslip.io.",
+                    "isAppRecordRequestHandler": true,
+                    "recordDataTemplate": null,
+                    "isRequestController": false,
+                    "isAuthoritativeRequestHandler": false,
+                    "isRequestBlockingHandler": false,
+                    "isQueryLogger": false,
+                    "isPostProcessor": false
+                }
+            ]
+        }
+    },
+    "status": "ok"
 }
 ```
 
@@ -4359,14 +4494,16 @@ PERMISSIONS:\
 Apps: Delete
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `name`: The name of the app to uninstall.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {},
-	"status": "ok"
+    "response": {},
+    "status": "ok"
 }
 ```
 
@@ -4384,16 +4521,18 @@ PERMISSIONS:\
 Apps: View
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `name`: The name of the app to retrieve the config.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"config": "config data or `null`"
-	},
-	"status": "ok"
+    "response": {
+        "config": "config data or `null`"
+    },
+    "status": "ok"
 }
 ```
 
@@ -4411,19 +4550,22 @@ PERMISSIONS:\
 Apps: Modify
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `name`: The name of the app to retrieve the config.
 
 REQUEST: This is a POST request call where the content type of the request must be `application/x-www-form-urlencoded` and the content must be as shown below:
-```
+
+```text
 config=query-string-encoded-config-data
 ```
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {},
-	"status": "ok"
+    "response": {},
+    "status": "ok"
 }
 ```
 
@@ -4443,6 +4585,7 @@ PERMISSIONS:\
 DnsClient: View
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `server`: The name server to query using the DNS client. Use `recursive-resolver` to perform recursive resolution. Use `system-dns` to query the DNS servers configured on the system.
 - `domain`: The domain name to query.
@@ -4453,56 +4596,57 @@ WHERE:
 - `import` (optional): This parameter when set to `true` indicates that the response of the DNS query should be imported in the an authoritative zone on this DNS server. Default value is `false` when this parameter is missing. If a zone does not exists, a primary zone for the `domain` name is created and the records from the response are set into the zone. Import can be done only for primary and forwarder type of zones. When `type` is set to AXFR, then the import feature will work as if a zone transfer was requested and the complete zone will be updated as per the zone transfer response. Note that any existing record type for the given `type` will be overwritten when syncing the records. It is recommended to use `recursive-resolver` or the actual name server address for the `server` parameter when importing records. You must have Zones Modify permission to create a zone or Zone Modify permission to import records into an existing zone.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"result": {
-			"Metadata": {
-				"NameServer": "server1:53 (127.0.0.1:53)",
-				"Protocol": "Udp",
-				"DatagramSize": "45 bytes",
-				"RoundTripTime": "1.42 ms"
-			},
-			"Identifier": 60127,
-			"IsResponse": true,
-			"OPCODE": "StandardQuery",
-			"AuthoritativeAnswer": true,
-			"Truncation": false,
-			"RecursionDesired": true,
-			"RecursionAvailable": true,
-			"Z": 0,
-			"AuthenticData": false,
-			"CheckingDisabled": false,
-			"RCODE": "NoError",
-			"QDCOUNT": 1,
-			"ANCOUNT": 1,
-			"NSCOUNT": 0,
-			"ARCOUNT": 0,
-			"Question": [
-				{
-					"Name": "example.com",
-					"Type": "A",
-					"Class": "IN"
-				}
-			],
-			"Answer": [
-				{
-					"Name": "example.com",
-					"Type": "A",
-					"Class": "IN",
-					"TTL": "86400 (1 day)",
-					"RDLENGTH": "4 bytes",
-					"RDATA": {
-						"IPAddress": "127.0.0.1"
-					}
-				}
-			],
-			"Authority": [],
-			"Additional": []
-		},
-		"rawResponses": []
-	},
-	"status": "ok"
+    "response": {
+        "result": {
+            "Metadata": {
+                "NameServer": "server1:53 (127.0.0.1:53)",
+                "Protocol": "Udp",
+                "DatagramSize": "45 bytes",
+                "RoundTripTime": "1.42 ms"
+            },
+            "Identifier": 60127,
+            "IsResponse": true,
+            "OPCODE": "StandardQuery",
+            "AuthoritativeAnswer": true,
+            "Truncation": false,
+            "RecursionDesired": true,
+            "RecursionAvailable": true,
+            "Z": 0,
+            "AuthenticData": false,
+            "CheckingDisabled": false,
+            "RCODE": "NoError",
+            "QDCOUNT": 1,
+            "ANCOUNT": 1,
+            "NSCOUNT": 0,
+            "ARCOUNT": 0,
+            "Question": [
+                {
+                    "Name": "example.com",
+                    "Type": "A",
+                    "Class": "IN"
+                }
+            ],
+            "Answer": [
+                {
+                    "Name": "example.com",
+                    "Type": "A",
+                    "Class": "IN",
+                    "TTL": "86400 (1 day)",
+                    "RDLENGTH": "4 bytes",
+                    "RDATA": {
+                        "IPAddress": "127.0.0.1"
+                    }
+                }
+            ],
+            "Authority": [],
+            "Additional": []
+        },
+        "rawResponses": []
+    },
+    "status": "ok"
 }
 ```
 
@@ -4524,6 +4668,7 @@ PERMISSIONS:\
 Settings: View
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 
 RESPONSE:
@@ -4670,7 +4815,7 @@ RESPONSE:
 
 ### Set DNS Settings
 
-This call allows to change the DNS server settings. 
+This call allows to change the DNS server settings.
 
 Note! Any parameter passed with this API call will overwrite existing value for that parameter. If you wish to append new values instead then you should first call the Get DNS Settings API to get the existing value, append your new value to it, and then pass the updated value with this API call.
 
@@ -4684,9 +4829,10 @@ PERMISSIONS:\
 Settings: Modify
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `dnsServerDomain` (optional): The primary domain name used by this DNS Server to identify itself.
-- `dnsServerLocalEndPoints` (optional): Local end points are the network interface IP addresses and ports you want the DNS Server to listen for requests. 
+- `dnsServerLocalEndPoints` (optional): Local end points are the network interface IP addresses and ports you want the DNS Server to listen for requests.
 - `dnsServerIPv4SourceAddresses` (optional): A comma separated list of IPv4 source addresses that the DNS server must use for making all outbound DNS requests when the server is connected to two or more networks. Network addresses are also accepted. By default, the IPv4 address of the network with a default route will be used as the source address.
 - `dnsServerIPv6SourceAddresses` (optional): A comma separated list of IPv6 source addresses that the DNS server must use for making all outbound DNS requests when the server is connected to two or more networks. Network addresses are also accepted. By default, the IPv6 address of the network with a default route will be used as the source address. Note that this option will be used only when `Prefer IPv6` option is enabled.
 - `defaultRecordTtl` (optional): The default TTL value to use if not specified when adding or updating records in a Zone.
@@ -4718,7 +4864,7 @@ WHERE:
 - `quicMaxInboundStreams` (optional): The max number of inbound bidirectional streams that can be accepted per QUIC connection. This option applies only to QUIC transport protocol. Valid range is `1`-`1000`. Initial value is `100`.
 - `listenBacklog` (optional): The maximum number of pending inbound connections. This option applies to TCP, TLS, TcpProxy, and QUIC transport protocols. Initial value is `100`.
 - `maxConcurrentResolutionsPerCore` (optional): The maximum number of concurrent async outbound resolutions that should be done per CPU core.  Initial value is `100`.
-- `webServiceLocalAddresses` (optional): Local addresses are the network interface IP addresses you want the web service to listen for requests. 
+- `webServiceLocalAddresses` (optional): Local addresses are the network interface IP addresses you want the web service to listen for requests.
 - `webServiceHttpPort` (optional): Specify the TCP port number for the web console and this API web service. Initial value is `5380`.
 - `webServiceEnableTls` (optional): Set this to `true` to start the HTTPS service to access web service.
 - `webServiceEnableHttp3` (optional): Set this to `true` to enable HTTP/3 protocol for the web service.
@@ -4819,18 +4965,20 @@ PERMISSIONS:\
 Settings: View OR Zones: Modify
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"tsigKeyNames": [
-			"key1",
-			"key2"
-		]
-	},
-	"status": "ok"
+    "response": {
+        "tsigKeyNames": [
+            "key1",
+            "key2"
+        ]
+    },
+    "status": "ok"
 }
 ```
 
@@ -4848,12 +4996,14 @@ PERMISSIONS:\
 Settings: Modify
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 
 RESPONSE:
-```
+
+```json
 {
-	"status": "ok"
+    "status": "ok"
 }
 ```
 
@@ -4871,16 +5021,18 @@ PERMISSIONS:\
 Settings: Modify
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `minutes`: The time in minutes to disable the blocklist for.
 
 RESPONSE:
-```
+
+```json
 {
-	"status": "ok",
-	"response": {
-		"temporaryDisableBlockingTill": "2021-10-10T01:14:27.1106773Z"
-	}
+    "status": "ok",
+    "response": {
+        "temporaryDisableBlockingTill": "2021-10-10T01:14:27.1106773Z"
+    }
 }
 ```
 
@@ -4898,6 +5050,7 @@ PERMISSIONS:\
 Settings: Delete
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `blockLists` (optional): Set to `true` to backup block lists cache files. Default value is `false`.
 - `logs` (optional): Set to `true` to backup log files. Default value is `false`.
@@ -4928,6 +5081,7 @@ PERMISSIONS:\
 Settings: Delete
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `blockLists` (optional): Set to `true` to restore block lists cache files. Default value is `false`.
 - `logs` (optional): Set to `true` to restore log files. Default value is `false`.
@@ -4966,46 +5120,48 @@ PERMISSIONS:\
 DhcpServer: View
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"leases": [
-			{
-				"scope": "Default",
-				"type": "Reserved",
-				"hardwareAddress": "00-00-00-00-00-00",
-				"clientIdentifier": "1-000000000000",
-				"address": "192.168.1.5",
-				"hostName": "server1.local",
-				"leaseObtained": "08/25/2020 17:52:51",
-				"leaseExpires": "09/26/2020 14:27:12"
-			},
-			{
-				"scope": "Default",
-				"type": "Dynamic",
-				"hardwareAddress": "00-00-00-00-00-00",
-				"clientIdentifier": "1-000000000000",
-				"address": "192.168.1.13",
-				"hostName": null,
-				"leaseObtained": "06/15/2020 16:41:46",
-				"leaseExpires": "09/25/2020 12:39:54"
-			},
-			{
-				"scope": "Default",
-				"type": "Dynamic",
-				"hardwareAddress": "00-00-00-00-00-00",
-				"clientIdentifier": "1-000000000000",
-				"address": "192.168.1.15",
-				"hostName": "desktop-ea2miaf.local",
-				"leaseObtained": "06/18/2020 12:19:03",
-				"leaseExpires": "09/25/2020 12:17:11"
-			},
-		]
-	},
-	"status": "ok"
+    "response": {
+        "leases": [
+            {
+                "scope": "Default",
+                "type": "Reserved",
+                "hardwareAddress": "00-00-00-00-00-00",
+                "clientIdentifier": "1-000000000000",
+                "address": "192.168.1.5",
+                "hostName": "server1.local",
+                "leaseObtained": "08/25/2020 17:52:51",
+                "leaseExpires": "09/26/2020 14:27:12"
+            },
+            {
+                "scope": "Default",
+                "type": "Dynamic",
+                "hardwareAddress": "00-00-00-00-00-00",
+                "clientIdentifier": "1-000000000000",
+                "address": "192.168.1.13",
+                "hostName": null,
+                "leaseObtained": "06/15/2020 16:41:46",
+                "leaseExpires": "09/25/2020 12:39:54"
+            },
+            {
+                "scope": "Default",
+                "type": "Dynamic",
+                "hardwareAddress": "00-00-00-00-00-00",
+                "clientIdentifier": "1-000000000000",
+                "address": "192.168.1.15",
+                "hostName": "desktop-ea2miaf.local",
+                "leaseObtained": "06/18/2020 12:19:03",
+                "leaseExpires": "09/25/2020 12:17:11"
+            },
+        ]
+    },
+    "status": "ok"
 }
 ```
 
@@ -5023,16 +5179,18 @@ PERMISSIONS:\
 DhcpServer: Delete
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `name`: The name of the DHCP scope.
 - `clientIdentifier` (optional): The client identifier for the lease. Either `hardwareAddress` or `clientIdentifier` must be specified.
 - `hardwareAddress` (optional): The MAC address of the device bearing the dynamic/reserved lease. Either `hardwareAddress` or `clientIdentifier` must be specified.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {},
-	"status": "ok"
+    "response": {},
+    "status": "ok"
 }
 ```
 
@@ -5050,16 +5208,18 @@ PERMISSIONS:\
 DhcpServer: Modify
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `name`: The name of the DHCP scope.
 - `clientIdentifier` (optional): The client identifier for the lease. Either `hardwareAddress` or `clientIdentifier` must be specified.
 - `hardwareAddress` (optional): The MAC address of the device bearing the dynamic lease. Either `hardwareAddress` or `clientIdentifier` must be specified.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {},
-	"status": "ok"
+    "response": {},
+    "status": "ok"
 }
 ```
 
@@ -5077,16 +5237,18 @@ PERMISSIONS:\
 DhcpServer: Modify
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `name`: The name of the DHCP scope.
 - `clientIdentifier` (optional): The client identifier for the lease. Either `hardwareAddress` or `clientIdentifier` must be specified.
 - `hardwareAddress` (optional): The MAC address of the device bearing the reserved lease. Either `hardwareAddress` or `clientIdentifier` must be specified.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {},
-	"status": "ok"
+    "response": {},
+    "status": "ok"
 }
 ```
 
@@ -5104,25 +5266,27 @@ PERMISSIONS:\
 DhcpServer: View
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"scopes": [
-			{
-				"name": "Default",
-				"enabled": false,
-				"startingAddress": "192.168.1.1",
-				"endingAddress": "192.168.1.254",
-				"subnetMask": "255.255.255.0",
-				"networkAddress": "192.168.1.0",
-				"broadcastAddress": "192.168.1.255"
-			}
-		]
-	},
-	"status": "ok"
+    "response": {
+        "scopes": [
+            {
+                "name": "Default",
+                "enabled": false,
+                "startingAddress": "192.168.1.1",
+                "endingAddress": "192.168.1.254",
+                "subnetMask": "255.255.255.0",
+                "networkAddress": "192.168.1.0",
+                "broadcastAddress": "192.168.1.255"
+            }
+        ]
+    },
+    "status": "ok"
 }
 ```
 
@@ -5140,90 +5304,92 @@ PERMISSIONS:\
 DhcpServer: View
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `name`: The name of the DHCP scope.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"name": "Default",
-		"startingAddress": "192.168.1.1",
-		"endingAddress": "192.168.1.254",
-		"subnetMask": "255.255.255.0",
-		"leaseTimeDays": 7,
-		"leaseTimeHours": 0,
-		"leaseTimeMinutes": 0,
-		"offerDelayTime": 0,
-		"pingCheckEnabled": false,
-		"pingCheckTimeout": 1000,
-		"pingCheckRetries": 2,
-		"domainName": "local",
-		"domainSearchList": [
-			"home.arpa",
-			"lan"
-		],
-		"dnsUpdates": true,
-		"dnsTtl": 900,
-		"serverAddress": "192.168.1.1",
-		"serverHostName": "tftp-server-1",
-		"bootFileName": "boot.bin",
-		"routerAddress": "192.168.1.1",
-		"useThisDnsServer": false,
-		"dnsServers": [
-			"192.168.1.5"
-		],
-		"winsServers": [
-			"192.168.1.5"
-		],
-		"ntpServers": [
-			"192.168.1.5"
-		],
-		"staticRoutes": [
-			{
-				"destination": "172.16.0.0",
-				"subnetMask": "255.255.255.0",
-				"router": "192.168.1.2"
-			}
-		],
-		"vendorInfo": [
-			{
-				"identifier": "substring(vendor-class-identifier,0,9)==\"PXEClient\"",
-				"information": "06:01:03:0A:04:00:50:58:45:09:14:00:00:11:52:61:73:70:62:65:72:72:79:20:50:69:20:42:6F:6F:74:FF"
-			}
-		],
-		"capwapAcIpAddresses": [
-			"192.168.1.2"
-		],
-		"tftpServerAddresses": [
-			"192.168.1.5",
-			"192.168.1.6"
-		],
-		"genericOptions": [
-			{
-				"code": 150,
-				"value": "C0:A8:01:01"
-			}
-		],
-		"exclusions": [
-			{
-				"startingAddress": "192.168.1.1",
-				"endingAddress": "192.168.1.10"
-			}
-		],
-		"reservedLeases": [
-			{
-				"hostName": null,
-				"hardwareAddress": "00-00-00-00-00-00",
-				"address": "192.168.1.10",
-				"comments": "comments"
-			}
-		],
-		"allowOnlyReservedLeases": false,
-		"blockLocallyAdministeredMacAddresses": true,
-		"ignoreClientIdentifierOption": true
-	},
-	"status": "ok"
+    "response": {
+        "name": "Default",
+        "startingAddress": "192.168.1.1",
+        "endingAddress": "192.168.1.254",
+        "subnetMask": "255.255.255.0",
+        "leaseTimeDays": 7,
+        "leaseTimeHours": 0,
+        "leaseTimeMinutes": 0,
+        "offerDelayTime": 0,
+        "pingCheckEnabled": false,
+        "pingCheckTimeout": 1000,
+        "pingCheckRetries": 2,
+        "domainName": "local",
+        "domainSearchList": [
+            "home.arpa",
+            "lan"
+        ],
+        "dnsUpdates": true,
+        "dnsTtl": 900,
+        "serverAddress": "192.168.1.1",
+        "serverHostName": "tftp-server-1",
+        "bootFileName": "boot.bin",
+        "routerAddress": "192.168.1.1",
+        "useThisDnsServer": false,
+        "dnsServers": [
+            "192.168.1.5"
+        ],
+        "winsServers": [
+            "192.168.1.5"
+        ],
+        "ntpServers": [
+            "192.168.1.5"
+        ],
+        "staticRoutes": [
+            {
+                "destination": "172.16.0.0",
+                "subnetMask": "255.255.255.0",
+                "router": "192.168.1.2"
+            }
+        ],
+        "vendorInfo": [
+            {
+                "identifier": "substring(vendor-class-identifier,0,9)==\"PXEClient\"",
+                "information": "06:01:03:0A:04:00:50:58:45:09:14:00:00:11:52:61:73:70:62:65:72:72:79:20:50:69:20:42:6F:6F:74:FF"
+            }
+        ],
+        "capwapAcIpAddresses": [
+            "192.168.1.2"
+        ],
+        "tftpServerAddresses": [
+            "192.168.1.5",
+            "192.168.1.6"
+        ],
+        "genericOptions": [
+            {
+                "code": 150,
+                "value": "C0:A8:01:01"
+            }
+        ],
+        "exclusions": [
+            {
+                "startingAddress": "192.168.1.1",
+                "endingAddress": "192.168.1.10"
+            }
+        ],
+        "reservedLeases": [
+            {
+                "hostName": null,
+                "hardwareAddress": "00-00-00-00-00-00",
+                "address": "192.168.1.10",
+                "comments": "comments"
+            }
+        ],
+        "allowOnlyReservedLeases": false,
+        "blockLocallyAdministeredMacAddresses": true,
+        "ignoreClientIdentifierOption": true
+    },
+    "status": "ok"
 }
 ```
 
@@ -5241,6 +5407,7 @@ PERMISSIONS:\
 DhcpServer: Modify
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `name`: The name of the DHCP scope.
 - `newName` (optional): The new name of the DHCP scope to rename an existing scope.
@@ -5279,10 +5446,11 @@ WHERE:
 - `ignoreClientIdentifierOption` (optional): Set this parameter to `true` to always use the client's MAC address as the identifier to allocate lease instead of the Client Identifier (Option 61) provided by the client in the request. Changing this option may cause the existing clients to get a different IP lease on renewal.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {},
-	"status": "ok"
+    "response": {},
+    "status": "ok"
 }
 ```
 
@@ -5297,6 +5465,7 @@ PERMISSIONS:\
 DhcpServer: Modify
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `name`: The name of the DHCP scope.
 - `hardwareAddress`: The MAC address of the client.
@@ -5305,10 +5474,11 @@ WHERE:
 - `comments` (optional): Comments for the reserved lease entry.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {},
-	"status": "ok"
+    "response": {},
+    "status": "ok"
 }
 ```
 
@@ -5323,15 +5493,17 @@ PERMISSIONS:\
 DhcpServer: Modify
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `name`: The name of the DHCP scope.
 - `hardwareAddress`: The MAC address of the client.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {},
-	"status": "ok"
+    "response": {},
+    "status": "ok"
 }
 ```
 
@@ -5349,14 +5521,16 @@ PERMISSIONS:\
 DhcpServer: Modify
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `name`: The name of the DHCP scope.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {},
-	"status": "ok"
+    "response": {},
+    "status": "ok"
 }
 ```
 
@@ -5374,14 +5548,16 @@ PERMISSIONS:\
 DhcpServer: Modify
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `name`: The name of the DHCP scope.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {},
-	"status": "ok"
+    "response": {},
+    "status": "ok"
 }
 ```
 
@@ -5399,14 +5575,16 @@ PERMISSIONS:\
 DhcpServer: Delete
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `name`: The name of the DHCP scope.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {},
-	"status": "ok"
+    "response": {},
+    "status": "ok"
 }
 ```
 
@@ -5425,36 +5603,38 @@ PERMISSIONS:\
 Administration: View
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"sessions": [
-			{
-				"username": "admin",
-				"isCurrentSession": true,
-				"partialToken": "272f4890427b9ab5",
-				"type": "Standard",
-				"tokenName": null,
-				"lastSeen": "2022-09-17T13:23:44.9972772Z",
-				"lastSeenRemoteAddress": "127.0.0.1",
-				"lastSeenUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0"
-			},
-			{
-				"username": "admin",
-				"isCurrentSession": false,
-				"partialToken": "ddfaecb8e9325e77",
-				"type": "ApiToken",
-				"tokenName": "MyToken1",
-				"lastSeen": "2022-09-17T13:22:45.6710766Z",
-				"lastSeenRemoteAddress": "127.0.0.1",
-				"lastSeenUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0"
-			}
-		]
-	},
-	"status": "ok"
+    "response": {
+        "sessions": [
+            {
+                "username": "admin",
+                "isCurrentSession": true,
+                "partialToken": "272f4890427b9ab5",
+                "type": "Standard",
+                "tokenName": null,
+                "lastSeen": "2022-09-17T13:23:44.9972772Z",
+                "lastSeenRemoteAddress": "127.0.0.1",
+                "lastSeenUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0"
+            },
+            {
+                "username": "admin",
+                "isCurrentSession": false,
+                "partialToken": "ddfaecb8e9325e77",
+                "type": "ApiToken",
+                "tokenName": "MyToken1",
+                "lastSeen": "2022-09-17T13:22:45.6710766Z",
+                "lastSeenRemoteAddress": "127.0.0.1",
+                "lastSeenUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0"
+            }
+        ]
+    },
+    "status": "ok"
 }
 ```
 
@@ -5469,19 +5649,21 @@ PERMISSIONS:\
 Administration: Modify
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `user`: The username for the user account for which to generate the API token.
 - `tokenName`: The name of the created token to identify its session.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"username": "admin",
-		"tokenName": "MyToken1",
-		"token": "ddfaecb8e9325e77865ee7e100f89596a65d3eae0e6dddcb33172355b95a64af"
-	},
-	"status": "ok"
+    "response": {
+        "username": "admin",
+        "tokenName": "MyToken1",
+        "token": "ddfaecb8e9325e77865ee7e100f89596a65d3eae0e6dddcb33172355b95a64af"
+    },
+    "status": "ok"
 }
 ```
 
@@ -5496,14 +5678,16 @@ PERMISSIONS:\
 Administration: Delete
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `partialToken`: The partial token of the session to delete that was returned by the list of sessions.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {},
-	"status": "ok"
+    "response": {},
+    "status": "ok"
 }
 ```
 
@@ -5518,34 +5702,36 @@ PERMISSIONS:\
 Administration: View
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"users": [
-			{
-				"displayName": "Administrator",
-				"username": "admin",
-				"disabled": false,
-				"previousSessionLoggedOn": "2022-09-17T13:20:32.7933783Z",
-				"previousSessionRemoteAddress": "127.0.0.1",
-				"recentSessionLoggedOn": "2022-09-17T13:22:45.671081Z",
-				"recentSessionRemoteAddress": "127.0.0.1"
-			},
-			{
-				"displayName": "Shreyas Zare",
-				"username": "shreyas",
-				"disabled": false,
-				"previousSessionLoggedOn": "0001-01-01T00:00:00Z",
-				"previousSessionRemoteAddress": "0.0.0.0",
-				"recentSessionLoggedOn": "0001-01-01T00:00:00Z",
-				"recentSessionRemoteAddress": "0.0.0.0"
-			}
-		]
-	},
-	"status": "ok"
+    "response": {
+        "users": [
+            {
+                "displayName": "Administrator",
+                "username": "admin",
+                "disabled": false,
+                "previousSessionLoggedOn": "2022-09-17T13:20:32.7933783Z",
+                "previousSessionRemoteAddress": "127.0.0.1",
+                "recentSessionLoggedOn": "2022-09-17T13:22:45.671081Z",
+                "recentSessionRemoteAddress": "127.0.0.1"
+            },
+            {
+                "displayName": "Shreyas Zare",
+                "username": "shreyas",
+                "disabled": false,
+                "previousSessionLoggedOn": "0001-01-01T00:00:00Z",
+                "previousSessionRemoteAddress": "0.0.0.0",
+                "recentSessionLoggedOn": "0001-01-01T00:00:00Z",
+                "recentSessionRemoteAddress": "0.0.0.0"
+            }
+        ]
+    },
+    "status": "ok"
 }
 ```
 
@@ -5560,24 +5746,26 @@ PERMISSIONS:\
 Administration: Modify
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `user`: A unique username for the user account.
 - `pass`: A password for the user account.
 - `displayName` (optional): The display name for the user account.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"displayName": "User",
-		"username": "user1",
-		"disabled": false,
-		"previousSessionLoggedOn": "0001-01-01T00:00:00",
-		"previousSessionRemoteAddress": "0.0.0.0",
-		"recentSessionLoggedOn": "0001-01-01T00:00:00",
-		"recentSessionRemoteAddress": "0.0.0.0"
-	},
-	"status": "ok"
+    "response": {
+        "displayName": "User",
+        "username": "user1",
+        "disabled": false,
+        "previousSessionLoggedOn": "0001-01-01T00:00:00",
+        "previousSessionRemoteAddress": "0.0.0.0",
+        "recentSessionLoggedOn": "0001-01-01T00:00:00",
+        "recentSessionRemoteAddress": "0.0.0.0"
+    },
+    "status": "ok"
 }
 ```
 
@@ -5586,60 +5774,62 @@ RESPONSE:
 Returns a user account profile details.
 
 URL:\
-`http://localhost:5380/api/admin/users/get?token=x&user=admin&includeGroups=true
+`http://localhost:5380/api/admin/users/get?token=x&user=admin&includeGroups=true`
 
 PERMISSIONS:\
 Administration: View
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `user`: The username for the user account.
 - `includeGroups` (optional): Set `true` to include a list of groups in response.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"displayName": "Administrator",
-		"username": "admin",
-		"disabled": false,
-		"previousSessionLoggedOn": "2022-09-16T13:22:45.671Z",
-		"previousSessionRemoteAddress": "127.0.0.1",
-		"recentSessionLoggedOn": "2022-09-18T09:55:26.9800695Z",
-		"recentSessionRemoteAddress": "127.0.0.1",
-		"sessionTimeoutSeconds": 1800,
-		"memberOfGroups": [
-			"Administrators"
-		],
-		"sessions": [
-			{
-				"username": "admin",
-				"isCurrentSession": false,
-				"partialToken": "1f8011516cea27af",
-				"type": "Standard",
-				"tokenName": null,
-				"lastSeen": "2022-09-18T09:55:40.6519988Z",
-				"lastSeenRemoteAddress": "127.0.0.1",
-				"lastSeenUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0"
-			},
-			{
-				"username": "admin",
-				"isCurrentSession": false,
-				"partialToken": "ddfaecb8e9325e77",
-				"type": "ApiToken",
-				"tokenName": "MyToken1",
-				"lastSeen": "2022-09-17T13:22:45.671Z",
-				"lastSeenRemoteAddress": "127.0.0.1",
-				"lastSeenUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0"
-			}
-		],
-		"groups": [
-			"Administrators",
-			"DHCP Administrators",
-			"DNS Administrators"
-		]
-	},
-	"status": "ok"
+    "response": {
+        "displayName": "Administrator",
+        "username": "admin",
+        "disabled": false,
+        "previousSessionLoggedOn": "2022-09-16T13:22:45.671Z",
+        "previousSessionRemoteAddress": "127.0.0.1",
+        "recentSessionLoggedOn": "2022-09-18T09:55:26.9800695Z",
+        "recentSessionRemoteAddress": "127.0.0.1",
+        "sessionTimeoutSeconds": 1800,
+        "memberOfGroups": [
+            "Administrators"
+        ],
+        "sessions": [
+            {
+                "username": "admin",
+                "isCurrentSession": false,
+                "partialToken": "1f8011516cea27af",
+                "type": "Standard",
+                "tokenName": null,
+                "lastSeen": "2022-09-18T09:55:40.6519988Z",
+                "lastSeenRemoteAddress": "127.0.0.1",
+                "lastSeenUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0"
+            },
+            {
+                "username": "admin",
+                "isCurrentSession": false,
+                "partialToken": "ddfaecb8e9325e77",
+                "type": "ApiToken",
+                "tokenName": "MyToken1",
+                "lastSeen": "2022-09-17T13:22:45.671Z",
+                "lastSeenRemoteAddress": "127.0.0.1",
+                "lastSeenUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0"
+            }
+        ],
+        "groups": [
+            "Administrators",
+            "DHCP Administrators",
+            "DNS Administrators"
+        ]
+    },
+    "status": "ok"
 }
 ```
 
@@ -5654,6 +5844,7 @@ PERMISSIONS:\
 Administration: Modify
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `user`: The username for the user account.
 - `displayName` (optional): The display name for the user account.
@@ -5665,44 +5856,45 @@ WHERE:
 - `memberOfGroups` (optional): A list of comma separated group names that the user must be set as a member.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"displayName": "Administrator",
-		"username": "admin",
-		"disabled": false,
-		"previousSessionLoggedOn": "2022-09-17T13:22:45.671Z",
-		"previousSessionRemoteAddress": "127.0.0.1",
-		"recentSessionLoggedOn": "2022-09-18T09:55:26.9800695Z",
-		"recentSessionRemoteAddress": "127.0.0.1",
-		"sessionTimeoutSeconds": 1800,
-		"memberOfGroups": [
-			"Administrators"
-		],
-		"sessions": [
-			{
-				"username": "admin",
-				"isCurrentSession": false,
-				"partialToken": "1f8011516cea27af",
-				"type": "Standard",
-				"tokenName": null,
-				"lastSeen": "2022-09-18T09:59:19.9034491Z",
-				"lastSeenRemoteAddress": "127.0.0.1",
-				"lastSeenUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0"
-			},
-			{
-				"username": "admin",
-				"isCurrentSession": false,
-				"partialToken": "ddfaecb8e9325e77",
-				"type": "ApiToken",
-				"tokenName": "MyToken1",
-				"lastSeen": "2022-09-17T13:22:45.671Z",
-				"lastSeenRemoteAddress": "127.0.0.1",
-				"lastSeenUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0"
-			}
-		]
-	},
-	"status": "ok"
+    "response": {
+        "displayName": "Administrator",
+        "username": "admin",
+        "disabled": false,
+        "previousSessionLoggedOn": "2022-09-17T13:22:45.671Z",
+        "previousSessionRemoteAddress": "127.0.0.1",
+        "recentSessionLoggedOn": "2022-09-18T09:55:26.9800695Z",
+        "recentSessionRemoteAddress": "127.0.0.1",
+        "sessionTimeoutSeconds": 1800,
+        "memberOfGroups": [
+            "Administrators"
+        ],
+        "sessions": [
+            {
+                "username": "admin",
+                "isCurrentSession": false,
+                "partialToken": "1f8011516cea27af",
+                "type": "Standard",
+                "tokenName": null,
+                "lastSeen": "2022-09-18T09:59:19.9034491Z",
+                "lastSeenRemoteAddress": "127.0.0.1",
+                "lastSeenUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0"
+            },
+            {
+                "username": "admin",
+                "isCurrentSession": false,
+                "partialToken": "ddfaecb8e9325e77",
+                "type": "ApiToken",
+                "tokenName": "MyToken1",
+                "lastSeen": "2022-09-17T13:22:45.671Z",
+                "lastSeenRemoteAddress": "127.0.0.1",
+                "lastSeenUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0"
+            }
+        ]
+    },
+    "status": "ok"
 }
 ```
 
@@ -5717,14 +5909,16 @@ PERMISSIONS:\
 Administration: Delete
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `user`: The username for the user account to delete.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {},
-	"status": "ok"
+    "response": {},
+    "status": "ok"
 }
 ```
 
@@ -5739,28 +5933,30 @@ PERMISSIONS:\
 Administration: View
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"groups": [
-			{
-				"name": "Administrators",
-				"description": "Super administrators"
-			},
-			{
-				"name": "DHCP Administrators",
-				"description": "DHCP service administrators"
-			},
-			{
-				"name": "DNS Administrators",
-				"description": "DNS service administrators"
-			}
-		]
-	},
-	"status": "ok"
+    "response": {
+        "groups": [
+            {
+                "name": "Administrators",
+                "description": "Super administrators"
+            },
+            {
+                "name": "DHCP Administrators",
+                "description": "DHCP service administrators"
+            },
+            {
+                "name": "DNS Administrators",
+                "description": "DNS service administrators"
+            }
+        ]
+    },
+    "status": "ok"
 }
 ```
 
@@ -5775,18 +5971,20 @@ PERMISSIONS:\
 Administration: Modify
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `group`: The name of the group to create.
 - `description` (optional): The description text for the group.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"name": "Group1",
-		"description": "My description"
-	},
-	"status": "ok"
+    "response": {
+        "name": "Group1",
+        "description": "My description"
+    },
+    "status": "ok"
 }
 ```
 
@@ -5801,25 +5999,27 @@ PERMISSIONS:\
 Administration: View
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `group`: The name of the group.
 - `includeUsers` (optional): Set `true` to include a list of users in response.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"name": "Administrators",
-		"description": "Super administrators",
-		"members": [
-			"admin"
-		],
-		"users": [
-			"admin",
-			"shreyas"
-		]
-	},
-	"status": "ok"
+    "response": {
+        "name": "Administrators",
+        "description": "Super administrators",
+        "members": [
+            "admin"
+        ],
+        "users": [
+            "admin",
+            "shreyas"
+        ]
+    },
+    "status": "ok"
 }
 ```
 
@@ -5834,6 +6034,7 @@ PERMISSIONS:\
 Administration: Modify
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `group`: The name of the group to update.
 - `newGroup` (optional): A new group name to rename the group.
@@ -5841,16 +6042,17 @@ WHERE:
 - `members` (optional): A comma separated list of usernames to set as the group's members.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"name": "Administrators",
-		"description": "Super administrators",
-		"members": [
-			"admin"
-		]
-	},
-	"status": "ok"
+    "response": {
+        "name": "Administrators",
+        "description": "Super administrators",
+        "members": [
+            "admin"
+        ]
+    },
+    "status": "ok"
 }
 ```
 
@@ -5865,14 +6067,16 @@ PERMISSIONS:\
 Administration: Delete
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `group`: The name of the group to delete.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {},
-	"status": "ok"
+    "response": {},
+    "status": "ok"
 }
 ```
 
@@ -5885,274 +6089,276 @@ PERMISSIONS:\
 Administration: View
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"permissions": [
-			{
-				"section": "Dashboard",
-				"userPermissions": [],
-				"groupPermissions": [
-					{
-						"name": "Administrators",
-						"canView": true,
-						"canModify": true,
-						"canDelete": true
-					},
-					{
-						"name": "Everyone",
-						"canView": true,
-						"canModify": false,
-						"canDelete": false
-					}
-				]
-			},
-			{
-				"section": "Zones",
-				"userPermissions": [],
-				"groupPermissions": [
-					{
-						"name": "Administrators",
-						"canView": true,
-						"canModify": true,
-						"canDelete": true
-					},
-					{
-						"name": "DHCP Administrators",
-						"canView": true,
-						"canModify": false,
-						"canDelete": false
-					},
-					{
-						"name": "DNS Administrators",
-						"canView": true,
-						"canModify": true,
-						"canDelete": true
-					},
-					{
-						"name": "Everyone",
-						"canView": true,
-						"canModify": false,
-						"canDelete": false
-					}
-				]
-			},
-			{
-				"section": "Cache",
-				"userPermissions": [],
-				"groupPermissions": [
-					{
-						"name": "Administrators",
-						"canView": true,
-						"canModify": true,
-						"canDelete": true
-					},
-					{
-						"name": "DNS Administrators",
-						"canView": true,
-						"canModify": true,
-						"canDelete": true
-					},
-					{
-						"name": "Everyone",
-						"canView": true,
-						"canModify": false,
-						"canDelete": false
-					}
-				]
-			},
-			{
-				"section": "Allowed",
-				"userPermissions": [],
-				"groupPermissions": [
-					{
-						"name": "Administrators",
-						"canView": true,
-						"canModify": true,
-						"canDelete": true
-					},
-					{
-						"name": "DNS Administrators",
-						"canView": true,
-						"canModify": true,
-						"canDelete": true
-					},
-					{
-						"name": "Everyone",
-						"canView": true,
-						"canModify": false,
-						"canDelete": false
-					}
-				]
-			},
-			{
-				"section": "Blocked",
-				"userPermissions": [],
-				"groupPermissions": [
-					{
-						"name": "Administrators",
-						"canView": true,
-						"canModify": true,
-						"canDelete": true
-					},
-					{
-						"name": "DNS Administrators",
-						"canView": true,
-						"canModify": true,
-						"canDelete": true
-					},
-					{
-						"name": "Everyone",
-						"canView": true,
-						"canModify": false,
-						"canDelete": false
-					}
-				]
-			},
-			{
-				"section": "Apps",
-				"userPermissions": [],
-				"groupPermissions": [
-					{
-						"name": "Administrators",
-						"canView": true,
-						"canModify": true,
-						"canDelete": true
-					},
-					{
-						"name": "DNS Administrators",
-						"canView": true,
-						"canModify": true,
-						"canDelete": true
-					},
-					{
-						"name": "Everyone",
-						"canView": true,
-						"canModify": false,
-						"canDelete": false
-					}
-				]
-			},
-			{
-				"section": "DnsClient",
-				"userPermissions": [],
-				"groupPermissions": [
-					{
-						"name": "Administrators",
-						"canView": true,
-						"canModify": true,
-						"canDelete": true
-					},
-					{
-						"name": "DHCP Administrators",
-						"canView": true,
-						"canModify": false,
-						"canDelete": false
-					},
-					{
-						"name": "DNS Administrators",
-						"canView": true,
-						"canModify": true,
-						"canDelete": true
-					},
-					{
-						"name": "Everyone",
-						"canView": true,
-						"canModify": false,
-						"canDelete": false
-					}
-				]
-			},
-			{
-				"section": "Settings",
-				"userPermissions": [],
-				"groupPermissions": [
-					{
-						"name": "Administrators",
-						"canView": true,
-						"canModify": true,
-						"canDelete": true
-					},
-					{
-						"name": "DNS Administrators",
-						"canView": true,
-						"canModify": true,
-						"canDelete": true
-					}
-				]
-			},
-			{
-				"section": "DhcpServer",
-				"userPermissions": [],
-				"groupPermissions": [
-					{
-						"name": "Administrators",
-						"canView": true,
-						"canModify": true,
-						"canDelete": true
-					},
-					{
-						"name": "DHCP Administrators",
-						"canView": true,
-						"canModify": true,
-						"canDelete": true
-					},
-					{
-						"name": "Everyone",
-						"canView": true,
-						"canModify": false,
-						"canDelete": false
-					}
-				]
-			},
-			{
-				"section": "Administration",
-				"userPermissions": [],
-				"groupPermissions": [
-					{
-						"name": "Administrators",
-						"canView": true,
-						"canModify": true,
-						"canDelete": true
-					}
-				]
-			},
-			{
-				"section": "Logs",
-				"userPermissions": [],
-				"groupPermissions": [
-					{
-						"name": "Administrators",
-						"canView": true,
-						"canModify": true,
-						"canDelete": true
-					},
-					{
-						"name": "DHCP Administrators",
-						"canView": true,
-						"canModify": false,
-						"canDelete": false
-					},
-					{
-						"name": "DNS Administrators",
-						"canView": true,
-						"canModify": false,
-						"canDelete": false
-					},
-					{
-						"name": "Everyone",
-						"canView": true,
-						"canModify": false,
-						"canDelete": false
-					}
-				]
-			}
-		]
-	},
-	"status": "ok"
+    "response": {
+        "permissions": [
+            {
+                "section": "Dashboard",
+                "userPermissions": [],
+                "groupPermissions": [
+                    {
+                        "name": "Administrators",
+                        "canView": true,
+                        "canModify": true,
+                        "canDelete": true
+                    },
+                    {
+                        "name": "Everyone",
+                        "canView": true,
+                        "canModify": false,
+                        "canDelete": false
+                    }
+                ]
+            },
+            {
+                "section": "Zones",
+                "userPermissions": [],
+                "groupPermissions": [
+                    {
+                        "name": "Administrators",
+                        "canView": true,
+                        "canModify": true,
+                        "canDelete": true
+                    },
+                    {
+                        "name": "DHCP Administrators",
+                        "canView": true,
+                        "canModify": false,
+                        "canDelete": false
+                    },
+                    {
+                        "name": "DNS Administrators",
+                        "canView": true,
+                        "canModify": true,
+                        "canDelete": true
+                    },
+                    {
+                        "name": "Everyone",
+                        "canView": true,
+                        "canModify": false,
+                        "canDelete": false
+                    }
+                ]
+            },
+            {
+                "section": "Cache",
+                "userPermissions": [],
+                "groupPermissions": [
+                    {
+                        "name": "Administrators",
+                        "canView": true,
+                        "canModify": true,
+                        "canDelete": true
+                    },
+                    {
+                        "name": "DNS Administrators",
+                        "canView": true,
+                        "canModify": true,
+                        "canDelete": true
+                    },
+                    {
+                        "name": "Everyone",
+                        "canView": true,
+                        "canModify": false,
+                        "canDelete": false
+                    }
+                ]
+            },
+            {
+                "section": "Allowed",
+                "userPermissions": [],
+                "groupPermissions": [
+                    {
+                        "name": "Administrators",
+                        "canView": true,
+                        "canModify": true,
+                        "canDelete": true
+                    },
+                    {
+                        "name": "DNS Administrators",
+                        "canView": true,
+                        "canModify": true,
+                        "canDelete": true
+                    },
+                    {
+                        "name": "Everyone",
+                        "canView": true,
+                        "canModify": false,
+                        "canDelete": false
+                    }
+                ]
+            },
+            {
+                "section": "Blocked",
+                "userPermissions": [],
+                "groupPermissions": [
+                    {
+                        "name": "Administrators",
+                        "canView": true,
+                        "canModify": true,
+                        "canDelete": true
+                    },
+                    {
+                        "name": "DNS Administrators",
+                        "canView": true,
+                        "canModify": true,
+                        "canDelete": true
+                    },
+                    {
+                        "name": "Everyone",
+                        "canView": true,
+                        "canModify": false,
+                        "canDelete": false
+                    }
+                ]
+            },
+            {
+                "section": "Apps",
+                "userPermissions": [],
+                "groupPermissions": [
+                    {
+                        "name": "Administrators",
+                        "canView": true,
+                        "canModify": true,
+                        "canDelete": true
+                    },
+                    {
+                        "name": "DNS Administrators",
+                        "canView": true,
+                        "canModify": true,
+                        "canDelete": true
+                    },
+                    {
+                        "name": "Everyone",
+                        "canView": true,
+                        "canModify": false,
+                        "canDelete": false
+                    }
+                ]
+            },
+            {
+                "section": "DnsClient",
+                "userPermissions": [],
+                "groupPermissions": [
+                    {
+                        "name": "Administrators",
+                        "canView": true,
+                        "canModify": true,
+                        "canDelete": true
+                    },
+                    {
+                        "name": "DHCP Administrators",
+                        "canView": true,
+                        "canModify": false,
+                        "canDelete": false
+                    },
+                    {
+                        "name": "DNS Administrators",
+                        "canView": true,
+                        "canModify": true,
+                        "canDelete": true
+                    },
+                    {
+                        "name": "Everyone",
+                        "canView": true,
+                        "canModify": false,
+                        "canDelete": false
+                    }
+                ]
+            },
+            {
+                "section": "Settings",
+                "userPermissions": [],
+                "groupPermissions": [
+                    {
+                        "name": "Administrators",
+                        "canView": true,
+                        "canModify": true,
+                        "canDelete": true
+                    },
+                    {
+                        "name": "DNS Administrators",
+                        "canView": true,
+                        "canModify": true,
+                        "canDelete": true
+                    }
+                ]
+            },
+            {
+                "section": "DhcpServer",
+                "userPermissions": [],
+                "groupPermissions": [
+                    {
+                        "name": "Administrators",
+                        "canView": true,
+                        "canModify": true,
+                        "canDelete": true
+                    },
+                    {
+                        "name": "DHCP Administrators",
+                        "canView": true,
+                        "canModify": true,
+                        "canDelete": true
+                    },
+                    {
+                        "name": "Everyone",
+                        "canView": true,
+                        "canModify": false,
+                        "canDelete": false
+                    }
+                ]
+            },
+            {
+                "section": "Administration",
+                "userPermissions": [],
+                "groupPermissions": [
+                    {
+                        "name": "Administrators",
+                        "canView": true,
+                        "canModify": true,
+                        "canDelete": true
+                    }
+                ]
+            },
+            {
+                "section": "Logs",
+                "userPermissions": [],
+                "groupPermissions": [
+                    {
+                        "name": "Administrators",
+                        "canView": true,
+                        "canModify": true,
+                        "canDelete": true
+                    },
+                    {
+                        "name": "DHCP Administrators",
+                        "canView": true,
+                        "canModify": false,
+                        "canDelete": false
+                    },
+                    {
+                        "name": "DNS Administrators",
+                        "canView": true,
+                        "canModify": false,
+                        "canDelete": false
+                    },
+                    {
+                        "name": "Everyone",
+                        "canView": true,
+                        "canModify": false,
+                        "canDelete": false
+                    }
+                ]
+            }
+        ]
+    },
+    "status": "ok"
 }
 ```
 
@@ -6167,49 +6373,51 @@ PERMISSIONS:\
 Administration: View
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `section`: The name of the section as given in the list of permissions API call.
 - `includeUsersAndGroups` (optional): Set to `true` to include a list of users and groups in the response.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"section": "Dashboard",
-		"userPermissions": [
-			{
-				"username": "shreyas",
-				"canView": true,
-				"canModify": false,
-				"canDelete": false
-			}
-		],
-		"groupPermissions": [
-			{
-				"name": "Administrators",
-				"canView": true,
-				"canModify": true,
-				"canDelete": true
-			},
-			{
-				"name": "Everyone",
-				"canView": true,
-				"canModify": false,
-				"canDelete": false
-			}
-		],
-		"users": [
-			"admin",
-			"shreyas"
-		],
-		"groups": [
-			"Administrators",
-			"DHCP Administrators",
-			"DNS Administrators",
-			"Everyone"
-		]
-	},
-	"status": "ok"
+    "response": {
+        "section": "Dashboard",
+        "userPermissions": [
+            {
+                "username": "shreyas",
+                "canView": true,
+                "canModify": false,
+                "canDelete": false
+            }
+        ],
+        "groupPermissions": [
+            {
+                "name": "Administrators",
+                "canView": true,
+                "canModify": true,
+                "canDelete": true
+            },
+            {
+                "name": "Everyone",
+                "canView": true,
+                "canModify": false,
+                "canDelete": false
+            }
+        ],
+        "users": [
+            "admin",
+            "shreyas"
+        ],
+        "groups": [
+            "Administrators",
+            "DHCP Administrators",
+            "DNS Administrators",
+            "Everyone"
+        ]
+    },
+    "status": "ok"
 }
 ```
 
@@ -6224,40 +6432,42 @@ PERMISSIONS:\
 Administration: Delete
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `section`: The name of the section as given in the list of permissions API call.
 - `userPermissions` (optional): A pipe `|` separated table data with each row containing username and boolean values for the view, modify and delete permissions. For example: user1|true|true|true|user2|true|false|false
 - `groupPermissions` (optional): A pipe `|` separated table data with each row containing the group name and boolean values for the view, modify and delete permissions. For example: group1|true|true|true|group2|true|true|false
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"section": "Dashboard",
-		"userPermissions": [
-			{
-				"username": "shreyas",
-				"canView": true,
-				"canModify": false,
-				"canDelete": false
-			}
-		],
-		"groupPermissions": [
-			{
-				"name": "Administrators",
-				"canView": true,
-				"canModify": true,
-				"canDelete": true
-			},
-			{
-				"name": "Everyone",
-				"canView": true,
-				"canModify": false,
-				"canDelete": false
-			}
-		]
-	},
-	"status": "ok"
+    "response": {
+        "section": "Dashboard",
+        "userPermissions": [
+            {
+                "username": "shreyas",
+                "canView": true,
+                "canModify": false,
+                "canDelete": false
+            }
+        ],
+        "groupPermissions": [
+            {
+                "name": "Administrators",
+                "canView": true,
+                "canModify": true,
+                "canDelete": true
+            },
+            {
+                "name": "Everyone",
+                "canView": true,
+                "canModify": false,
+                "canDelete": false
+            }
+        ]
+    },
+    "status": "ok"
 }
 ```
 
@@ -6277,36 +6487,38 @@ PERMISSIONS:\
 Logs: View
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"logFiles": [
-			{
-				"fileName": "2020-09-19",
-				"size": "8.14 KB"
-			},
-			{
-				"fileName": "2020-09-15",
-				"size": "5.6 KB"
-			},
-			{
-				"fileName": "2020-09-12",
-				"size": "18.4 KB"
-			},
-			{
-				"fileName": "2020-09-11",
-				"size": "1.78 KB"
-			},
-			{
-				"fileName": "2020-09-10",
-				"size": "2.03 KB"
-			}
-		]
-	},
-	"status": "ok"
+    "response": {
+        "logFiles": [
+            {
+                "fileName": "2020-09-19",
+                "size": "8.14 KB"
+            },
+            {
+                "fileName": "2020-09-15",
+                "size": "5.6 KB"
+            },
+            {
+                "fileName": "2020-09-12",
+                "size": "18.4 KB"
+            },
+            {
+                "fileName": "2020-09-11",
+                "size": "1.78 KB"
+            },
+            {
+                "fileName": "2020-09-10",
+                "size": "2.03 KB"
+            }
+        ]
+    },
+    "status": "ok"
 }
 ```
 
@@ -6324,6 +6536,7 @@ PERMISSIONS:\
 Logs: View
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `fileName`: The `fileName` returned by the List Logs API call.
 - `limit` (optional): The limit of number of mega bytes to download the log file. Default value is `0` when parameter is missing which indicates there is no limit.
@@ -6335,7 +6548,7 @@ Response is a downloadable file with `Content-Type: text/plain` and `Content-Dis
 
 Permanently deletes a log file from the disk.
 
-URL: 
+URL:
 `http://localhost:5380/api/logs/delete?token=x&log=2020-09-19`
 
 OBSOLETE PATH:\
@@ -6345,14 +6558,16 @@ PERMISSIONS:\
 Logs: Delete
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `log`: The `fileName` returned by the List Logs API call.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {},
-	"status": "ok"
+    "response": {},
+    "status": "ok"
 }
 ```
 
@@ -6370,13 +6585,15 @@ PERMISSIONS:\
 Logs: Delete
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {},
-	"status": "ok"
+    "response": {},
+    "status": "ok"
 }
 ```
 
@@ -6394,6 +6611,7 @@ PERMISSIONS:\
 Logs: View
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `name`: The name of the installed DNS app.
 - `classPath`: The class path of the DNS app.
@@ -6411,138 +6629,139 @@ WHERE:
 - `qclass` (optional): The DNS class (QCLASS) in the request question section to filter the logs.
 
 RESPONSE:
-```
+
+```json
 {
-	"response": {
-		"pageNumber": 1,
-		"totalPages": 2,
-		"totalEntries": 13,
-		"entries": [
-			{
-				"rowNumber": 1,
-				"timestamp": "2021-09-10T12:22:52Z",
-				"clientIpAddress": "127.0.0.1",
-				"protocol": "Udp",
-				"responseType": "Recursive",
-				"responseRtt": 33.45,
-				"rcode": "NoError",
-				"qname": "google.com",
-				"qtype": "A",
-				"qclass": "IN",
-				"answer": "172.217.166.46"
-			},
-			{
-				"rowNumber": 2,
-				"timestamp": "2021-09-10T12:37:02Z",
-				"clientIpAddress": "127.0.0.1",
-				"protocol": "Udp",
-				"responseType": "Blocked",
-				"rcode": "NxDomain",
-				"qname": "example.com",
-				"qtype": "A",
-				"qclass": "IN",
-				"answer": ""
-			},
-			{
-				"rowNumber": 3,
-				"timestamp": "2021-09-11T09:13:31Z",
-				"clientIpAddress": "127.0.0.1",
-				"protocol": "Udp",
-				"responseType": "Authoritative",
-				"rcode": "ServerFailure",
-				"qname": "example.com",
-				"qtype": "A",
-				"qclass": "IN",
-				"answer": ""
-			},
-			{
-				"rowNumber": 4,
-				"timestamp": "2021-09-11T09:14:48Z",
-				"clientIpAddress": "127.0.0.1",
-				"protocol": "Udp",
-				"responseType": "Authoritative",
-				"rcode": "ServerFailure",
-				"qname": "example.com",
-				"qtype": "A",
-				"qclass": "IN",
-				"answer": ""
-			},
-			{
-				"rowNumber": 5,
-				"timestamp": "2021-09-11T09:27:25Z",
-				"clientIpAddress": "127.0.0.1",
-				"protocol": "Udp",
-				"responseType": "Blocked",
-				"rcode": "NxDomain",
-				"qname": "example.com",
-				"qtype": "A",
-				"qclass": "IN",
-				"answer": ""
-			},
-			{
-				"rowNumber": 6,
-				"timestamp": "2021-09-11T09:27:29Z",
-				"clientIpAddress": "127.0.0.1",
-				"protocol": "Udp",
-				"responseType": "Blocked",
-				"rcode": "NxDomain",
-				"qname": "www.example.com",
-				"qtype": "A",
-				"qclass": "IN",
-				"answer": ""
-			},
-			{
-				"rowNumber": 7,
-				"timestamp": "2021-09-11T09:28:36Z",
-				"clientIpAddress": "127.0.0.1",
-				"protocol": "Udp",
-				"responseType": "Blocked",
-				"rcode": "NxDomain",
-				"qname": "www.example.com",
-				"qtype": "A",
-				"qclass": "IN",
-				"answer": ""
-			},
-			{
-				"rowNumber": 8,
-				"timestamp": "2021-09-11T09:28:41Z",
-				"clientIpAddress": "127.0.0.1",
-				"protocol": "Udp",
-				"responseType": "Blocked",
-				"rcode": "NxDomain",
-				"qname": "example.com",
-				"qtype": "A",
-				"qclass": "IN",
-				"answer": ""
-			},
-			{
-				"rowNumber": 9,
-				"timestamp": "2021-09-11T09:28:44Z",
-				"clientIpAddress": "127.0.0.1",
-				"protocol": "Udp",
-				"responseType": "Blocked",
-				"rcode": "NxDomain",
-				"qname": "sdfsdf.example.com",
-				"qtype": "A",
-				"qclass": "IN",
-				"answer": ""
-			},
-			{
-				"rowNumber": 10,
-				"timestamp": "2021-09-11T09:42:02Z",
-				"clientIpAddress": "127.0.0.1",
-				"protocol": "Udp",
-				"responseType": "Recursive",
-				"responseRtt": 23.63,
-				"rcode": "NoError",
-				"qname": "technitium.com",
-				"qtype": "A",
-				"qclass": "IN",
-				"answer": "139.59.3.235"
-			}
-		]
-	},
-	"status": "ok"
+    "response": {
+        "pageNumber": 1,
+        "totalPages": 2,
+        "totalEntries": 13,
+        "entries": [
+            {
+                "rowNumber": 1,
+                "timestamp": "2021-09-10T12:22:52Z",
+                "clientIpAddress": "127.0.0.1",
+                "protocol": "Udp",
+                "responseType": "Recursive",
+                "responseRtt": 33.45,
+                "rcode": "NoError",
+                "qname": "google.com",
+                "qtype": "A",
+                "qclass": "IN",
+                "answer": "172.217.166.46"
+            },
+            {
+                "rowNumber": 2,
+                "timestamp": "2021-09-10T12:37:02Z",
+                "clientIpAddress": "127.0.0.1",
+                "protocol": "Udp",
+                "responseType": "Blocked",
+                "rcode": "NxDomain",
+                "qname": "example.com",
+                "qtype": "A",
+                "qclass": "IN",
+                "answer": ""
+            },
+            {
+                "rowNumber": 3,
+                "timestamp": "2021-09-11T09:13:31Z",
+                "clientIpAddress": "127.0.0.1",
+                "protocol": "Udp",
+                "responseType": "Authoritative",
+                "rcode": "ServerFailure",
+                "qname": "example.com",
+                "qtype": "A",
+                "qclass": "IN",
+                "answer": ""
+            },
+            {
+                "rowNumber": 4,
+                "timestamp": "2021-09-11T09:14:48Z",
+                "clientIpAddress": "127.0.0.1",
+                "protocol": "Udp",
+                "responseType": "Authoritative",
+                "rcode": "ServerFailure",
+                "qname": "example.com",
+                "qtype": "A",
+                "qclass": "IN",
+                "answer": ""
+            },
+            {
+                "rowNumber": 5,
+                "timestamp": "2021-09-11T09:27:25Z",
+                "clientIpAddress": "127.0.0.1",
+                "protocol": "Udp",
+                "responseType": "Blocked",
+                "rcode": "NxDomain",
+                "qname": "example.com",
+                "qtype": "A",
+                "qclass": "IN",
+                "answer": ""
+            },
+            {
+                "rowNumber": 6,
+                "timestamp": "2021-09-11T09:27:29Z",
+                "clientIpAddress": "127.0.0.1",
+                "protocol": "Udp",
+                "responseType": "Blocked",
+                "rcode": "NxDomain",
+                "qname": "www.example.com",
+                "qtype": "A",
+                "qclass": "IN",
+                "answer": ""
+            },
+            {
+                "rowNumber": 7,
+                "timestamp": "2021-09-11T09:28:36Z",
+                "clientIpAddress": "127.0.0.1",
+                "protocol": "Udp",
+                "responseType": "Blocked",
+                "rcode": "NxDomain",
+                "qname": "www.example.com",
+                "qtype": "A",
+                "qclass": "IN",
+                "answer": ""
+            },
+            {
+                "rowNumber": 8,
+                "timestamp": "2021-09-11T09:28:41Z",
+                "clientIpAddress": "127.0.0.1",
+                "protocol": "Udp",
+                "responseType": "Blocked",
+                "rcode": "NxDomain",
+                "qname": "example.com",
+                "qtype": "A",
+                "qclass": "IN",
+                "answer": ""
+            },
+            {
+                "rowNumber": 9,
+                "timestamp": "2021-09-11T09:28:44Z",
+                "clientIpAddress": "127.0.0.1",
+                "protocol": "Udp",
+                "responseType": "Blocked",
+                "rcode": "NxDomain",
+                "qname": "sdfsdf.example.com",
+                "qtype": "A",
+                "qclass": "IN",
+                "answer": ""
+            },
+            {
+                "rowNumber": 10,
+                "timestamp": "2021-09-11T09:42:02Z",
+                "clientIpAddress": "127.0.0.1",
+                "protocol": "Udp",
+                "responseType": "Recursive",
+                "responseRtt": 23.63,
+                "rcode": "NoError",
+                "qname": "technitium.com",
+                "qtype": "A",
+                "qclass": "IN",
+                "answer": "139.59.3.235"
+            }
+        ]
+    },
+    "status": "ok"
 }
 ```
 
@@ -6557,6 +6776,7 @@ PERMISSIONS:\
 Logs: View
 
 WHERE:
+
 - `token`: The session token generated by the `login` or the `createToken` call.
 - `name`: The name of the installed DNS app.
 - `classPath`: The class path of the DNS app.
