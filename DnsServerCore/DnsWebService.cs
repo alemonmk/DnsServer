@@ -1873,7 +1873,7 @@ namespace DnsServerCore
                         if (bR.ReadBoolean()) //credential set
                             credential = new NetworkCredential(bR.ReadShortString(), bR.ReadShortString());
 
-                        _dnsServer.WebReqProxy = NetProxy.CreateProxy(proxyType, address, port, credential);
+                        _dnsServer.WebReqProxy = NetProxy.CreateProxy(webReqProxyType, address, port, credential);
 
                         int count = bR.ReadByte();
                         List<NetProxyBypassItem> bypassList = new List<NetProxyBypassItem>(count);
