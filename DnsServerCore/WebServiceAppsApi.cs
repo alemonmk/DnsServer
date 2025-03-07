@@ -170,8 +170,8 @@ namespace DnsServerCore
                 if ((_storeAppsJsonData is null) || (DateTime.UtcNow > _storeAppsJsonDataUpdatedOn.AddSeconds(STORE_APPS_JSON_DATA_CACHE_TIME_SECONDS)))
                 {
                     SocketsHttpHandler handler = new SocketsHttpHandler();
-                    handler.Proxy = _dnsWebService._dnsServer.Proxy;
-                    handler.UseProxy = _dnsWebService._dnsServer.Proxy is not null;
+                    handler.Proxy = _dnsWebService._dnsServer.WebReqProxy;
+                    handler.UseProxy = _dnsWebService._dnsServer.WebReqProxy is not null;
                     handler.AutomaticDecompression = DecompressionMethods.All;
 
                     HttpClientNetworkHandler networkHandler = new HttpClientNetworkHandler(handler, _dnsWebService._dnsServer.PreferIPv6 ? HttpClientNetworkType.PreferIPv6 : HttpClientNetworkType.Default, _dnsWebService._dnsServer);
@@ -198,8 +198,8 @@ namespace DnsServerCore
                     {
                         //download to temp file
                         SocketsHttpHandler handler = new SocketsHttpHandler();
-                        handler.Proxy = _dnsWebService._dnsServer.Proxy;
-                        handler.UseProxy = _dnsWebService._dnsServer.Proxy is not null;
+                        handler.Proxy = _dnsWebService._dnsServer.WebReqProxy;
+                        handler.UseProxy = _dnsWebService._dnsServer.WebReqProxy is not null;
                         handler.AutomaticDecompression = DecompressionMethods.All;
 
                         HttpClientNetworkHandler networkHandler = new HttpClientNetworkHandler(handler, _dnsWebService._dnsServer.PreferIPv6 ? HttpClientNetworkType.PreferIPv6 : HttpClientNetworkType.Default, _dnsWebService._dnsServer);
@@ -480,8 +480,8 @@ namespace DnsServerCore
                     {
                         //download to temp file
                         SocketsHttpHandler handler = new SocketsHttpHandler();
-                        handler.Proxy = _dnsWebService._dnsServer.Proxy;
-                        handler.UseProxy = _dnsWebService._dnsServer.Proxy is not null;
+                        handler.Proxy = _dnsWebService._dnsServer.WebReqProxy;
+                        handler.UseProxy = _dnsWebService._dnsServer.WebReqProxy is not null;
                         handler.AutomaticDecompression = DecompressionMethods.All;
 
                         using (HttpClient http = new HttpClient(new HttpClientNetworkHandler(handler, _dnsWebService._dnsServer.PreferIPv6 ? HttpClientNetworkType.PreferIPv6 : HttpClientNetworkType.Default, _dnsWebService._dnsServer)))
